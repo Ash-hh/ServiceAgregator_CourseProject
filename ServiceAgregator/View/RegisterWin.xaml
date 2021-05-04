@@ -1,0 +1,91 @@
+﻿<Window x:Class="ServiceAgregator.View.RegisterWin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ServiceAgregator.View"
+        mc:Ignorable="d"
+        Title="RegisterWin" Height="650" Width="700">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="150 10 150 10"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                        x:Name="Border" 
+                        CornerRadius="15"
+                        BorderThickness="2 1 2 1"
+                        Background="#739dcd"
+                        BorderBrush="#e9dddd ">
+                            <ContentPresenter                                
+                                Margin="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                RecognizesAccessKey="True"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+
+
+        </Style>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="100 10 30 10 "/>
+            <Setter Property="FontStretch" Value="ExtraCondensed"/>
+
+        </Style>
+
+        <Style TargetType="PasswordBox">
+            <Setter Property="Margin" Value="100 10 30 10 "/>
+            <Setter Property="FontStretch" Value="ExtraCondensed"/>
+
+        </Style>
+
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontFamily" Value="Verdana"/>
+            <Setter Property="FontSize" Value="17"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.7*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+
+
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="UserIcon"/>
+            <Button Grid.Row="1" Content="Загрузить фото"></Button>
+        </Grid>
+
+        <Label Content="Имя" Grid.Row="2"></Label>
+        <TextBox Grid.Row="2" Text="{Binding User.User_Name}"></TextBox>
+        <Label Content="Логин" Grid.Row="3"></Label>
+        <TextBox Grid.Row="3" Text="{Binding User.Login}"></TextBox>
+        <Label Content="Пароль" Grid.Row="4"></Label>
+        <TextBox Grid.Row="4" Text="{Binding User.Password}"></TextBox>
+        <Button Grid.Row="5" Content="Зарегестрироваться" Command="{Binding RegisterCommand}"></Button>
+
+
+    </Grid>
+</Window>

@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="ServiceAgregator.View.Controls.ServiceMainControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ServiceAgregator.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="Aqua">
+        <DataGrid Grid.Column="1" AutoGenerateColumns="False" Margin="10" IsReadOnly="True"
+                  ItemsSource="{Binding Books}" SelectedItem="{Binding CurrentBook}">
+
+            <DataGrid.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
+                                 Color="LightSteelBlue"/>
+            </DataGrid.Resources>
+
+            <DataGrid.Columns>
+
+                <DataGridTemplateColumn Width="150" Header="Image">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="/View/Resources/tek.png" Width="120" Height="Auto"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="*" Header="Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="*" Header="Author">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Author}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="*" Header="Status">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=BookStatus}" TextWrapping="Wrap"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
+                                <Button Command="{Binding DataContext.OpenBookDetailsCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}">
+                                    Details
+                                </Button>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
