@@ -78,10 +78,10 @@ namespace ServiceAgregator.ViewModel
 
         private bool CanLogin(Window win)
         {
-            //if (Login == null || Password == null)
-            //{
-            //    return false;
-            //}
+            if (Login == null || Password == null)
+            {
+                return false;
+            }
             return true;
         }
 

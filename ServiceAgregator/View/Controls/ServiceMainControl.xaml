@@ -8,7 +8,7 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="Aqua">
         <DataGrid Grid.Column="1" AutoGenerateColumns="False" Margin="10" IsReadOnly="True"
-                  ItemsSource="{Binding Books}" SelectedItem="{Binding CurrentBook}">
+                  ItemsSource="{Binding Services}" SelectedItem="{Binding CurrentBook}">
 
             <DataGrid.Resources>
                 <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
@@ -26,26 +26,26 @@
 
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="*" Header="Name">
+                <DataGridTemplateColumn Width="*" Header="Tag">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Path=Tag}" TextWrapping="Wrap"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="*" Header="Author">
+                <DataGridTemplateColumn Width="*" Header="Description">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Author}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Path=Description}" TextWrapping="Wrap"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
 
-                <DataGridTemplateColumn Width="*" Header="Status">
+                <DataGridTemplateColumn Width="*" Header="Cost">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=BookStatus}" TextWrapping="Wrap"/>
+                            <TextBlock Text="{Binding Path=Cost}" TextWrapping="Wrap"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

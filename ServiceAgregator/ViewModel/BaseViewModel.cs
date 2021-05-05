@@ -9,7 +9,7 @@ namespace ServiceAgregator.ViewModel
 {
     public class BaseViewModel : INotifyPropertyChanged
     {
-        #region INotifyPropertyChanged Members
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void OnPropertyChanged(string propertyName)
@@ -19,6 +19,6 @@ namespace ServiceAgregator.ViewModel
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-        #endregion
+        
     }
 }

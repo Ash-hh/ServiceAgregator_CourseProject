@@ -74,8 +74,8 @@
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image x:Name="UserIcon"/>
-            <Button Grid.Row="1" Content="Загрузить фото"></Button>
+            <Image Source="{Binding User.User_Image}" x:Name="UserIcon"/>
+            <Button Grid.Row="1" Content="Загрузить фото" Command="{Binding LoadImage}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
         </Grid>
 
         <Label Content="Имя" Grid.Row="2"></Label>
@@ -84,7 +84,7 @@
         <TextBox Grid.Row="3" Text="{Binding User.Login}"></TextBox>
         <Label Content="Пароль" Grid.Row="4"></Label>
         <TextBox Grid.Row="4" Text="{Binding User.Password}"></TextBox>
-        <Button Grid.Row="5" Content="Зарегестрироваться" Command="{Binding RegisterCommand}"></Button>
+        <Button Grid.Row="5" Content="Зарегестрироваться" Command="{Binding RegisterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
 
 
     </Grid>

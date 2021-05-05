@@ -26,27 +26,39 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Image Source="/View/Resources/UserIcon.png" Height="Auto" Width="120px"/>
+                </Grid>
+
+                <Grid x:Name="UserInfo" ShowGridLines="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Image Source="{Binding Path=CurrentUser.User_Image}" Height="Auto" Width="120px"/>
 
                     <Label HorizontalAlignment="Center"
                        Margin="10 0"
                        FontSize="15"
                            Grid.Row="1">
-                        <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="YourProfile">Upload Image</Hyperlink>
+                        <Hyperlink Command="{Binding UploadImage}">Upload Image</Hyperlink>
                     </Label>
 
-                </Grid>
-
-                <StackPanel Grid.Row="1">
-                    <Label Content="{Binding Path=CurrentUser.User_Name}"
+                    <StackPanel Grid.Column="1" Grid.RowSpan="2">
+                        <Label Content="{Binding Path=CurrentUser.User_Name}"
                            HorizontalAlignment="Center"
                            FontSize="15"
                            Margin="0 5"/>
 
-                    <Label Content="{Binding Path=CurrentUser.Login}"
+                        <Label Content="{Binding Path=CurrentUser.Login}"
                            HorizontalAlignment="Center"
                            FontSize="15"/>
-                </StackPanel>
+                    </StackPanel>
+                </Grid>
+
+                
             </Grid>
 
 

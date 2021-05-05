@@ -10,19 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ServiceAgregator.View
+namespace ServiceAgregator.View.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для RegisterWin.xaml
+    /// Логика взаимодействия для DetailsServiceControl.xaml
     /// </summary>
-    public partial class RegisterWin : Window
+    public partial class DetailsServiceControl : UserControl
     {
-        public RegisterWin()
-        {           
+        public DetailsServiceControl()
+        {
             InitializeComponent();
-            DataContext = new ViewModel.RegisterWinViewModel();
         }
     }
 }
