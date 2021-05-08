@@ -56,6 +56,9 @@
                            HorizontalAlignment="Center"
                            FontSize="15"/>
                     </StackPanel>
+                    <DataGrid>
+                        
+                    </DataGrid>
                 </Grid>
 
                 

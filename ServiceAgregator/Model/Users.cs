@@ -21,11 +21,11 @@ namespace ServiceAgregator.Models
         public int User_ID { get; set; }
 
         [Required]
-        [StringLength(20)]
+        [StringLength(50)]
         public string Login { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(95)]
         public string Password { get; set; }
 
         [Required]

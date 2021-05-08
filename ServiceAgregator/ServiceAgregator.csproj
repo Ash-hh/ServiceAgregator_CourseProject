@@ -64,6 +64,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\PasswordHash.cs" />
     <Compile Include="DataBase\ServicesQuery.cs" />
     <Compile Include="ViewModel\Main\DetailsServiceViewModel.cs" />
     <Compile Include="ViewModel\Main\ServicesViewModel.cs" />

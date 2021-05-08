@@ -6,63 +6,34 @@
              xmlns:local="clr-namespace:ServiceAgregator.View.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="Aqua">
-        <DataGrid Grid.Column="1" AutoGenerateColumns="False" Margin="10" IsReadOnly="True"
-                  ItemsSource="{Binding Services}" SelectedItem="{Binding CurrentBook}">
-
-            <DataGrid.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" 
-                                 Color="LightSteelBlue"/>
-            </DataGrid.Resources>
-
-            <DataGrid.Columns>
-
-                <DataGridTemplateColumn Width="150" Header="Image">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Image Source="/View/Resources/tek.png" Width="120" Height="Auto"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-
-                </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn Width="*" Header="Tag">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=Tag}" TextWrapping="Wrap"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn Width="*" Header="Description">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=Description}" TextWrapping="Wrap"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn Width="*" Header="Cost">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Path=Cost}" TextWrapping="Wrap"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-                <DataGridTemplateColumn Width="*">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
-                                <Button Command="{Binding DataContext.OpenBookDetailsCommand, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}">
-                                    Details
-                                </Button>
-                            </TextBlock>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-
-            </DataGrid.Columns>
-        </DataGrid>
+    <Grid>
+        <Grid>
+            <ListBox ItemsSource="{Binding Services}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
+                            <Grid Width="620" Height="200">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5*"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="{Binding Path=Tag}"/>
+                                <Image Grid.Row="1"  Width="120" Height="120" Margin="5" Source="/View/Resources/tek.png" />
+                                <TextBlock Grid.Column="1" Text="{Binding Path=User_ID}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=Date_OfAdd}"/>
+                                <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="2" Text="{Binding Path=Description}"/>
+                                <TextBlock Grid.Column="3" Grid.RowSpan="2" Text="{Binding Path=Cost}"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Grid>
     </Grid>
 </UserControl>

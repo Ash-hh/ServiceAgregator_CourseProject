@@ -16,12 +16,13 @@ namespace ServiceAgregator.ViewModel.Main
         public ServicesViewModel()
         {
             Services = new DataBase.ServicesQuery().GetAllServices();
-
+            User = new DataBase.ServicesQuery().GetAllUsers();
 
         }
 
         private ObservableCollection<Services> _services;
 
+        private ObservableCollection<Users> User { set; get; }
         public ObservableCollection<Services> Services
         {
             get

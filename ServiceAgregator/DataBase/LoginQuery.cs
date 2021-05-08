@@ -3,47 +3,87 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.Windows;
+using ServiceAgregator.Models;
+using System.Data.Entity;
+using System.Data.Entity.Validation;
 
 namespace ServiceAgregator.DataBase
 {
     class LoginQuery
     {
-        Models.Login login;
+       Login login;
 
-        public LoginQuery(Models.Login login)
+        public Users user { set; get; }
+
+        public LoginQuery(Login login)
         {
             this.login = login;
         }
 
+
+
         public bool Login()
         {
-            using (DataBase.DBContext db = new DataBase.DBContext())
+            using (DBContext db = new DBContext())
             {
-                var User = db.Users.FirstOrDefault(p => p.Login == login._Login && p.Password == login._Password);
+                var User = db.Users.FirstOrDefault(p => p.Login == login._Login);
                 if (User != null)
                 {
-                    return true;
+                    user = User;
+                    return new Command.PasswordHash().TryGetAccess(User, login._Password,db);
                 }
-            }
-            return false;
+                else
+                    return false;
+            }            
         }
 
-        public Models.Users ReturnCurrenUser()
+        public bool LoginPass()
         {
-            using (DataBase.DBContext db = new DataBase.DBContext())
+           
+           
+            
+            //byte[] DBpass = new UTF8Encoding().GetBytes(user.Password);
+            byte[] Inputpass = new UTF8Encoding().GetBytes(login._Password);
+
+            
+          
+            using (SHA256 mySHA256 = SHA256.Create())
             {
-                var User = db.Users.FirstOrDefault(p => p.Login == login._Login && p.Password == login._Password);
-                if (User != null)
+                string pass = BitConverter.ToString(mySHA256.ComputeHash(Inputpass));
+                if (user.Password == pass)
                 {
-                    return (Models.Users)User;
+                    using (DBContext db = new DBContext())
+                    {
+                        try 
+                        {
+                            var User = db.Users.Where(p => p.Login == login._Login).FirstOrDefault();
+                            User.Date_LastLogin = DateTime.Now;
+                            //User.Password = BitConverter.ToString(mySHA256.ComputeHash(Inputpass));
+                            db.SaveChanges();
+                        }
+                        catch (DbEntityValidationException ex)
+                        {
+                            foreach (DbEntityValidationResult validationError in ex.EntityValidationErrors)
+                            {
+                                Console.WriteLine("Object: " + validationError.Entry.Entity.ToString());
+                                Console.WriteLine("");
+                                foreach (DbValidationError err in validationError.ValidationErrors)
+                                {
+                                    Console.WriteLine(err.ErrorMessage + "");
+                                }
+                            }
+                        }
+                    }
+                    return true;
                 }
                 else
                 {
-                    return new Models.Users();
+                    MessageBox.Show("!!!");
+                    return false;
                 }
-                
-            }
-            
+            }            
         }
     }
 }

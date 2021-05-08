@@ -47,13 +47,11 @@ namespace ServiceAgregator.ViewModel
         private void OnLogin(Window win)
         {
             DataBase.LoginQuery login = new DataBase.LoginQuery(_Login);
+            //login.LoginPass();
 
-
-            
-           
-            if(login.Login())
+            if (login.Login())
             {
-                MainWindow main = new MainWindow(login.ReturnCurrenUser());
+                MainWindow main = new MainWindow(login.user);
                 main.Show();
                 if (win != null)
                 {
@@ -68,20 +66,21 @@ namespace ServiceAgregator.ViewModel
 
         private void OnRegister(Window win)
         {
-            if(win != null)
+            if (win != null)
             {
                 View.RegisterWin register = new View.RegisterWin();
                 register.Show();
                 win.Close();
             }
+
         }
 
         private bool CanLogin(Window win)
         {
-            if (Login == null || Password == null)
-            {
-                return false;
-            }
+            //if (Login == null || Password == null)
+            //{
+            //    return false;
+            //}
             return true;
         }
 

@@ -14,8 +14,7 @@ namespace ServiceAgregator.DataBase
         {
             using (DataBase.DBContext db = new DBContext())
             {
-                
-                GenerateUserId(db);
+                NewUser.Password = new Command.PasswordHash().GetStrHash(NewUser.Password);
                 NewUser.Date_Registration = DateTime.Now;
                 NewUser.Date_LastLogin = DateTime.Now;                
                 NewUser.User_Type = 1;
