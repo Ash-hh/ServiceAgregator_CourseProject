@@ -3,66 +3,146 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ServiceAgregator.View.Controls"
+             xmlns:local="clr-namespace:ServiceAgregator.View.Controls"           
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="950" d:DesignWidth="800" >
+
+
+    <UserControl.Resources>
+
+        <Style TargetType="Label">
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="15"/>
+        </Style>
+
+        <Style TargetType="Separator">
+            <Setter Property="Margin" Value="15 0 15 0"/>
+            <Setter Property="VerticalAlignment" Value="Bottom"/>
+        </Style>
+        
+    </UserControl.Resources>
 
     <Grid Background="White">
         <ScrollViewer>
-            <Grid ShowGridLines="True">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
+            <Grid>              
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
 
                 </Grid.RowDefinitions>
-
-               
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                </Grid>
-
-                <Grid x:Name="UserInfo" ShowGridLines="True">
+                    
+                    <!--Image-->
+                <Grid x:Name="UserInfo" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="1.5*"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <Image Source="{Binding Path=CurrentUser.User_Image}" Height="Auto" Width="120px"/>
+                    <Image Source="{Binding Path=CurrentUser.User_Image}" Height="Auto" Width="Auto" MaxHeight="300" MaxWidth="300"/>
 
-                    <Label HorizontalAlignment="Center"
-                       Margin="10 0"
-                       FontSize="15"
+                    <Label                       
                            Grid.Row="1">
-                        <Hyperlink Command="{Binding UploadImage}">Upload Image</Hyperlink>
+                        <Hyperlink x:Name="UploadLink" Command="{Binding UploadImage}">Upload Image</Hyperlink>
                     </Label>
 
-                    <StackPanel Grid.Column="1" Grid.RowSpan="2">
-                        <Label Content="{Binding Path=CurrentUser.User_Name}"
-                           HorizontalAlignment="Center"
-                           FontSize="15"
-                           Margin="0 5"/>
+                    <Label 
+                        x:Name="Save"                             
+                        VerticalAlignment="Top"
+                           Grid.Row="2">                       
+                        <Hyperlink Command="{Binding SaveUserProfile}">Save Image</Hyperlink>
+                    </Label>
 
-                        <Label Content="{Binding Path=CurrentUser.Login}"
-                           HorizontalAlignment="Center"
-                           FontSize="15"/>
-                    </StackPanel>
-                    <DataGrid>
+                    <!--Personal Info-->
+                    <Grid Grid.Column="1" Grid.RowSpan="3">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="2*"/>
+                            <ColumnDefinition Width="2*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="1.5*"/>
+                            <RowDefinition Height="0.7*"/>
+                        </Grid.RowDefinitions>
+
+
+                        <Label
+                            Content="Login"/>
+
+                        <Label
+                             Grid.Row="1"  
+                            Content="User Name"/>
+
+                        <Label
+                             Grid.Row="2"  
+                            Content="Reg Date"/>
+
+                        <Label
+                             Grid.Row="3"  
+                            Content="Pass Change"/>
+
+                        <Button  Grid.Row="3" Grid.Column="1"   Grid.ColumnSpan="2"/>
+
+                        <Label                                                     
+                            VerticalAlignment="Top"
+                            Grid.Row="4"
+                            Grid.Column="1">
+
+                            <Hyperlink Command="{Binding SaveUserProfile}">Changes</Hyperlink>
+                        </Label>
                         
-                    </DataGrid>
+                        <Label                                                     
+                            VerticalAlignment="Top"
+                            Grid.Row="4"
+                            Grid.Column="2">
+                            
+                            <Hyperlink Command="{Binding SaveUserProfile}">Save Changes</Hyperlink>
+                        </Label>
+
+
+
+                        <Label                          
+                            Grid.ColumnSpan="2"
+                           Content="{Binding Path=CurrentUser.User_Name}"
+                           Grid.Column="1"
+                         
+                          />
+
+                        <Label 
+                              Grid.ColumnSpan="2"
+                           Grid.Row="1"  
+                           Content="{Binding Path=CurrentUser.Login}"
+                             Grid.Column="1"
+                          />
+
+                        <Label 
+                              Grid.ColumnSpan="2"
+                           Grid.Row="2"  
+                           Content="{Binding Path=CurrentUser.Date_Registration}"
+                            Grid.Column="1"
+                         />
+
+                    </Grid>
+                    
+                        <!--Settings-->
+                    <Grid>
+                        
+                    </Grid>
+
                 </Grid>
 
+                <Separator  Grid.ColumnSpan="2"/>
                 
             </Grid>
+          
 
 
 

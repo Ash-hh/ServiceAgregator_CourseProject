@@ -90,7 +90,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
-            </Grid.RowDefinitions>
+            </Grid.RowDefinitions>            
             <TextBox Text="{Binding Password}" Grid.Row="1"/>
             <Label Content="Password"/>
         </Grid>

@@ -46,8 +46,7 @@ namespace ServiceAgregator.ViewModel
 
         private void OnLogin(Window win)
         {
-            DataBase.LoginQuery login = new DataBase.LoginQuery(_Login);
-            //login.LoginPass();
+            DataBase.LoginQuery login = new DataBase.LoginQuery(_Login);            
 
             if (login.Login())
             {

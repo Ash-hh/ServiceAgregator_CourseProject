@@ -21,6 +21,11 @@
             <uc:ServiceMainControl/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewModelMain:ChoosenServiceViewModel}">
+            <uc:ChoosenServiceControl/>
+        </DataTemplate>
+                      
+
     </Window.Resources>
 
 
@@ -57,6 +62,11 @@
                        Margin="20 0"
                        FontSize="15">
                     <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="Services">Services</Hyperlink>
+                </Label>
+                <Label HorizontalAlignment="Left"
+                       Margin="20 0"
+                       FontSize="15">
+                    <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="Service">Service</Hyperlink>
                 </Label>
             </StackPanel>
 

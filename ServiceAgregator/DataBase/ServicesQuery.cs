@@ -31,23 +31,5 @@ namespace ServiceAgregator.DataBase
             
         }
 
-        public ObservableCollection<Users> GetAllUsers()
-        {
-            using (DBContext db = new DBContext())
-            {
-                ObservableCollection<Users> users = new ObservableCollection<Users>();
-                var bufflist = db.Users.ToList<Users>();
-                foreach (Users buff in bufflist)
-                {
-                    users.Add(buff);
-                }
-                return users;
-            }
-                
-        }
-
-
-
-
     }
 }

@@ -21,12 +21,13 @@ namespace ServiceAgregator.ViewModel.Main
         {
             _currentUser = currentUser;
             UploadImage = new DelegateCommand<object>(ImageLoad, CanExecute);
+            SaveUserProfile = new DelegateCommand<object>(SaveProfile, CanExecute);
         }
 
         public DelegateCommand<object> UploadImage { set; get; }
+        public DelegateCommand<object> SaveUserProfile { set; get; }
 
         private Users _currentUser;
-
         public Users CurrentUser
         {
             get
@@ -36,7 +37,7 @@ namespace ServiceAgregator.ViewModel.Main
             private set
             {
                 _currentUser = value;
-                OnPropertyChanged(nameof(_currentUser));
+                OnPropertyChanged(nameof(CurrentUser));
             }
         }
 
@@ -48,7 +49,7 @@ namespace ServiceAgregator.ViewModel.Main
                 try
                 {
                     CurrentUser.User_Image = File.ReadAllBytes(FilePath);
-                    MessageBox.Show("!!");
+                    OnPropertyChanged("CurrentUser");                  
                 }
                 catch (Exception ee)
                 {
@@ -66,6 +67,11 @@ namespace ServiceAgregator.ViewModel.Main
                 return true;
             }
             return false;
+        }
+
+        private void SaveProfile(object obj)
+        {
+            new DataBase.UserQuery().UserUpdate(CurrentUser);            
         }
 
         public bool CanExecute(object obj)

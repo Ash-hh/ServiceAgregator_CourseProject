@@ -12,7 +12,7 @@ namespace ServiceAgregator.DataBase
         public bool Succes = false;
         public RegisterQuery(Models.Users NewUser)
         {
-            using (DataBase.DBContext db = new DBContext())
+            using (DBContext db = new DBContext())
             {
                 NewUser.Password = new Command.PasswordHash().GetStrHash(NewUser.Password);
                 NewUser.Date_Registration = DateTime.Now;

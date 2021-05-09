@@ -64,13 +64,24 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Command\Changer.cs" />
     <Compile Include="Command\PasswordHash.cs" />
+    <Compile Include="DataBase\OrdersQuery.cs" />
     <Compile Include="DataBase\ServicesQuery.cs" />
+    <Compile Include="DataBase\UserQuery.cs" />
+    <Compile Include="ViewModel\ControlsViewModel\MakeOrderViewModel.cs" />
+    <Compile Include="ViewModel\Main\ChoosenServiceViewModel.cs" />
     <Compile Include="ViewModel\Main\DetailsServiceViewModel.cs" />
     <Compile Include="ViewModel\Main\ServicesViewModel.cs" />
     <Compile Include="ViewModel\Main\UserProfileViewModel.cs" />
+    <Compile Include="View\Controls\ChoosenServiceControl.xaml.cs">
+      <DependentUpon>ChoosenServiceControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\DetailsServiceControl.xaml.cs">
       <DependentUpon>DetailsServiceControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\MakeOrderControl.xaml.cs">
+      <DependentUpon>MakeOrderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\ServiceMainControl.xaml.cs">
       <DependentUpon>ServiceMainControl.xaml</DependentUpon>
@@ -81,7 +92,15 @@
     <Compile Include="View\RegisterWin.xaml.cs">
       <DependentUpon>RegisterWin.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Controls\ChoosenServiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Controls\DetailsServiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\MakeOrderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -157,7 +176,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="View\Styles\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Resources\tek.bmp" />
   </ItemGroup>

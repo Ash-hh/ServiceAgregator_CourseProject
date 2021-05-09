@@ -8,10 +8,14 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid>
-            <ListBox ItemsSource="{Binding Services}">
+            <ListBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}">
                 <ListBox.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate>                        
                         <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
+                            <Border.InputBindings>
+                                <MouseBinding MouseAction="{x:Static MouseAction.LeftDoubleClick}"
+                                              Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ServiceDetails}"/>
+                            </Border.InputBindings>
                             <Grid Width="620" Height="200">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>

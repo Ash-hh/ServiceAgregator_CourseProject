@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using ServiceAgregator.Models;
+using ServiceAgregator.Command;
+
 
 namespace ServiceAgregator.ViewModel.Main
 {
@@ -16,13 +18,16 @@ namespace ServiceAgregator.ViewModel.Main
         public ServicesViewModel()
         {
             Services = new DataBase.ServicesQuery().GetAllServices();
-            User = new DataBase.ServicesQuery().GetAllUsers();
-
+            User = new DataBase.UserQuery().GetAllUsers();
+            ServiceDetails = new DelegateCommand<object>(Details, CanExecute);
         }
 
-        private ObservableCollection<Services> _services;
+        public DelegateCommand<object> ServiceDetails { set; get; }
 
+        private ObservableCollection<Services> _services;
         private ObservableCollection<Users> User { set; get; }
+
+        public Services SelectedService { set; get; }
         public ObservableCollection<Services> Services
         {
             get
@@ -35,11 +40,16 @@ namespace ServiceAgregator.ViewModel.Main
             }
         }
 
-        private void LoadServices()
+        private void Details(object obj)
         {
-
+            Changer.getInstance(null).MainViewModel.SelectedViewModel = new ChoosenServiceViewModel(SelectedService);
         }
-        
+
+        public bool CanExecute(object obj)
+        {
+            return true;
+        }
+
 
 
 

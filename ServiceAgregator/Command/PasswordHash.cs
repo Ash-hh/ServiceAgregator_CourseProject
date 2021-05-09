@@ -26,31 +26,13 @@ namespace ServiceAgregator.Command
             }
         }
 
-        public bool TryGetAccess(Users User, string password,DBContext db)
+        public bool TryGetAccess(Users User, string password)
         {
             if(User.Password == GetStrHash(password))
             {
-               
-                    try
-                    {
-                        var DBUser = db.Users.Where(p => p.Login == User.Login).FirstOrDefault();
-                        DBUser.Date_LastLogin = DateTime.Now;
-                        //User.Password = BitConverter.ToString(mySHA256.ComputeHash(Inputpass));
-                        db.SaveChanges();
-                    }
-                    catch (DbEntityValidationException ex)
-                    {
-                        foreach (DbEntityValidationResult validationError in ex.EntityValidationErrors)
-                        {
-                            Console.WriteLine("Object: " + validationError.Entry.Entity.ToString());
-                            Console.WriteLine("");
-                            foreach (DbValidationError err in validationError.ValidationErrors)
-                            {
-                                Console.WriteLine(err.ErrorMessage + "");
-                            }
-                        }
-                    }
-                
+                User.Date_LastLogin = DateTime.Now;
+                new UserQuery().UserUpdate(User);
+
                 return true;
             }
             return false;

@@ -23,12 +23,15 @@ namespace ServiceAgregator.ViewModel
         }
 
         public MainViewModel()
-        {
+        {          
             UpdateViewCommand = new DelegateCommand<string>(OnUpdateViewCommand, CanUpdateViewCommand);
         }
 
         public MainViewModel(Models.Users user)
         {
+            Changer.getInstance(this);
+            Changer.CurrentUser = user;
+            SelectedViewModel = new ServicesViewModel();
             CurrentUser = user;
             UpdateViewCommand = new DelegateCommand<string>(OnUpdateViewCommand, CanUpdateViewCommand);
         }
@@ -54,11 +57,15 @@ namespace ServiceAgregator.ViewModel
             switch (parameter)
             {
                 case "YourProfile":
-                    this.SelectedViewModel = new UserProfileViewModel(_currentUser);
+                    Changer.getInstance(null).MainViewModel.SelectedViewModel = new UserProfileViewModel(_currentUser);
                     break;
                 case "Services":
-                    this.SelectedViewModel = new ServicesViewModel();
+                    Changer.getInstance(null).MainViewModel.SelectedViewModel = new ServicesViewModel();
                     break;
+                //case "Service":
+                //    Changer.getInstance(null).MainViewModel.SelectedViewModel = new ChoosenServiceViewModel();
+                //    break;
+
             }
         }
 
