@@ -43,7 +43,8 @@ namespace ServiceAgregator.ViewModel
             {
                 try
                 {
-                    User.User_Image = File.ReadAllBytes(FilePath);                   
+                    User.User_Image = File.ReadAllBytes(FilePath);
+                    OnPropertyChanged("User");
                     MessageBox.Show("!!");
                 }
                 catch (Exception ee)
@@ -88,10 +89,9 @@ namespace ServiceAgregator.ViewModel
                 if(win!=null)
                 {
                     win.Close();
-                }
-                
+                }                
             }
-           // MessageBox.Show($"{_User.User_Name}  {_User.Login}");   
+           
         }
 
         private bool CanExecute(Window win)

@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace ServiceAgregator.View.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для ChoosenServiceControl.xaml
+    /// Логика взаимодействия для UserOrdersConrols.xaml
     /// </summary>
-    public partial class ChoosenServiceControl : UserControl
+    public partial class UserOrdersConrols : UserControl
     {
-        public ChoosenServiceControl()
+        public UserOrdersConrols()
         {
             InitializeComponent();
         }

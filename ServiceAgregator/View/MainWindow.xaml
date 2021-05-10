@@ -21,8 +21,8 @@
             <uc:ServiceMainControl/>
         </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModelMain:ChoosenServiceViewModel}">
-            <uc:ChoosenServiceControl/>
+        <DataTemplate DataType="{x:Type viewModelMain:DetailsServiceViewModel}">
+            <uc:DetailsServiceControl/>
         </DataTemplate>
                       
 
@@ -63,11 +63,20 @@
                        FontSize="15">
                     <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="Services">Services</Hyperlink>
                 </Label>
+
                 <Label HorizontalAlignment="Left"
                        Margin="20 0"
                        FontSize="15">
-                    <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="Service">Service</Hyperlink>
+                    <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="MyOrders">My Orders</Hyperlink>
                 </Label>
+
+                <Label HorizontalAlignment="Left"
+                       Margin="20 0"
+                       FontSize="15">
+                    <Hyperlink >My Services</Hyperlink>
+                </Label>
+
+
             </StackPanel>
 
         </Grid>

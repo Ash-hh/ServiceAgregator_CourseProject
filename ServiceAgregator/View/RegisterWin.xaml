@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServiceAgregator.View"
         mc:Ignorable="d"
-        Title="RegisterWin" Height="650" Width="700">
+        Title="RegisterWin" Height="650" Width="600">
     <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="150 10 150 10"/>
@@ -55,7 +55,7 @@
         </Style>
     </Window.Resources>
 
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.7*"/>
             <RowDefinition Height="3*"/>
@@ -69,22 +69,22 @@
 
 
 
-        <Grid Grid.Row="1" ShowGridLines="True">
+        <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Image Source="{Binding User.User_Image}" x:Name="UserIcon"/>
-            <Button Grid.Row="1" Content="Загрузить фото" Command="{Binding LoadImage}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
+            <Button Grid.Row="1" Content="Upload Image" Command="{Binding LoadImage}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
         </Grid>
 
-        <Label Content="Имя" Grid.Row="2"></Label>
+        <Label Content="Name" Grid.Row="2"></Label>
         <TextBox Grid.Row="2" Text="{Binding User.User_Name}"></TextBox>
-        <Label Content="Логин" Grid.Row="3"></Label>
+        <Label Content="Login" Grid.Row="3"></Label>
         <TextBox Grid.Row="3" Text="{Binding User.Login}"></TextBox>
-        <Label Content="Пароль" Grid.Row="4"></Label>
+        <Label Content="Password" Grid.Row="4"></Label>
         <TextBox Grid.Row="4" Text="{Binding User.Password}"></TextBox>
-        <Button Grid.Row="5" Content="Зарегестрироваться" Command="{Binding RegisterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
+        <Button Grid.Row="5" Content="Register" Command="{Binding RegisterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
 
 
     </Grid>

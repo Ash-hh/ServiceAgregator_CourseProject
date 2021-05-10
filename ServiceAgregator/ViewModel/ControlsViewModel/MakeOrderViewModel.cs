@@ -14,26 +14,21 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
         public Orders Order {set;get;}
 
         public DelegateCommand<object> MakeOrder { set; get; }
+
         public MakeOrderViewModel(Services service)
         {
             MakeOrder = new DelegateCommand<object>(Checkout, CanExecute);
 
             Order = new Orders();
-            Order.Order_ID = 11;
+            Order.Order_ID = new OrdersQuery().GenerateUniqueId();
             Order.Service_ID = service.Service_ID;
             Order.User_ID = Changer.CurrentUser.User_ID;
-            Order.Status = "Моча съела говно";
-
-            
-
+            Order.Status = "NotWatched";
         }
-
 
         public void Checkout(object obj)
         {
-
             new OrdersQuery().AddNewOrder(Order);
-
         }
 
         public bool CanExecute(object obj)

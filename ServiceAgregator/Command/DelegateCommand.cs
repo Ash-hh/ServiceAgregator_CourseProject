@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using ServiceAgregator.Models;
 
 namespace ServiceAgregator.Command
 {
@@ -53,4 +55,46 @@ namespace ServiceAgregator.Command
             CanExecuteChanged(this, EventArgs.Empty);
         }
     }
+
+    public static class Extensions
+    {
+        public static ObservableCollection<object> FromListToObservableCollection(this ObservableCollection<object> observ, List<object> list)
+        {
+            foreach(object f in list)
+            {
+                observ.Add(f);
+            }
+            return observ;
+        }
+
+        public static ObservableCollection<Services> FromListToObservableCollection(this ObservableCollection<Services> observ, List<Services> list)
+        {
+            foreach (Services f in list)
+            {
+                observ.Add(f);
+            }
+            return observ;
+        }
+
+        public static ObservableCollection<Users> FromListToObservableCollection(this ObservableCollection<Users> observ, List<Users> list)
+        {
+            foreach (Users f in list)
+            {
+                observ.Add(f);
+            }
+            return observ;
+        }
+
+        public static ObservableCollection<Orders> FromListToObservableCollection(this ObservableCollection<Orders> observ, List<Orders> list)
+        {
+            foreach (Orders f in list)
+            {
+                observ.Add(f);
+            }
+            return observ;
+        }
+
+
+    }
+        
 }

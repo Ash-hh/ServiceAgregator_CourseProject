@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ServiceAgregator.Models;
+using ServiceAgregator.Command;
 
 namespace ServiceAgregator.DataBase
 {
@@ -21,12 +22,16 @@ namespace ServiceAgregator.DataBase
             using (DBContext db = new DBContext())
             {
                 ObservableCollection<Services> services = new ObservableCollection<Services>();
-                var bufflist = db.Services.ToList<Services>();
-                foreach (Services buff in bufflist)
+                var bufflist = db.Services.ToList();
+                var buffUsers = db.Users.ToList();
+             
+                foreach(Services service in bufflist)
                 {
-                    services.Add(buff);
+                    var User = buffUsers.Where(p => p.User_ID == service.User_ID).FirstOrDefault();
+                    service.Users = User;                   
                 }
-                return services;
+
+                return services.FromListToObservableCollection(bufflist);              
             }
             
         }
