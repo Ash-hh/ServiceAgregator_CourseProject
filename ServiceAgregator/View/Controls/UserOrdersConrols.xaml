@@ -6,7 +6,79 @@
              xmlns:local="clr-namespace:ServiceAgregator.View.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+    </UserControl.Resources>
+    
     <Grid Background="White">
-            
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4*"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Total Orders:" HorizontalAlignment="Right"/>
+            <Label Content="{Binding Orders.Count}" Grid.Column="1" HorizontalAlignment="Left"/>
+        </Grid>
+        
+        <Grid Grid.Row="1">
+            <ListBox ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}"  SelectedIndex="{Binding SelectedIndex}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
+                            <Grid Width="620" Height="200" ShowGridLines="True">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="5*"/>
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Column="1" Content="{Binding Date_Execution}"/>
+                                <Label Grid.Column="2" Content="{Binding Status}"/>
+
+                                <TextBlock Text="{Binding Services.Users.User_Name}"/>
+                                <Image Grid.Row="1"  Width="120" Height="120" Margin="5" Source="{Binding Services.Users.User_Image}"/>
+                                
+                                
+                                <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="2" Text="{Binding Services.Description}"/>
+                                <TextBlock Grid.Column="3" Grid.RowSpan="2" Text="{Binding Services.Cost}"/>
+
+
+                                <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" >
+                                    <Button Content="Canceled" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Canceled"/>
+                                    <Button Content="Done" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Done"/>
+                                    <Button Content="Waiting" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Waiting"/>
+                                    <Button Content="Delete" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.DeleteOrder}"/>
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" 
+                            BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+        </Grid>
     </Grid>
 </UserControl>

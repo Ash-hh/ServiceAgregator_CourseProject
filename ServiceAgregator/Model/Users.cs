@@ -17,7 +17,7 @@ namespace ServiceAgregator.Models
         }
 
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int User_ID { get; set; }
 
         [Required]

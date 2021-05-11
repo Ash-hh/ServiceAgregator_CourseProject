@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="ServiceAgregator.View.Controls.MakeOrderControl"
+﻿<UserControl x:Class="ServiceAgregator.View.Controls.InternalControls.MakeOrderControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,14 +6,20 @@
              xmlns:local="clr-namespace:ServiceAgregator.View.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="800">
-    <Grid Background="Wheat">
+
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            
+        </Style>
+    </UserControl.Resources>
+    <Grid Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Calendar  SelectedDate="{Binding Order.Date_Execution}"></Calendar>
-        <Button Grid.Column="1" Content="Make an Order" Command="{Binding MakeOrder}"/>
+        <Button Grid.Column="1" Content="Make an Order" Command="{Binding MakeOrder}" MaxHeight="100" MaxWidth="200"/>
         
     </Grid>
 </UserControl>

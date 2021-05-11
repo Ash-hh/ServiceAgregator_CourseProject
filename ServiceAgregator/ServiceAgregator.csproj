@@ -70,15 +70,24 @@
     <Compile Include="DataBase\ServicesQuery.cs" />
     <Compile Include="DataBase\UserQuery.cs" />
     <Compile Include="ViewModel\ControlsViewModel\MakeOrderViewModel.cs" />
+    <Compile Include="ViewModel\ControlsViewModel\UserServicesViewModel.cs" />
     <Compile Include="ViewModel\Main\DetailsServiceViewModel.cs" />
+    <Compile Include="ViewModel\Main\DetailsUserOrderControlViewModel.cs" />
     <Compile Include="ViewModel\Main\ServicesViewModel.cs" />
     <Compile Include="ViewModel\Main\UserOrdersViewModel.cs" />
     <Compile Include="ViewModel\Main\UserProfileViewModel.cs" />
+    <Compile Include="ViewModel\Main\ServicesControllerViewModel.cs" />
     <Compile Include="View\Controls\DetailsServiceControl.xaml.cs">
       <DependentUpon>DetailsServiceControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Controls\MakeOrderControl.xaml.cs">
+    <Compile Include="View\Controls\DetailsUserOrderControl.xaml.cs">
+      <DependentUpon>DetailsUserOrderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\InternalControls\MakeOrderControl.xaml.cs">
       <DependentUpon>MakeOrderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\InternalControls\UserServicesControl.xaml.cs">
+      <DependentUpon>UserServicesControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\ServiceMainControl.xaml.cs">
       <DependentUpon>ServiceMainControl.xaml</DependentUpon>
@@ -89,6 +98,9 @@
     <Compile Include="View\Controls\UserProfileControl.xaml.cs">
       <DependentUpon>UserProfileControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Controls\ServicesControllerControl.xaml.cs">
+      <DependentUpon>ServicesControllerControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RegisterWin.xaml.cs">
       <DependentUpon>RegisterWin.xaml</DependentUpon>
     </Compile>
@@ -96,7 +108,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\Controls\MakeOrderControl.xaml">
+    <Page Include="View\Controls\DetailsUserOrderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\InternalControls\MakeOrderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\InternalControls\UserServicesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -109,6 +129,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Controls\UserProfileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\ServicesControllerControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

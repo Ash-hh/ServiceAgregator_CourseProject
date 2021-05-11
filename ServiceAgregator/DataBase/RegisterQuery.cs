@@ -17,8 +17,7 @@ namespace ServiceAgregator.DataBase
                 NewUser.Password = new Command.PasswordHash().GetStrHash(NewUser.Password);
                 NewUser.Date_Registration = DateTime.Now;
                 NewUser.Date_LastLogin = DateTime.Now;                
-                NewUser.User_Type = 1;
-                NewUser.User_ID = GenerateUserId(db);
+                NewUser.User_Type = 1;                
                 try
                 {
                     if(IsUserLoginValid(db,NewUser))

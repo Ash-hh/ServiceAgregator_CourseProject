@@ -62,10 +62,12 @@ namespace ServiceAgregator.ViewModel
                 case "Services":
                     Changer.getInstance(null).MainViewModel.SelectedViewModel = new ServicesViewModel();
                     break;
-                //case "Service":
-                //    Changer.getInstance(null).MainViewModel.SelectedViewModel = new ChoosenServiceViewModel();
-                //    break;
-
+                case "MyOrders":
+                    Changer.getInstance(null).MainViewModel.SelectedViewModel = new UserOrdersViewModel();
+                    break;
+                case "MyServices":
+                    Changer.getInstance(null).MainViewModel.SelectedViewModel = new ServicesControllerViewModel();
+                    break;
             }
         }
 

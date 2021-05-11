@@ -23,7 +23,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             Order.Order_ID = new OrdersQuery().GenerateUniqueId();
             Order.Service_ID = service.Service_ID;
             Order.User_ID = Changer.CurrentUser.User_ID;
-            Order.Status = "NotWatched";
+            Order.Status = "Waiting";
         }
 
         public void Checkout(object obj)

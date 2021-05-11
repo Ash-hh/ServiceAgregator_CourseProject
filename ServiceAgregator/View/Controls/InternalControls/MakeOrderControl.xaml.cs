@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ServiceAgregator.View.Controls
+namespace ServiceAgregator.View.Controls.InternalControls
 {
     /// <summary>
     /// Логика взаимодействия для MakeOrderControl.xaml

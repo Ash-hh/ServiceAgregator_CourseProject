@@ -24,7 +24,19 @@
         <DataTemplate DataType="{x:Type viewModelMain:DetailsServiceViewModel}">
             <uc:DetailsServiceControl/>
         </DataTemplate>
-                      
+
+        <DataTemplate DataType="{x:Type  viewModelMain:UserOrdersViewModel}">
+            <uc:UserOrdersConrols/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type  viewModelMain:DetailsUserOrderControlViewModel}">
+            <uc:DetailsUserOrderControl/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type  viewModelMain:ServicesControllerViewModel}">
+            <uc:ServicesControllerControl/>
+        </DataTemplate>
+
 
     </Window.Resources>
 
@@ -73,7 +85,7 @@
                 <Label HorizontalAlignment="Left"
                        Margin="20 0"
                        FontSize="15">
-                    <Hyperlink >My Services</Hyperlink>
+                    <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="MyServices" >My Services</Hyperlink>
                 </Label>
 
 

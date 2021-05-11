@@ -4,6 +4,7 @@ namespace ServiceAgregator.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
@@ -11,7 +12,7 @@ namespace ServiceAgregator.Models
     public partial class Orders
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Order_ID { get; set; }
 
         public int Service_ID { get; set; }
@@ -27,5 +28,6 @@ namespace ServiceAgregator.Models
         public virtual Users Users { get; set; }
 
         public virtual Services Services { get; set; }
+       
     }
 }

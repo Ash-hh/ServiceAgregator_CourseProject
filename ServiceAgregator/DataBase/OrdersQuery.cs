@@ -54,6 +54,19 @@ namespace ServiceAgregator.DataBase
             }
         }
 
+        public void OrderUpdate(Orders Order)
+        {
+            using (DBContext db = new DBContext())
+            {
+                var OrderToUpdate = db.Orders.Where(p => p.Order_ID == Order.Order_ID).FirstOrDefault();
+                OrderToUpdate.Status = Order.Status;
+                OrderToUpdate.Service_ID = Order.Service_ID;
+                OrderToUpdate.User_ID = Order.User_ID;
+                db.SaveChanges();
+            }
+                
+        }
+
         public ObservableCollection<Orders> GetUserOrders()
         {
             ObservableCollection<Orders> UserOrders = new ObservableCollection<Orders>();
@@ -61,8 +74,16 @@ namespace ServiceAgregator.DataBase
             using (DBContext db = new DBContext())
             {
                 var Orders = db.Orders.Where(p => p.User_ID == Changer.CurrentUser.User_ID).ToList();
+                var buffServices = new ServicesQuery().GetAllServices();
+                foreach(Models.Orders order in Orders)
+                {
+                    var Service = buffServices.Where(p => p.Service_ID == order.Service_ID).FirstOrDefault();
+                    order.Services = Service;
+                }
                 return UserOrders.FromListToObservableCollection(Orders);
             }
         }
+
+        
     }
 }
