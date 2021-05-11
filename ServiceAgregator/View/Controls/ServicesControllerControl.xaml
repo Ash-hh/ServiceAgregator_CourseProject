@@ -15,6 +15,14 @@
         <DataTemplate DataType="{x:Type viewModeControl:UserServicesViewModel}">
             <uc:UserServicesControl/>
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewModeControl:AddServiceViewModel}">
+            <uc:AddServiceControl/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModeControl:UserServiceDetailsViewModel}">
+            <uc:UserServiceDetails/>
+        </DataTemplate>
     </UserControl.Resources>
 
     <Grid Background="White">
@@ -24,10 +32,10 @@
         </Grid.ColumnDefinitions>
         <StackPanel>
             <Label>
-                <Hyperlink>Add</Hyperlink>               
+                <Hyperlink Command="{Binding ChangeModel}" CommandParameter="AddNewService">Add</Hyperlink>               
             </Label>
             <Label>
-                <Hyperlink>My service Orders</Hyperlink>
+                <Hyperlink Command="{Binding ChangeModel}" CommandParameter="ServiceDetails">My service Orders</Hyperlink>
             </Label>
         </StackPanel>
 

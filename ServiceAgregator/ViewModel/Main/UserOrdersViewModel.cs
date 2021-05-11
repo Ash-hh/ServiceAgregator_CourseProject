@@ -45,7 +45,7 @@ namespace ServiceAgregator.ViewModel.Main
             { 
                 _selectedOrder = value;
                 OnPropertyChanged("SelectedOrder");
-                OnPropertyChanged("Orderss");              
+                OnPropertyChanged("Orders");              
             } 
             get { return _selectedOrder; }
         }
@@ -55,14 +55,19 @@ namespace ServiceAgregator.ViewModel.Main
         {
             if(SelectedOrder.Status!=" ")
             {
+                //SelectedOrder.Status = status;
+                //OnPropertyChanged("SelectedOrder");
+                //OnPropertyChanged("Orders");
+
                 Orders buff = new Orders();
                 buff = SelectedOrder;
                 buff.Status = status;
                 int id = SelectedIndex;
                 Orders.RemoveAt(SelectedIndex);
                 Orders.Insert(id, buff);
-
                 new OrdersQuery().OrderUpdate(Orders.ElementAt(id));
+
+                //new OrdersQuery().OrderUpdate(SelectedOrder);
             }
             else
             {

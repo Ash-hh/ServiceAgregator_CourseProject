@@ -48,7 +48,7 @@
                                 </Grid.RowDefinitions>
 
                                 <Label Grid.Column="1" Content="{Binding Date_Execution}"/>
-                                <Label Grid.Column="2" Content="{Binding Status}"/>
+                                <TextBlock Grid.Column="2" Text="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"/>
 
                                 <TextBlock Text="{Binding Services.Users.User_Name}"/>
                                 <Image Grid.Row="1"  Width="120" Height="120" Margin="5" Source="{Binding Services.Users.User_Image}"/>

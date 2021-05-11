@@ -6,41 +6,79 @@
              xmlns:local="clr-namespace:ServiceAgregator.View.Controls.InternalControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="Grid" x:Name="Item">
+            <Setter Property="Margin" Value="5 5 5 5"/>
+            
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+        
+    </UserControl.Resources>
+    
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.1*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
         <Label Content="{Binding Services.Count}"/>
+        
         <Grid Grid.Row="1">
             <ListBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
-                            <Border.InputBindings>
+                            <!--<Border.InputBindings>
                                 <MouseBinding MouseAction="{x:Static MouseAction.LeftDoubleClick}"
-                                              Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ServiceDetails}"/>
-                            </Border.InputBindings>
-                            <Grid Width="620" Height="200">
+                                              Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ChangeViewModel}"/>
+                            </Border.InputBindings>-->
+                            <Grid Width="620" Margin="5" ShowGridLines="True">
                                 <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.7*"/>
+                                    <ColumnDefinition Width="0.3*"/>
                                     <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="2*"/>
-                                    <ColumnDefinition Width="*"/>                                    
+                                    <ColumnDefinition Width="0.5*"/>                                    
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="0.6*"/>
+                                    <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Path=Tag}"/>
-                                <TextBlock Grid.Row="1" Text="{Binding Path=Date_OfAdd}"/>
-                                <TextBlock Grid.Column="1"  Grid.RowSpan ="2" TextWrapping="Wrap" Text="{Binding Path=Description}"/>
-                                <TextBlock Grid.Column="2" Grid.RowSpan="2" Text="{Binding Path=Cost}"/>
-                                <Label Grid.Row="2" Content="{Binding Path=Orders.Count}"/>
+                                <TextBlock Text="{Binding Path=Tag}" Grid.ColumnSpan="2"/>
+                                <TextBlock Grid.Row="1" Text="{Binding Path=Date_OfAdd}" Grid.ColumnSpan="2"/>
+                                <TextBlock Grid.Column="1" Grid.ColumnSpan="2"  Grid.RowSpan ="2" TextWrapping="Wrap" Text="{Binding Path=Description}"/>
+                                <TextBlock Grid.Column="3" Grid.RowSpan="2" Text="{Binding Path=Cost}"/>
+                                <Label Grid.Row="2" Content="Total Orders:"/>
+                                <Label Grid.Column="1" Grid.Row="2" Content="{Binding Path=Orders.Count}"/>
+                                <Button Content="Detail"  Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ChangeViewModel}"/>
+                                <Expander Header="Orders" Grid.Row="3" Grid.ColumnSpan="2">
+                                    <DataGrid ItemsSource="{Binding Orders}" AutoGenerateColumns="False" Width="300">
+                                        <DataGrid.Columns>
+                                            <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution}"/>
+                                            <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                                        </DataGrid.Columns>    
+                                    </DataGrid>
+                                </Expander>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" 
+                            BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Grid>
     </Grid>

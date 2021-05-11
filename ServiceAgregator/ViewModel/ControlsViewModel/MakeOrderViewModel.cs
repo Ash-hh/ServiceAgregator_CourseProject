@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ServiceAgregator.DataBase;
 using ServiceAgregator.Models;
 using ServiceAgregator.Command;
+using System.Windows;
 
 namespace ServiceAgregator.ViewModel.ControlsViewModel
 {
@@ -29,6 +30,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
         public void Checkout(object obj)
         {
             new OrdersQuery().AddNewOrder(Order);
+            MessageBox.Show("Your Order Confirmed");
         }
 
         public bool CanExecute(object obj)

@@ -19,7 +19,7 @@ namespace ServiceAgregator.Models
 
         public int User_ID { get; set; }
 
-        [StringLength(10)]
+        [StringLength(25)]
         public string Status { get; set; }
 
         [Column(TypeName = "date")]

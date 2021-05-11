@@ -7,16 +7,26 @@ using ServiceAgregator.ViewModel.ControlsViewModel;
 using ServiceAgregator.Command;
 using ServiceAgregator.Models;
 using ServiceAgregator.DataBase;
+using ServiceAgregator.ViewModel;
+using ServiceAgregator.ViewModel.Main;
 
 namespace ServiceAgregator.ViewModel.ControlsViewModel
 {
     public class UserServicesViewModel : BaseViewModel
     {
-        public ObservableCollection<object> Services { set; get; }
+        public ObservableCollection<Services> Services { set; get; }
         public Services SelectedService { set; get; }
         public UserServicesViewModel()
         {
+            ChangeViewModel = new DelegateCommand<object>(Details);
             Services = new ServicesQuery().GetUserServices();
+        }
+
+        public DelegateCommand<object> ChangeViewModel { set; get; }
+
+        private void Details(object obj)
+        {
+            Changer.getInstance(null).MainViewModel.SelectedViewModel = new ServicesControllerViewModel(SelectedService);
         }
     }
 }

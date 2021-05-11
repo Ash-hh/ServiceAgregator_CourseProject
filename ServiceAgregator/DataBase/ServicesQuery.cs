@@ -36,9 +36,18 @@ namespace ServiceAgregator.DataBase
             
         }
 
-        public ObservableCollection<object> GetUserServices()
+        public void AddNewService(Services ServiceToAdd)
         {
-            ObservableCollection<object> buffservices = new ObservableCollection<object>();
+            using (DBContext db = new DBContext())
+            {
+                db.Services.Add(ServiceToAdd);
+                db.SaveChanges();
+            }
+        }
+
+        public ObservableCollection<Services> GetUserServices()
+        {
+            ObservableCollection<Services> buffservices = new ObservableCollection<Services>();
             using (DBContext db = new DBContext())
             {
 
@@ -48,7 +57,7 @@ namespace ServiceAgregator.DataBase
                 //               where services.User_ID == Changer.CurrentUser.User_ID
                 //               select services).ToList();
 
-                var Services = db.Services.GroupJoin(db.Orders,
+                var Services = db.Services.Where(z=>z.User_ID == Changer.CurrentUser.User_ID).GroupJoin(db.Orders,
                     p => p.Service_ID,
                     t => t.Service_ID,
                     (serv, order) => new
@@ -59,17 +68,24 @@ namespace ServiceAgregator.DataBase
                         Description = serv.Description,
                         Cost = serv.Cost,
                         Date_OfAdd = serv.Date_OfAdd,
-                        Orders = order
+                        Orders = order.ToList(),
                     }).ToList();
 
                 foreach(var f in Services)
                 {
-                    Console.WriteLine(f.ToString());
-                    
-                    
+                    buffservices.Add(new Services
+                    {
+                        Service_ID = f.Service_ID,
+                        User_ID = f.User_ID,
+                        Tag = f.Tag,
+                        Description = f.Description,
+                        Cost = f.Cost,
+                        Date_OfAdd = f.Date_OfAdd,
+                        Orders = f.Orders
+                    });                    
                 }
-              
-                
+
+
                 return buffservices;
             }
 
