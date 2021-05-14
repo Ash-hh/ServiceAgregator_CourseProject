@@ -40,19 +40,7 @@ namespace ServiceAgregator.DataBase
                
             }
         }
-
-        public int GenerateUniqueId()
-        {
-            using (DBContext db = new DBContext())
-            {
-                var id = db.Orders.OrderByDescending(p => p.Order_ID).Select(p => p.Order_ID).Take(1);
-                foreach (int f in id)
-                {
-                    return f + 1;
-                }
-                return 1;
-            }
-        }
+      
 
         public void OrderUpdate(Orders Order)
         {
@@ -73,15 +61,67 @@ namespace ServiceAgregator.DataBase
             
             using (DBContext db = new DBContext())
             {
-                var Orders = db.Orders.Where(p => p.User_ID == Changer.CurrentUser.User_ID).ToList();
-                var buffServices = new ServicesQuery().GetAllServices();
-                foreach(Models.Orders order in Orders)
+                var Orders = db.Orders.Where(p => p.User_ID == Changer.CurrentUser.User_ID && p.Status!= "DeletedByCustomer").ToList();
+                var buffServices = new ServicesQuery().GetOrderServices();
+                foreach(Orders order in Orders)
                 {
                     var Service = buffServices.Where(p => p.Service_ID == order.Service_ID).FirstOrDefault();
                     order.Services = Service;
                 }
                 return UserOrders.FromListToObservableCollection(Orders);
             }
+        }
+
+        public void DeleteOrder(Orders order)
+        {
+            //Orders 
+            //using (DBContext db =new DBContext())
+            //{
+            //    var order = db.Orders.FirstOrDefault(p => p.Order_ID == Order.Order_ID);
+            //}
+                if (order.Status == "DeletedByCustomer" && order.Services.User_ID == Changer.CurrentUser.User_ID)
+                {
+                    Delete();
+                }
+                else if (order.Status == "DeletedByProducer" && order.Services.User_ID != Changer.CurrentUser.User_ID)
+                {
+                    Delete();
+                }
+                else if (order.Status == "ThisServiceIsNotAvailible" && order.Services.User_ID != Changer.CurrentUser.User_ID)
+                {
+                    using (DBContext db = new DBContext())
+                    {
+                        if (db.Orders.Where(p => p.Service_ID == order.Service_ID).Count() == 1)
+                        {
+                            var Service = db.Services.FirstOrDefault(p => p.Service_ID == order.Service_ID);
+                            Service.Orders = null;
+                            Delete();
+                            new ServicesQuery().DeleteService(Service);
+                        }
+                        else
+                        {
+                            Delete();
+                        }
+
+                    }
+                }
+                else
+                {
+                    OrderUpdate(order);
+                }
+
+            void Delete()
+            {
+                using (DBContext db = new DBContext())
+                {
+                    db.Orders.Attach(order);
+                    db.Entry(order).State = System.Data.Entity.EntityState.Deleted;
+                    db.Orders.Remove(order);
+                    db.SaveChanges();
+
+                }
+            }
+            
         }
 
         

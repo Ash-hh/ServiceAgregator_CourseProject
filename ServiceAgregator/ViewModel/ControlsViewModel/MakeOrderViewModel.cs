@@ -21,7 +21,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             MakeOrder = new DelegateCommand<object>(Checkout, CanExecute);
 
             Order = new Orders();
-            Order.Order_ID = new OrdersQuery().GenerateUniqueId();
+           // Order.Order_ID = new OrdersQuery().GenerateUniqueId();
             Order.Service_ID = service.Service_ID;
             Order.User_ID = Changer.CurrentUser.User_ID;
             Order.Status = "Waiting";

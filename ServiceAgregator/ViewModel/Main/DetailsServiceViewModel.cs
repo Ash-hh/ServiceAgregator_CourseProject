@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using ServiceAgregator.Models;
 using ServiceAgregator.Command;
+using ServiceAgregator.DataBase;
+using System.Windows;
 
 namespace ServiceAgregator.ViewModel.Main
 {
@@ -63,7 +65,15 @@ namespace ServiceAgregator.ViewModel.Main
 
         private void ShowOrderWin(object obj)
         {
-            MakeOrder = new ControlsViewModel.MakeOrderViewModel(Service);
+            if(new OrdersQuery().GetUserOrders().FirstOrDefault(p=>p.Service_ID == Service.Service_ID)==null)
+            {
+                MakeOrder = new ControlsViewModel.MakeOrderViewModel(Service);
+            }
+            else
+            {
+                MessageBox.Show("You already order this Service");
+            }
+            
         }
     }
 }

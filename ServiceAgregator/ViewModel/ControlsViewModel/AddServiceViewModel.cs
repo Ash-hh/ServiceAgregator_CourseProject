@@ -34,6 +34,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             {
                 Service.User_ID = Changer.CurrentUser.User_ID;
                 Service.Date_OfAdd = DateTime.Now.Date;
+                Service.Available = true;
                 new ServicesQuery().AddNewService(Service);
             }
         }

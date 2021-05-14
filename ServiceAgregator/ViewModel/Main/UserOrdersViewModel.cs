@@ -53,7 +53,7 @@ namespace ServiceAgregator.ViewModel.Main
         //--Если вы читаете это сообщение, то снизу огромный костыль
         private void Update_Status(string status)
         {
-            if(SelectedOrder.Status!=" ")
+            if(SelectedOrder.Status=="Waiting")
             {
                 //SelectedOrder.Status = status;
                 //OnPropertyChanged("SelectedOrder");
@@ -77,7 +77,13 @@ namespace ServiceAgregator.ViewModel.Main
         
         private void Delete(object obj)
         {
+            if(SelectedOrder.Status != "ThisServiceIsNotAvailible")
+            {
+                SelectedOrder.Status = "DeletedByCustomer";
+            }            
+            new OrdersQuery().DeleteOrder(SelectedOrder);
             Orders.Remove(SelectedOrder);
+
         }
         public bool CanExecute(object obj)
         {
