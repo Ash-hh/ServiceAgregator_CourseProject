@@ -16,6 +16,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
 
         public DelegateCommand<object> MakeOrder { set; get; }
 
+        //TODO: Calendar Validation
         public MakeOrderViewModel(Services service)
         {
             MakeOrder = new DelegateCommand<object>(Checkout, CanExecute);

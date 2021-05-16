@@ -73,12 +73,7 @@ namespace ServiceAgregator.DataBase
         }
 
         public void DeleteOrder(Orders order)
-        {
-            //Orders 
-            //using (DBContext db =new DBContext())
-            //{
-            //    var order = db.Orders.FirstOrDefault(p => p.Order_ID == Order.Order_ID);
-            //}
+        {            
                 if (order.Status == "DeletedByCustomer" && order.Services.User_ID == Changer.CurrentUser.User_ID)
                 {
                     Delete();
@@ -93,10 +88,10 @@ namespace ServiceAgregator.DataBase
                     {
                         if (db.Orders.Where(p => p.Service_ID == order.Service_ID).Count() == 1)
                         {
-                            var Service = db.Services.FirstOrDefault(p => p.Service_ID == order.Service_ID);
-                            Service.Orders = null;
+                            //var Service = db.Services.FirstOrDefault(p => p.Service_ID == order.Service_ID);
+                           // Service.Orders = null;
                             Delete();
-                            new ServicesQuery().DeleteService(Service);
+                            new ServicesQuery().DeleteService(order.Service_ID);
                         }
                         else
                         {

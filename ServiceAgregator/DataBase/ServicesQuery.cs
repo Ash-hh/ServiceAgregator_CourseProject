@@ -61,28 +61,26 @@ namespace ServiceAgregator.DataBase
                 db.Services.Add(ServiceToAdd);
                 db.SaveChanges();
             }
-        }
+        }        
 
-        // TODO: Update DeleteService; Delete by ID, Not By object;
-        public void DeleteService(Services Service)
+        public void DeleteService(int ServiceId)
         {
-            
+
             using (DBContext db = new DBContext())
             {
-                var ServiceToDelete = db.Services.FirstOrDefault(p => p.Service_ID == Service.Service_ID);
-                var Orders = db.Orders.Where(p => p.Service_ID == ServiceToDelete.Service_ID);
-                if(Orders.FirstOrDefault() != null && Orders.FirstOrDefault().Status != "ThisServiceIsNotAvailible")
+                var ServiceToDelete = db.Services.FirstOrDefault(p => p.Service_ID == ServiceId);              
+                if (ServiceToDelete.Orders.Count != 0 && ServiceToDelete.Orders.FirstOrDefault().Status != "ThisServiceIsNotAvailible")
                 {
-                    foreach (Orders order in Orders)
+                    foreach (Orders order in ServiceToDelete.Orders)
                     {
                         order.Status = "ThisServiceIsNotAvailible";
                     }
                     db.Services.FirstOrDefault(p => p.Service_ID == ServiceToDelete.Service_ID).Available = false;
-                    db.SaveChanges();                    
+                    db.SaveChanges();
                 }
                 else
-                {                    
-                    db.Services.Attach(db.Services.FirstOrDefault(p=>p.Service_ID == ServiceToDelete.Service_ID));
+                {
+                    db.Services.Attach(db.Services.FirstOrDefault(p => p.Service_ID == ServiceToDelete.Service_ID));
                     db.Entry(ServiceToDelete).State = System.Data.Entity.EntityState.Deleted;
                     db.Services.Remove(ServiceToDelete);
                     db.SaveChanges();
@@ -94,37 +92,9 @@ namespace ServiceAgregator.DataBase
         {
             ObservableCollection<Services> buffservices = new ObservableCollection<Services>();
             using (DBContext db = new DBContext())
-            {
-                var Services = db.Services.Where(z => z.User_ID == Changer.CurrentUser.User_ID && z.Available == true).GroupJoin(db.Orders,
-                    p => p.Service_ID,
-                    t => t.Service_ID,
-                    (serv, order) => new
-                    {
-                        Service_ID = serv.Service_ID,
-                        User_ID = serv.User_ID,
-                        Tag = serv.Tag,
-                        Description = serv.Description,
-                        Cost = serv.Cost,
-                        Date_OfAdd = serv.Date_OfAdd,
-                        Orders = order.ToList(),
-                    }).ToList();
-
-                foreach (var f in Services)
-                {
-                    buffservices.Add(new Services
-                    {
-                        Service_ID = f.Service_ID,
-                        User_ID = f.User_ID,
-                        Tag = f.Tag,
-                        Description = f.Description,
-                        Cost = f.Cost,
-                        Date_OfAdd = f.Date_OfAdd,
-                        Orders = f.Orders
-                    });
-                }
-                //var Services = db.Services.Where(p => p.Available == true).ToList();
-                //TODO: Fix Binding with uppermethod
-                return buffservices;
+            {              
+                var Services = db.Services.Where(p => p.Available == true && p.User_ID == Changer.CurrentUser.User_ID).ToList();             
+                return buffservices.FromListToObservableCollection(Services);
             }
 
         }

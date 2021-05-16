@@ -47,15 +47,14 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
 
         public void ServiceDelete(object obj)
         {
-            new ServicesQuery().DeleteService(Service);
+            new ServicesQuery().DeleteService(Service.Service_ID);
             Changer.getInstance(null).MainViewModel.SelectedViewModel = new ServiceAgregator.ViewModel.Main.ServicesControllerViewModel();
         }
 
         
-        //TODO: Update;
+      //TODO: Update Delete Fucntion
         public void Cancel(string status)
-        {
-            //TODO: Update Binding;
+        {            
             if(Order.Status != "DeletedByCustomer")
             {
                 Order.Status = "CanceledByProduces";
