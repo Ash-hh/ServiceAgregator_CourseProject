@@ -22,7 +22,12 @@
         <Label Content="Description" Grid.Row="1"/>
         <Label Content="Cost" Grid.Row="2"/>
 
-        <TextBox Grid.Column="1" Text="{Binding Service.Tag}"/>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding Path=Service.Tag}">
+            <TextBlock  Text="Home"></TextBlock>
+            <TextBlock Text="Auto"></TextBlock>
+            <TextBlock Text="Other"></TextBlock>
+            <TextBlock Text="Education"></TextBlock>
+        </ComboBox>
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Service.Description}"/>
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Service.Cost}"/>
         <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Add" Command="{Binding AddNewService}"/>

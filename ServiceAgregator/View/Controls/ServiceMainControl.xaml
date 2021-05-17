@@ -11,7 +11,31 @@
              d:DesignHeight="450" d:DesignWidth="800">
 
     <Grid>
-        <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+        </Grid.RowDefinitions>
+
+        <Grid x:Name="Filter" Background="White">
+            
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock>Choose Tag for Filter </TextBlock>
+            
+            <ComboBox Grid.Column="1" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding Tag}">
+                <TextBlock>Home</TextBlock>
+                <TextBlock>Auto</TextBlock>
+                <TextBlock>Other</TextBlock>
+                <TextBlock>Education</TextBlock>
+            </ComboBox>
+            <Button Grid.Column="2"/>
+        </Grid>
+
+        <Grid Grid.Row="1">
             <ListBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>                        

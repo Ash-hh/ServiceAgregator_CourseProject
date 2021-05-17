@@ -19,6 +19,7 @@ namespace ServiceAgregator.Models
 
         public int User_ID { get; set; }
 
+        
         [StringLength(25)]
         public string Status { get; set; }
 

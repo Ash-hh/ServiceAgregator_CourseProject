@@ -87,9 +87,7 @@ namespace ServiceAgregator.DataBase
                     using (DBContext db = new DBContext())
                     {
                         if (db.Orders.Where(p => p.Service_ID == order.Service_ID).Count() == 1)
-                        {
-                            //var Service = db.Services.FirstOrDefault(p => p.Service_ID == order.Service_ID);
-                           // Service.Orders = null;
+                        {                           
                             Delete();
                             new ServicesQuery().DeleteService(order.Service_ID);
                         }

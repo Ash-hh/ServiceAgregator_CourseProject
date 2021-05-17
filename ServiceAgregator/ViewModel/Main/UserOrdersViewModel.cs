@@ -50,15 +50,12 @@ namespace ServiceAgregator.ViewModel.Main
             get { return _selectedOrder; }
         }
 
+        //TODO: Fix
         //--Если вы читаете это сообщение, то снизу огромный костыль
         private void Update_Status(string status)
         {
             if(SelectedOrder.Status=="Waiting")
             {
-                //SelectedOrder.Status = status;
-                //OnPropertyChanged("SelectedOrder");
-                //OnPropertyChanged("Orders");
-
                 Orders buff = new Orders();
                 buff = SelectedOrder;
                 buff.Status = status;

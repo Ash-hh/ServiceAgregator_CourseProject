@@ -23,6 +23,8 @@ namespace ServiceAgregator.ViewModel.Main
 
         private ObservableCollection<Services> _services;    
 
+        public string Tag { set; get; }
+
         public Services SelectedService { set; get; }
 
         public ObservableCollection<Services> Services

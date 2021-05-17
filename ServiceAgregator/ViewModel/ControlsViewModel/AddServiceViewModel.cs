@@ -14,6 +14,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
 
         private Services _service;
 
+
         public Services Service
         {
             set { _service = value; OnPropertyChanged("Service"); }

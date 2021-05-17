@@ -99,5 +99,14 @@ namespace ServiceAgregator.DataBase
 
         }
 
+        public Services GetService(int id)
+        {
+            using (DBContext db = new DBContext())
+            {
+                return db.Services.Find(id);
+            }
+
+        }
+
     }
 }

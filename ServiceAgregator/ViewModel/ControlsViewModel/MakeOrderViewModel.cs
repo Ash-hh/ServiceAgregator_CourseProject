@@ -24,14 +24,20 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             Order = new Orders();
            // Order.Order_ID = new OrdersQuery().GenerateUniqueId();
             Order.Service_ID = service.Service_ID;
+            Order.Services = service;
             Order.User_ID = Changer.CurrentUser.User_ID;
             Order.Status = "Waiting";
         }
 
         public void Checkout(object obj)
         {
-            new OrdersQuery().AddNewOrder(Order);
-            MessageBox.Show("Your Order Confirmed");
+            if(new View.DialogWins.Default(Order).ShowDialog() == true)
+            {
+                new OrdersQuery().AddNewOrder(Order);                
+                MessageBox.Show("Your Order Confirmed");
+                Changer.getInstance(null).MainViewModel.SelectedViewModel = new Main.ServicesViewModel();
+            }
+            
         }
 
         public bool CanExecute(object obj)

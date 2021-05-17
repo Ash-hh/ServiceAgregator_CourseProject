@@ -109,6 +109,9 @@
     <Compile Include="View\Controls\ServicesControllerControl.xaml.cs">
       <DependentUpon>ServicesControllerControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\DialogWins\Default.xaml.cs">
+      <DependentUpon>Default.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RegisterWin.xaml.cs">
       <DependentUpon>RegisterWin.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Controls\ServicesControllerControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DialogWins\Default.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
