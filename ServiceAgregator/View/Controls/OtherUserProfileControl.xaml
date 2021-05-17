@@ -24,5 +24,12 @@
                 <Hyperlink Command="{Binding UserServices}">User Services</Hyperlink>
             </Label>
         </StackPanel>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding UserProfile.ReviewsRecepient}" Width="500" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Review Date" Binding="{Binding Review_Date}"/>
+                <DataGridTextColumn Header="Reviewer Name" Binding="{Binding UsersSender.User_Name}"/>
+                <DataGridTextColumn Header="Text" Binding="{Binding Text}"/>
+            </DataGrid.Columns>           
+        </DataGrid>
     </Grid>
 </UserControl>

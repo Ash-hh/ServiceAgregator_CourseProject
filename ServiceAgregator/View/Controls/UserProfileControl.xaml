@@ -87,9 +87,13 @@
 
                         <Label
                              Grid.Row="3"  
-                            Content="Pass Change"/>
+                            Content="Rating"/>
 
-                        <Button  Grid.Row="3" Grid.Column="1"   Grid.ColumnSpan="2"/>
+                        <Label
+                            Grid.Row="3"
+                            Grid.Column="1"
+                            Grid.ColumnSpan="2"
+                            Content="{Binding Path=CurrentUser.Rating}"/>
 
                         <Label                                                     
                             VerticalAlignment="Top"

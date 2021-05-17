@@ -16,7 +16,7 @@ namespace ServiceAgregator.DataBase
         {          
             using (DBContext db = new DBContext())
             {
-                var DBUser = db.Users.Where(p => p.User_ID == id).FirstOrDefault();
+                var DBUser = db.Users.Include("ReviewsRecepient").Include("ReviewsRecepient.UsersSender").Where(p => p.User_ID == id).FirstOrDefault();
                 if(DBUser!=null)
                 {
                     return DBUser;

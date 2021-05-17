@@ -69,6 +69,7 @@
     <Compile Include="DataBase\OrdersQuery.cs" />
     <Compile Include="DataBase\ServicesQuery.cs" />
     <Compile Include="DataBase\UserQuery.cs" />
+    <Compile Include="Model\Reviews.cs" />
     <Compile Include="Model\Tags.cs" />
     <Compile Include="ViewModel\ControlsViewModel\AddServiceViewModel.cs" />
     <Compile Include="ViewModel\ControlsViewModel\MakeOrderViewModel.cs" />

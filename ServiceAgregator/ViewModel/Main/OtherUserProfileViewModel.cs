@@ -12,11 +12,11 @@ namespace ServiceAgregator.ViewModel.Main
 {
     class OtherUserProfileViewModel : BaseViewModel
     {
-        public Users UserProfile { set; get; }
+        public Users UserProfile { set; get; }      
         public OtherUserProfileViewModel(int userId)
         {
             UserProfile = new UserQuery().GetUserById(userId);
-            UserServices = new DelegateCommand<object>(Services);
+            UserServices = new DelegateCommand<object>(Services);           
         }
 
         public DelegateCommand<object> UserServices { set; get; }

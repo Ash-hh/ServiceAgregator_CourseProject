@@ -15,6 +15,7 @@ namespace ServiceAgregator.DataBase
         }
 
         public virtual DbSet<Orders> Orders { get; set; }
+        public virtual DbSet<Reviews> Reviews { get; set; }
         public virtual DbSet<Services> Services { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tags> Tags { get; set; }
@@ -22,6 +23,11 @@ namespace ServiceAgregator.DataBase
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+
+            modelBuilder.Entity<Reviews>()
+                .Property(e => e.Text)
+                .IsUnicode(false);
+
             modelBuilder.Entity<Services>()
                 .Property(e => e.Tag)
                 .IsFixedLength();
@@ -48,6 +54,16 @@ namespace ServiceAgregator.DataBase
                 .HasMany(e => e.Orders)
                 .WithRequired(e => e.Users)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Users>()
+                .HasMany(e => e.ReviewsSender)
+                .WithOptional(e => e.UsersSender)
+                .HasForeignKey(e => e.Sender_Id);
+
+            modelBuilder.Entity<Users>()
+                .HasMany(e => e.ReviewsRecepient)
+                .WithOptional(e => e.UsersRecepient)
+                .HasForeignKey(e => e.Recipient_Id);
 
             modelBuilder.Entity<Users>()
                 .HasMany(e => e.Services)

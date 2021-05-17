@@ -24,5 +24,6 @@ namespace ServiceAgregator.View.Controls
         {
             InitializeComponent();
         }
+               
     }
 }
