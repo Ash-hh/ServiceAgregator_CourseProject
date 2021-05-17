@@ -19,7 +19,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
         public UserServicesViewModel()
         {
             ChangeViewModel = new DelegateCommand<object>(Details);
-            Services = new ServicesQuery().GetUserServices();
+            Services = new ServicesQuery().GetUserServices(Changer.CurrentUser.User_ID);
         }
 
         public DelegateCommand<object> ChangeViewModel { set; get; }

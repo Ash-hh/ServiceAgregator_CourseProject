@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="ServiceAgregator.View.Controls.OtherUserProfileControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ServiceAgregator.View.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>            
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="1.5*"/>
+        </Grid.ColumnDefinitions>
+        <Image Source="{Binding UserProfile.User_Image}"/>
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="{Binding UserProfile.User_Name}"/>
+            <TextBlock Text="{Binding UserProfile.Date_Registration}"/>
+            <Label>
+                <Hyperlink Command="{Binding UserServices}">User Services</Hyperlink>
+            </Label>
+        </StackPanel>
+    </Grid>
+</UserControl>

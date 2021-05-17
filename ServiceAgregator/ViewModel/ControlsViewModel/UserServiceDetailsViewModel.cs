@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +18,8 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             DeleteService = new DelegateCommand<object>(ServiceDelete);
             CancelCom = new DelegateCommand<string>(Cancel);
             DeleteOrder = new DelegateCommand<object>(Delete);
+            Orders = new ObservableCollection<Orders>();
+            Orders.FromListToObservableCollection(Service.Orders);
 
         }
         //TODO: CanExecute() !!
@@ -37,6 +39,13 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             get { return _order; }
         }
 
+        private ObservableCollection<Orders> _orders;
+
+        public ObservableCollection<Orders> Orders
+        {
+            set { _orders = value; OnPropertyChanged("Orders"); }
+            get { return _orders; }
+        }
         public Services Service
         {
             set { _service = value; OnPropertyChanged("Service"); }
@@ -62,18 +71,23 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             }
         }
 
+        
         public void Delete(object obj)
         {
             if(Order.Status == "DeletedByCustomer")
             {
                 Order.Services = Service;
                 new OrdersQuery().DeleteOrder(Order);
-                Service.Orders.Remove(Order);
+                Orders.Remove(Order);
+                          
             }
             else
             {
                 Order.Services = Service;
                 Order.Status = "DeletedByProducer";
+                Orders.FirstOrDefault(p=>p.Order_ID == Order.Order_ID).Status = "DeletedByProducer";                
+                new OrdersQuery().OrderUpdate(Order);
+                Orders.Remove(Order);
             }
         }
     }

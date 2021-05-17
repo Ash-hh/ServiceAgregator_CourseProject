@@ -33,7 +33,7 @@
             </Label>
 
             <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
-                <DataGrid ItemsSource="{Binding Service.Orders}" SelectedItem="{Binding Order}" AutoGenerateColumns="False" Width="300">
+                <DataGrid ItemsSource="{Binding Orders}" SelectedItem="{Binding Order}" AutoGenerateColumns="False" Width="300" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>

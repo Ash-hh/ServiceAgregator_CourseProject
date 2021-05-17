@@ -13,18 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ServiceAgregator.View.Controls.InternalControls
+namespace ServiceAgregator.View.Controls
 {
     /// <summary>
-    /// Логика взаимодействия для UserServiceDetails.xaml
+    /// Логика взаимодействия для OtherUserProfileControl.xaml
     /// </summary>
-    public partial class UserServiceDetails : UserControl
+    public partial class OtherUserProfileControl : UserControl
     {
-        public UserServiceDetails()
+        public OtherUserProfileControl()
         {
             InitializeComponent();
         }
-
-        
     }
 }

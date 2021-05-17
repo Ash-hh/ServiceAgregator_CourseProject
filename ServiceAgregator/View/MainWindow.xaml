@@ -37,6 +37,10 @@
             <uc:ServicesControllerControl/>
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type  viewModelMain:OtherUserProfileViewModel}">
+            <uc:OtherUserProfileControl/>
+        </DataTemplate>
+
 
     </Window.Resources>
 

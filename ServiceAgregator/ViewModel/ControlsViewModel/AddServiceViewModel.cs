@@ -14,6 +14,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
 
         private Services _service;
 
+        public List<Tags> Tags {set;get;}
 
         public Services Service
         {
@@ -24,6 +25,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
         {
             AddNewService = new DelegateCommand<object>(ServiceAdd, CanExecute);
             Service = new Services();
+            Tags = new ServicesQuery().GetTags();
         }
 
         public DelegateCommand<object> AddNewService { set; get; }

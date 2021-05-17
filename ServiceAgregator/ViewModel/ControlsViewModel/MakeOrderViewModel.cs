@@ -12,17 +12,15 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
 {
     class MakeOrderViewModel : BaseViewModel
     {
-        public Orders Order {set;get;}
-
+        public Orders Order {set;get;}        
+        public DateTime Today { set; get; }
         public DelegateCommand<object> MakeOrder { set; get; }
-
-        //TODO: Calendar Validation
+    
         public MakeOrderViewModel(Services service)
-        {
+        {           
             MakeOrder = new DelegateCommand<object>(Checkout, CanExecute);
-
-            Order = new Orders();
-           // Order.Order_ID = new OrdersQuery().GenerateUniqueId();
+            Today = DateTime.Today;
+            Order = new Orders();       
             Order.Service_ID = service.Service_ID;
             Order.Services = service;
             Order.User_ID = Changer.CurrentUser.User_ID;
@@ -36,8 +34,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
                 new OrdersQuery().AddNewOrder(Order);                
                 MessageBox.Show("Your Order Confirmed");
                 Changer.getInstance(null).MainViewModel.SelectedViewModel = new Main.ServicesViewModel();
-            }
-            
+            }            
         }
 
         public bool CanExecute(object obj)

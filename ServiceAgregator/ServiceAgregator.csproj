@@ -69,12 +69,14 @@
     <Compile Include="DataBase\OrdersQuery.cs" />
     <Compile Include="DataBase\ServicesQuery.cs" />
     <Compile Include="DataBase\UserQuery.cs" />
+    <Compile Include="Model\Tags.cs" />
     <Compile Include="ViewModel\ControlsViewModel\AddServiceViewModel.cs" />
     <Compile Include="ViewModel\ControlsViewModel\MakeOrderViewModel.cs" />
     <Compile Include="ViewModel\ControlsViewModel\UserServiceDetailsViewModel.cs" />
     <Compile Include="ViewModel\ControlsViewModel\UserServicesViewModel.cs" />
     <Compile Include="ViewModel\Main\DetailsServiceViewModel.cs" />
     <Compile Include="ViewModel\Main\DetailsUserOrderControlViewModel.cs" />
+    <Compile Include="ViewModel\Main\OtherUserProfileViewModel.cs" />
     <Compile Include="ViewModel\Main\ServicesViewModel.cs" />
     <Compile Include="ViewModel\Main\UserOrdersViewModel.cs" />
     <Compile Include="ViewModel\Main\UserProfileViewModel.cs" />
@@ -96,6 +98,9 @@
     </Compile>
     <Compile Include="View\Controls\InternalControls\UserServicesControl.xaml.cs">
       <DependentUpon>UserServicesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Controls\OtherUserProfileControl.xaml.cs">
+      <DependentUpon>OtherUserProfileControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Controls\ServiceMainControl.xaml.cs">
       <DependentUpon>ServiceMainControl.xaml</DependentUpon>
@@ -136,6 +141,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Controls\InternalControls\UserServicesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Controls\OtherUserProfileControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

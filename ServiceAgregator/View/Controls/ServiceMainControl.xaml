@@ -17,6 +17,10 @@
         </Grid.RowDefinitions>
 
         <Grid x:Name="Filter" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
             
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -24,15 +28,17 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock>Choose Tag for Filter </TextBlock>
-            
-            <ComboBox Grid.Column="1" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding Tag}">
-                <TextBlock>Home</TextBlock>
-                <TextBlock>Auto</TextBlock>
-                <TextBlock>Other</TextBlock>
-                <TextBlock>Education</TextBlock>
+            <TextBlock Grid.RowSpan="2">Choose Tag for Filter </TextBlock>
+
+            <ComboBox Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Left" Width="200" 
+                      ItemsSource="{Binding Path=Tags}"
+                      DisplayMemberPath="Tag"
+                      SelectedValuePath="Tag"                      
+                      SelectedItem="{Binding Path=Tag}">
+                
             </ComboBox>
-            <Button Grid.Column="2"/>
+            <Button Content="Find" Command="{Binding FilterByTag}" Grid.Column="2"/>
+            <Button Content="Clear" Grid.Row="1" Command="{Binding FilterClear}" Grid.Column="2"/>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -58,14 +64,29 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding Path=Tag}"/>
                                 <Image Grid.Row="1"  Width="120" Height="120" Margin="5" Source="{Binding Users.User_Image}" />
-                                <TextBlock Grid.Row="2" Text="{Binding Path=Users.User_Name}"/>
+                                
                                 <TextBlock Grid.Column="1" Text="{Binding Path=Date_OfAdd}"/>
                                 <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="2" Text="{Binding Path=Description}"/>
-                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Path=Cost}"/>                                
+                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Path=Cost}"/>
+                                <Label Grid.Row="2">
+                                    <Hyperlink Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UserProfile}">
+                                        <TextBlock Text="{Binding Users.User_Name}" />
+                                    </Hyperlink>
+                                </Label>
                             </Grid>
                         </Border>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem" 
+                            BasedOn="{StaticResource {x:Type ListBoxItem}}">
+                        <Style.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="IsSelected" Value="True"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.ItemContainerStyle>
             </ListBox>
         </Grid>
     </Grid>

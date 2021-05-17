@@ -25,7 +25,7 @@ namespace ServiceAgregator.ViewModel
         public MainViewModel()
         {          
             UpdateViewCommand = new DelegateCommand<string>(OnUpdateViewCommand, CanUpdateViewCommand);
-        }
+        }        
 
         public MainViewModel(Models.Users user)
         {

@@ -21,6 +21,7 @@ namespace ServiceAgregator.DataBase
                 {
                     if (Order != null)
                     {
+                        db.Orders.Attach(Order);
                         db.Orders.Add(Order);
                         db.SaveChanges();
                     }
@@ -61,13 +62,7 @@ namespace ServiceAgregator.DataBase
             
             using (DBContext db = new DBContext())
             {
-                var Orders = db.Orders.Where(p => p.User_ID == Changer.CurrentUser.User_ID && p.Status!= "DeletedByCustomer").ToList();
-                var buffServices = new ServicesQuery().GetOrderServices();
-                foreach(Orders order in Orders)
-                {
-                    var Service = buffServices.Where(p => p.Service_ID == order.Service_ID).FirstOrDefault();
-                    order.Services = Service;
-                }
+                var Orders = db.Orders.Include("Services.Users").Where(p => p.User_ID == Changer.CurrentUser.User_ID && p.Status!= "DeletedByCustomer").ToList();               
                 return UserOrders.FromListToObservableCollection(Orders);
             }
         }
@@ -115,8 +110,7 @@ namespace ServiceAgregator.DataBase
                 }
             }
             
-        }
-
+        }        
         
     }
 }
