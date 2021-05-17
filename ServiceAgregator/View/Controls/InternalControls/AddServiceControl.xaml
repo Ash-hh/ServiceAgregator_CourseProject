@@ -22,11 +22,12 @@
         <Label Content="Description" Grid.Row="1"/>
         <Label Content="Cost" Grid.Row="2"/>
 
-        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Width="200" SelectedItem="{Binding Path=Service.Tag}">
-            <TextBlock  Text="Home"></TextBlock>
-            <TextBlock Text="Auto"></TextBlock>
-            <TextBlock Text="Other"></TextBlock>
-            <TextBlock Text="Education"></TextBlock>
+        <ComboBox Grid.Column="1" HorizontalAlignment="Left" Width="200" 
+                  ItemsSource="{Binding Path=Tags}" 
+                  DisplayMemberPath="Tag"
+                  SelectedValuePath="Tag"
+                  SelectedValue="{Binding Path=Service.Tag}">
+
         </ComboBox>
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Service.Description}"/>
         <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Service.Cost}"/>

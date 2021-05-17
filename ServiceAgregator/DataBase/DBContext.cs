@@ -17,6 +17,7 @@ namespace ServiceAgregator.DataBase
         public virtual DbSet<Orders> Orders { get; set; }
         public virtual DbSet<Services> Services { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
+        public virtual DbSet<Tags> Tags { get; set; }
         public virtual DbSet<Users> Users { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -33,6 +34,11 @@ namespace ServiceAgregator.DataBase
                 .HasMany(e => e.Orders)
                 .WithRequired(e => e.Services)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Tags>()
+             .HasMany(e => e.Services)
+             .WithRequired(e => e.Tags)
+             .WillCascadeOnDelete(false);
 
             modelBuilder.Entity<Users>()
                 .Property(e => e.Password)

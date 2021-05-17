@@ -22,15 +22,15 @@ namespace ServiceAgregator.DataBase
             using (DBContext db = new DBContext())
             {
                 ObservableCollection<Services> services = new ObservableCollection<Services>();
-                var bufflist = db.Services.Where(p=>p.Available==true).ToList();
-                var buffUsers = db.Users.ToList();
-             
-                foreach(Services service in bufflist)
-                {
-                    var User = buffUsers.Where(p => p.User_ID == service.User_ID).FirstOrDefault();
-                    service.Users = User;                   
-                }
+                //var bufflist = db.Services.Where(p=>p.Available==true).ToList();
+                //var buffUsers = db.Users.ToList();
 
+                //foreach(Services service in bufflist)
+                //{
+                //    var User = buffUsers.Where(p => p.User_ID == service.User_ID).FirstOrDefault();
+                //    service.Users = User;                   
+                //}
+                var bufflist = db.Services.Include("Users").Where(p => p.Available == true).ToList(); 
                 return services.FromListToObservableCollection(bufflist);              
             }
             
@@ -58,6 +58,7 @@ namespace ServiceAgregator.DataBase
         {
             using (DBContext db = new DBContext())
             {
+                db.Services.Attach(ServiceToAdd);
                 db.Services.Add(ServiceToAdd);
                 db.SaveChanges();
             }
@@ -86,14 +87,14 @@ namespace ServiceAgregator.DataBase
                     db.SaveChanges();
                 }
             }
-        }
+        }       
 
-        public ObservableCollection<Services> GetUserServices()
+        public ObservableCollection<Services> GetUserServices(int UserId)
         {
             ObservableCollection<Services> buffservices = new ObservableCollection<Services>();
             using (DBContext db = new DBContext())
-            {              
-                var Services = db.Services.Where(p => p.Available == true && p.User_ID == Changer.CurrentUser.User_ID).ToList();             
+            {
+                var Services = db.Services.Include("Orders").Include("Users").Where(p => p.Available == true && p.User_ID == UserId).ToList();
                 return buffservices.FromListToObservableCollection(Services);
             }
 
@@ -106,6 +107,24 @@ namespace ServiceAgregator.DataBase
                 return db.Services.Find(id);
             }
 
+        }
+
+        public List<Tags> GetTags()
+        {
+            using (DBContext db = new DBContext())
+            {
+                return db.Tags.Include("Services").ToList();
+            }
+        }
+
+        public ObservableCollection<Services> GetServicesByTag(Tags tag)
+        {
+            ObservableCollection<Services> buffservices = new ObservableCollection<Services>();
+            using (DBContext db = new DBContext())
+            {
+                var Services = db.Services.Include("Users").Where(p => p.Available == true && p.Tag == tag.Tag).ToList();
+                return buffservices.FromListToObservableCollection(Services);
+            }
         }
 
     }

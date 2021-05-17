@@ -19,8 +19,7 @@ namespace ServiceAgregator.Models
         public int Service_ID { get; set; }
 
         public int User_ID { get; set; }
-
-        [Required]
+        
         [StringLength(10)]
         public string Tag { get; set; }
 
@@ -37,6 +36,8 @@ namespace ServiceAgregator.Models
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }
+
+        public virtual Tags Tags { get; set; }
 
         public virtual Users Users { get; set; }
     }
