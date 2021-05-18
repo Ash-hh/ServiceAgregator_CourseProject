@@ -62,22 +62,22 @@ namespace ServiceAgregator.DataBase
             
             using (DBContext db = new DBContext())
             {
-                var Orders = db.Orders.Include("Services.Users").Where(p => p.User_ID == Changer.CurrentUser.User_ID && p.Status!= "DeletedByCustomer").ToList();               
+                var Orders = db.Orders.Include("Services.Users").Where(p => p.User_ID == Changer.CurrentUserID && p.Status!= "DeletedByCustomer").ToList();               
                 return UserOrders.FromListToObservableCollection(Orders);
             }
         }
 
         public void DeleteOrder(Orders order)
         {            
-                if (order.Status == "DeletedByCustomer" && order.Services.User_ID == Changer.CurrentUser.User_ID)
+                if (order.Status == "DeletedByCustomer" && order.Services.User_ID == Changer.CurrentUserID)
                 {
                     Delete();
                 }
-                else if (order.Status == "DeletedByProducer" && order.Services.User_ID != Changer.CurrentUser.User_ID)
+                else if (order.Status == "DeletedByProducer" && order.Services.User_ID != Changer.CurrentUserID)
                 {
                     Delete();
                 }
-                else if (order.Status == "ThisServiceIsNotAvailible" && order.Services.User_ID != Changer.CurrentUser.User_ID)
+                else if (order.Status == "ThisServiceIsNotAvailible" && order.Services.User_ID != Changer.CurrentUserID)
                 {
                     using (DBContext db = new DBContext())
                     {

@@ -16,7 +16,10 @@ namespace ServiceAgregator.DataBase
         {          
             using (DBContext db = new DBContext())
             {
-                var DBUser = db.Users.Include("ReviewsRecepient").Include("ReviewsRecepient.UsersSender").Where(p => p.User_ID == id).FirstOrDefault();
+                var DBUser = db.Users.Include("ReviewsRecepient").
+                                        Include("ReviewsRecepient.UsersSender").
+                                        Include("Services").
+                                        Include("Services.Orders").Where(p => p.User_ID == id).FirstOrDefault();
                 if(DBUser!=null)
                 {
                     return DBUser;
@@ -87,5 +90,17 @@ namespace ServiceAgregator.DataBase
                 }               
             }
         }
-    }
+
+        public void SendReview(Reviews review)
+        {
+            using (DBContext db = new DBContext())
+            {
+                db.Reviews.Attach(review);
+                db.Reviews.Add(review);
+                db.SaveChanges();
+            }
+        }
+
+    } 
+
 }

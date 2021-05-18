@@ -12,7 +12,7 @@ namespace ServiceAgregator.Command
         private static Changer instance;
         public MainViewModel MainViewModel { get; set; }
 
-        public static Models.Users CurrentUser { set; get; }
+        public static int CurrentUserID { set; get; }
         private Changer(MainViewModel mainView)
         {           
             MainViewModel = mainView;
@@ -20,7 +20,7 @@ namespace ServiceAgregator.Command
 
         public void SetCurrentUser(Models.Users user)
         {
-            CurrentUser = user;
+            CurrentUserID = user.User_ID;
         }
        
         public static Changer getInstance(MainViewModel mainViewModel = null)

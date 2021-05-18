@@ -30,7 +30,7 @@ namespace ServiceAgregator.ViewModel
         public MainViewModel(Models.Users user)
         {
             Changer.getInstance(this);
-            Changer.CurrentUser = user;
+            Changer.CurrentUserID = user.User_ID;
             SelectedViewModel = new ServicesViewModel();
             CurrentUser = user;
             UpdateViewCommand = new DelegateCommand<string>(OnUpdateViewCommand, CanUpdateViewCommand);

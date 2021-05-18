@@ -18,9 +18,9 @@ namespace ServiceAgregator.View.DialogWins
     /// <summary>
     /// Логика взаимодействия для Default.xaml
     /// </summary>
-    public partial class Default : Window
+    public partial class ConfirmOrderWin : Window
     {
-        public Default(Orders order)
+        public ConfirmOrderWin(Orders order)
         {
             Order = order;
             this.DataContext = Order;

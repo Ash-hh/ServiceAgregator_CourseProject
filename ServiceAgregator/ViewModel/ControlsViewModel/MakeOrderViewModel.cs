@@ -23,13 +23,13 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             Order = new Orders();       
             Order.Service_ID = service.Service_ID;
             Order.Services = service;
-            Order.User_ID = Changer.CurrentUser.User_ID;
+            Order.User_ID = Changer.CurrentUserID;
             Order.Status = "Waiting";
         }
 
         public void Checkout(object obj)
         {
-            if(new View.DialogWins.Default(Order).ShowDialog() == true)
+            if(new View.DialogWins.ConfirmOrderWin(Order).ShowDialog() == true)
             {
                 new OrdersQuery().AddNewOrder(Order);                
                 MessageBox.Show("Your Order Confirmed");

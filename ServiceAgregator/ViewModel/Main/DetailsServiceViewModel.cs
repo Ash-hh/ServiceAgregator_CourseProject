@@ -67,7 +67,15 @@ namespace ServiceAgregator.ViewModel.Main
         {
             if(new OrdersQuery().GetUserOrders().FirstOrDefault(p=>p.Service_ID == Service.Service_ID)==null)
             {
-                MakeOrder = new ControlsViewModel.MakeOrderViewModel(Service);
+                if(Service.User_ID != Changer.CurrentUserID)
+                {
+                    MakeOrder = new ControlsViewModel.MakeOrderViewModel(Service);
+                }
+                else
+                {
+                    MessageBox.Show("You can't order your own service");
+                }
+                
             }
             else
             {

@@ -9,7 +9,7 @@
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>            
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="0.5*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -20,11 +20,25 @@
         <StackPanel Grid.Column="1">
             <TextBlock Text="{Binding UserProfile.User_Name}"/>
             <TextBlock Text="{Binding UserProfile.Date_Registration}"/>
+            <TextBlock Text="{Binding UserProfile.Rating}"/>
             <Label>
                 <Hyperlink Command="{Binding UserServices}">User Services</Hyperlink>
             </Label>
         </StackPanel>
-        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding UserProfile.ReviewsRecepient}" Width="500" AutoGenerateColumns="False">
+        
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBox
+                Margin="5"
+                Text="{Binding ReviewText}"/>
+            <Button 
+                Grid.Column="1" Content="Send Review" Margin="10" Command="{Binding SendReview}"/>
+        </Grid>
+        
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding UserProfile.ReviewsRecepient}" Width="500" AutoGenerateColumns="False">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Review Date" Binding="{Binding Review_Date}"/>
                 <DataGridTextColumn Header="Reviewer Name" Binding="{Binding UsersSender.User_Name}"/>
