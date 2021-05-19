@@ -64,8 +64,8 @@
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding Path=Tag}"/>
                                 <Image Grid.Row="1"  Width="120" Height="120" Margin="5" Source="{Binding Users.User_Image}" />
-                                
-                                <TextBlock Grid.Column="1" Text="{Binding Path=Date_OfAdd}"/>
+
+                                <TextBlock Grid.Column="1" Text="{Binding Path=Date_OfAdd, StringFormat=dd-MM-yyyy}"/>
                                 <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="2" Text="{Binding Path=Description}"/>
                                 <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Path=Cost}"/>
                                 <Label Grid.Row="2">

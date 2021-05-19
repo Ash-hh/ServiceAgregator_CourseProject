@@ -50,7 +50,7 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="{Binding Path=Tag}" Grid.ColumnSpan="2"/>
-                                <TextBlock Grid.Row="1" Text="{Binding Path=Date_OfAdd}" Grid.ColumnSpan="2"/>
+                                <TextBlock Grid.Row="1" Text="{Binding Path=Date_OfAdd, StringFormat=dd-MM-yyyy}" Grid.ColumnSpan="2"/>
                                 <TextBlock Grid.Column="1" Grid.ColumnSpan="2"  Grid.RowSpan ="2" TextWrapping="Wrap" Text="{Binding Path=Description}"/>
                                 <TextBlock Grid.Column="3" Grid.RowSpan="2" Text="{Binding Path=Cost}"/>
                                 <Label Grid.Row="2" Content="Total Orders:"/>
@@ -61,7 +61,7 @@
                                           Style="{DynamicResource ExpanderVisibility}">
                                     <DataGrid ItemsSource="{Binding Orders}" AutoGenerateColumns="False" Width="300">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution}"/>
+                                            <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution, StringFormat=dd-MM-yyyy}"/>
                                             <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
                                         </DataGrid.Columns>    
                                     </DataGrid>

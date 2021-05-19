@@ -48,7 +48,7 @@
                                     <RowDefinition Height="5*"/>
                                 </Grid.RowDefinitions>
 
-                                <Label Grid.Column="1" Content="{Binding Date_Execution}"/>
+                                <Label Grid.Column="1" Content="{Binding Date_Execution, StringFormat=dd-MM-yyyy}"/>
                                 <TextBlock Grid.Column="2" Text="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"/>
 
                                 <TextBlock Text="{Binding Services.Users.User_Name}"/>

@@ -130,7 +130,7 @@
                         <Label 
                               Grid.ColumnSpan="2"
                            Grid.Row="2"  
-                           Content="{Binding Path=CurrentUser.Date_Registration}"
+                           Content="{Binding Path=CurrentUser.Date_Registration, StringFormat=dd-MM-yyyy}"
                             Grid.Column="1"
                          />
 

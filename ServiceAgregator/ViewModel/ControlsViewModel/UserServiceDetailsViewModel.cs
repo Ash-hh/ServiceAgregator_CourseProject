@@ -22,7 +22,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             DeleteOrder = new DelegateCommand<object>(Delete);
             Orders = new ObservableCollection<Orders>();
             Orders.FromListToObservableCollection(Service.Orders);
-            EditService = new DelegateCommand<string>(Edit);
+            EditService = new DelegateCommand<string>(Edit);            
         }
         //TODO: CanExecute() !!
         public DelegateCommand<object> DeleteService { set; get; }

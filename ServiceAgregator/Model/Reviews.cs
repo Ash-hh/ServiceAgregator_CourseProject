@@ -21,7 +21,7 @@ namespace ServiceAgregator.Models
 
         [Column(TypeName = "text")]
         public string Text { get; set; }
-
+        public double? Mark { get; set; }
         public virtual Users UsersSender { get; set; }
 
         public virtual Users UsersRecepient { get; set; }

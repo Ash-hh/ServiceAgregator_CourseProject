@@ -52,6 +52,9 @@
             <Setter Property="FontWeight" Value="Bold"/>
         </Style>
 
+        <Style TargetType="Path">
+            <Setter Property="Fill" Value="Beige"/>
+        </Style>
 
     </Window.Resources>
 
@@ -69,11 +72,7 @@
             <RowDefinition Height="0.5*"/>
             <RowDefinition Height="0.9*"/>
         </Grid.RowDefinitions>
-
-        <Image Grid.Column="1" Margin="6">
-
-        </Image>
-
+        
         <Button  Grid.Row="3" Grid.Column="1" Content="Войти" Command="{Binding LogInCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
         <Button  Grid.Row="4" Grid.Column="1" Content="Регистрация" Command="{Binding RegisterCommand }" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
 
