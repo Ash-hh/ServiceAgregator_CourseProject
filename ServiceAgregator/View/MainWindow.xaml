@@ -10,7 +10,10 @@
         xmlns:viewModelMain="clr-namespace:ServiceAgregator.ViewModel.Main"
         
         mc:Ignorable="d"
-        Title="MainWindow" Height="750" Width="1400">
+        Title="MainWindow" Height="700" Width="900"
+        ResizeMode="NoResize"       
+        Background="Transparent"        
+        >
 
     <Window.Resources>
         <DataTemplate DataType="{x:Type viewModelMain:UserProfileViewModel}">
@@ -40,64 +43,96 @@
         <DataTemplate DataType="{x:Type  viewModelMain:OtherUserProfileViewModel}">
             <uc:OtherUserProfileControl/>
         </DataTemplate>
-
-
     </Window.Resources>
 
 
-    <Grid ShowGridLines="True">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="5*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="8*"/>
-            <RowDefinition Height="0.9*"/>
-        </Grid.RowDefinitions>
-
-        <GridSplitter Grid.Row="1" Width="4" Grid.RowSpan="2"/>
-        <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="3"
-        HorizontalAlignment="Stretch" VerticalAlignment="Top" />
-
-        <Grid ShowGridLines="True" Grid.Row="1" Grid.RowSpan="2">
-            <!-- Окно меню -->
+    <Border Background="#cfdaec">
+        
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*"/>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="8*"/>
+                <RowDefinition Height="0.9*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel>
-                <Label HorizontalAlignment="Left"
-                       Margin="10 0"
-                       FontSize="15">
-                    <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="YourProfile">Your Profile</Hyperlink>
-                </Label>
-                <Label HorizontalAlignment="Left"
-                       Margin="20 0"
-                       FontSize="15">
-                    <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="Services">Services</Hyperlink>
-                </Label>
+            <GridSplitter 
+                HorizontalAlignment="Left" 
+                Grid.Column="1" 
+                Grid.Row="1" 
+                Width="2" 
+                Grid.RowSpan="2" 
+                Background="#faecfd"/>
 
-                <Label HorizontalAlignment="Left"
-                       Margin="20 0"
-                       FontSize="15">
-                    <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="MyOrders">My Orders</Hyperlink>
-                </Label>
+            <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="3" Background="#faecfd"
+        HorizontalAlignment="Stretch" VerticalAlignment="Top" />
 
-                <Label HorizontalAlignment="Left"
-                       Margin="20 0"
-                       FontSize="15">
-                    <Hyperlink Command="{Binding UpdateViewCommand}" CommandParameter="MyServices" >My Services</Hyperlink>
-                </Label>
+            <Grid ShowGridLines="True" Grid.Row="1" Grid.RowSpan="3" Background="#cfdaec">
+                <!-- Окно меню -->
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+
+                <!--<Ellipse 
+                Grid.Row="1"
+                Width="150" 
+                Height="150"
+                StrokeThickness="2"
+                Stroke="Gray" StrokeDashCap="Round">
+                    <Ellipse.Fill>
+                        <ImageBrush ImageSource="{Binding CurrentUser.User_Image}"
+                                Stretch="UniformToFill"/>
+                    </Ellipse.Fill>
+                </Ellipse>-->
+
+                <StackPanel>
+                    <RadioButton
+                    Content="Your Profile"
+                    Height="50"
+                    FontSize="17"                    
+                    Command="{Binding UpdateViewCommand}" 
+                    CommandParameter="YourProfile"
+                    Style="{StaticResource MainMenuButton}"
+                    />
+                    <RadioButton
+                    Content="Services"
+                    Height="50"
+                    FontSize="17"   
+                    IsChecked="True"   
+                    Command="{Binding UpdateViewCommand}" 
+                    CommandParameter="Services"
+                    Style="{StaticResource MainMenuButton}"
+                    />
+                    <RadioButton
+                    Content="MyOrders"
+                    Height="50"
+                    FontSize="17"                    
+                    Command="{Binding UpdateViewCommand}" 
+                   CommandParameter="MyOrders"
+                    Style="{StaticResource MainMenuButton}"
+                    />
+                    <RadioButton
+                    Content="My Services"
+                    Height="50"
+                    FontSize="17"                    
+                    Command="{Binding UpdateViewCommand}" 
+                    CommandParameter="MyServices"
+                    Style="{StaticResource MainMenuButton}"
+                    />
+
+                </StackPanel>                
+            </Grid>
 
 
-            </StackPanel>
+
+            <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding SelectedViewModel}"/>
 
         </Grid>
-
-        <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding SelectedViewModel}"/>
-
-    </Grid>
+    </Border>    
 </Window>

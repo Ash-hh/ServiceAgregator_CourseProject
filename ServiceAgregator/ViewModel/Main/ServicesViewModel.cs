@@ -24,6 +24,7 @@ namespace ServiceAgregator.ViewModel.Main
             FilterClear = new DelegateCommand<object>(ClearFilter);
         }
 
+        //TODO:Refactor
         public ServicesViewModel(int UserId)
         {
             ServiceDB = new DataBase.ServicesQuery();
@@ -76,7 +77,10 @@ namespace ServiceAgregator.ViewModel.Main
 
         private void TagFilter(object obj)
         {
-            Services = ServiceDB.GetServicesByTag(Tag);
+            if(Tag!=null)
+            {
+                Services = ServiceDB.GetServicesByTag(Tag);
+            }           
         }
 
         //TODO: Clear Combobox 
@@ -89,5 +93,6 @@ namespace ServiceAgregator.ViewModel.Main
         {
             return true;
         }
+       
     }
 }

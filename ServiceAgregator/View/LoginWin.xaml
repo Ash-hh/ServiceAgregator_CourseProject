@@ -5,13 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ServiceAgregator.View"
         mc:Ignorable="d"
-        Title="LoginWin" Height="650" Width="470">
-    
-    <Window.Resources>
-        <Style TargetType="Grid">
-            <Setter Property="Background" Value=" #dde0eb "/>
-        </Style>
+        Title="LoginWin" Height="650" Width="470"
+        WindowStyle="None"
+        Background="Transparent"
+        AllowsTransparency="True"
+        >
 
+    <Window.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="10 10 10 10"/>
             <Setter Property="FontFamily" Value="Verdana"/>
@@ -34,9 +34,6 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-
-
-
         </Style>
 
         <Style TargetType="TextBox">
@@ -58,41 +55,52 @@
 
     </Window.Resources>
 
-    <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="2.2*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="0.7*"/>
-            <RowDefinition Height="0.7*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="0.9*"/>
-        </Grid.RowDefinitions>
-        
-        <Button  Grid.Row="3" Grid.Column="1" Content="Войти" Command="{Binding LogInCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
-        <Button  Grid.Row="4" Grid.Column="1" Content="Регистрация" Command="{Binding RegisterCommand }" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
 
-        <Grid Grid.Row="1" Grid.Column="1">
+    <Border
+        Background="#dde0eb"
+        CornerRadius="15"
+        >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2.2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="0.7*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.9*"/>
             </Grid.RowDefinitions>
-            <TextBox Text="{Binding Login}" Grid.Row="1"/>
-            <Label Content="Login"/>
-        </Grid>
 
-        <Grid Grid.Row="2" Grid.Column="1" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"/>
-                <RowDefinition Height="3*"/>
-            </Grid.RowDefinitions>            
-            <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1"/>
-            <Label Content="Password"/>
-        </Grid>
+            <Image Grid.Column="1" Source="Resources/tek.png" Margin="15"/>
 
-    </Grid>
+            <Button  Grid.Row="3" Grid.Column="1" Content="Войти" Command="{Binding LogInCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
+            <Button  Grid.Row="4" Grid.Column="1" Content="Регистрация" Command="{Binding RegisterCommand }" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <TextBox Text="{Binding Login}" Grid.Row="1"/>
+                <Label Content="Login"/>
+            </Grid>
+
+            <Grid Grid.Row="2" Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                <PasswordBox PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1"/>
+                <Label Content="Password"/>
+            </Grid>
+
+        </Grid>
+    </Border>
+    
+       
+      
 </Window>

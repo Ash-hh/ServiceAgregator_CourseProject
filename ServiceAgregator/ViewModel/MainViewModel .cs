@@ -50,6 +50,7 @@ namespace ServiceAgregator.ViewModel
             }
         }
 
+        public DelegateCommand<object> Exit { set; get; }
         public DelegateCommand<string> UpdateViewCommand { get; set; }
 
         private void OnUpdateViewCommand(string parameter)
@@ -74,6 +75,11 @@ namespace ServiceAgregator.ViewModel
         private bool CanUpdateViewCommand(string parameter)
         {
             return true;
+        }
+
+        private void Close(object obj)
+        {
+            
         }
 
     }

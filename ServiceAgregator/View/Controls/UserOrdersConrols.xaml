@@ -92,6 +92,10 @@
                             <DataTrigger Binding="{Binding Status}" Value="DeletedByProducer">
                                 <Setter Property="Button.Visibility" Value="Hidden"/>
                             </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Status}" Value="CanceledByProducer">
+                                <Setter Property="Button.Visibility" Value="Hidden"/>
+                            </DataTrigger>
                         </Style.Triggers>
                     </Style>
                 </ListBox.Resources>

@@ -8,86 +8,179 @@
             
              
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="700">
 
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="6*"/>
-        </Grid.RowDefinitions>
+    <Border
+        BorderThickness="3 3 0 0"
+        BorderBrush="#faecfd"
+        >
+        
+        <Grid Background="#eef0f6 ">
 
-        <Grid x:Name="Filter" Background="White">
             <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
-            
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+            <Grid x:Name="Filter" Background="#eef0f6 " Margin="10 0 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
 
-            <TextBlock Grid.RowSpan="2">Choose Tag for Filter </TextBlock>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.7*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
 
-            <ComboBox Grid.RowSpan="2" Grid.Column="1" HorizontalAlignment="Left" Width="200" 
+                <TextBlock 
+                Grid.RowSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                FontSize="17">Choose Tag for Filter</TextBlock>
+
+                <ComboBox  
+                Style="{StaticResource ComboBoxStyle}"
+                    Grid.RowSpan="2" Grid.Column="1"
+                      Width="230"
+                      Height="50"                    
+                      HorizontalAlignment="Left"                       
                       ItemsSource="{Binding Path=Tags}"
                       DisplayMemberPath="Tag"
                       SelectedValuePath="Tag"                      
                       SelectedItem="{Binding Path=Tag}">
+
+                </ComboBox>
+
+
+                <Button
+                    Margin="0 5 0 5"
+                    Style="{StaticResource BtnStyle}"   
+                    Width="200"
+                    Content="Find" 
+                    Command="{Binding FilterByTag}" 
+                    Grid.Column="2"/>
                 
-            </ComboBox>
-            <Button Content="Find" Command="{Binding FilterByTag}" Grid.Column="2"/>
-            <Button Content="Clear" Grid.Row="1" Command="{Binding FilterClear}" Grid.Column="2"/>
-        </Grid>
+                <Button 
+                    Margin="0 5 0 5"
+                    Style="{StaticResource BtnStyle}"   
+                    Width="200"
+                    Content="Clear" 
+                    Grid.Row="1" 
+                    Command="{Binding FilterClear}" Grid.Column="2"/>
+            </Grid>
 
-        <Grid Grid.Row="1">
-            <ListBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>                        
-                        <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
-                            <Border.InputBindings>
-                                <MouseBinding MouseAction="{x:Static MouseAction.LeftDoubleClick}"
+            <Grid Grid.Row="1" Background="#eef0f6 ">
+                <ListBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Background="#eef0f6 ">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
+                                <Border.InputBindings>
+                                    <MouseBinding MouseAction="{x:Static MouseAction.LeftDoubleClick}"
                                               Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ServiceDetails}"/>
-                            </Border.InputBindings>
-                            <Grid Width="620" Height="200" ShowGridLines="True">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="5*"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Path=Tag}"/>
-                                <Image Grid.Row="1"  Width="120" Height="120" Margin="5" Source="{Binding Users.User_Image}" />
+                                </Border.InputBindings>
+                                <Grid Width="700" Height="210">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="5*"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
 
-                                <TextBlock Grid.Column="1" Text="{Binding Path=Date_OfAdd, StringFormat=dd-MM-yyyy}"/>
-                                <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="2" Text="{Binding Path=Description}"/>
-                                <TextBlock Grid.Column="3" Grid.Row="1" Text="{Binding Path=Cost}"/>
-                                <Label Grid.Row="2">
-                                    <Hyperlink Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UserProfile}">
-                                        <TextBlock Text="{Binding Users.User_Name}" />
-                                    </Hyperlink>
-                                </Label>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem" 
+                                    <Separator
+                                        Grid.Row="1" Grid.ColumnSpan="4"
+                                        VerticalAlignment="Top"
+                                        Height="2"
+                                        Margin=" 10 0 10 0"/>
+
+                                    <TextBlock 
+                                        Grid.Column="1" 
+                                        Text="{Binding Path=Tag}"
+                                        FontSize="14"/>
+
+
+                                    <Ellipse 
+                                        Grid.Row="1"
+                                        Width="120" 
+                                        Height="120"
+                                        StrokeThickness="2"
+                                        Stroke="Gray" StrokeDashCap="Round">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding Users.User_Image}"
+                                                Stretch="UniformToFill"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    
+                                    <!--<Image Grid.Row="1"  Width="120" Height="120" Margin="5" Source="{Binding Users.User_Image}" />-->
+
+                                    <TextBlock 
+                                        
+                                        Text="{Binding Path=Date_OfAdd, StringFormat=dd.MM.yyyy}"
+                                        FontSize="14"
+                                        HorizontalAlignment="Left"/>
+                                    
+                                    <TextBlock 
+                                        Grid.Column="1" 
+                                        Grid.Row="1" 
+                                        TextWrapping="Wrap" 
+                                        Grid.ColumnSpan="2" 
+                                        Text="{Binding Path=Description}"
+                                        VerticalAlignment="Center"
+                                        FontSize="14"
+                                        FontFamily="Verdana"/>
+                                    
+                                    
+                                    <TextBlock 
+                                        VerticalAlignment="Center"
+                                        Grid.Column="3" 
+                                        Grid.Row="1"                                        
+                                        Text="{Binding Path=Cost}"
+                                        FontSize="15"                                        
+                                        FontWeight="Bold"/>
+                                    
+                                    
+                                    <Label Grid.Row="2">
+                                        <Hyperlink 
+                                            TextDecorations=""
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UserProfile}">                                            
+                                            <TextBlock 
+                                                Padding="3"
+                                                FontSize="13"
+                                                Text="{Binding Users.User_Name}" />
+                                        </Hyperlink>
+                                    </Label>
+
+                                    <Label Grid.Row="2" Grid.Column="1">
+                                        <Hyperlink 
+                                            TextDecorations=""
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ServiceDetails}">
+                                            <TextBlock 
+                                                Padding="3"
+                                                FontSize="13"
+                                                Text="View Details" />
+                                        </Hyperlink>
+                                    </Label>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem" 
                             BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                        <Style.Triggers>
-                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                <Setter Property="IsSelected" Value="True"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
+                            <Style.Triggers>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                </ListBox>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>   
 </UserControl>

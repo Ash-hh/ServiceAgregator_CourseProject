@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ServiceAgregator.Models;
 using ServiceAgregator.Command;
+using System.Data.Entity;
 
 namespace ServiceAgregator.DataBase
 {
@@ -102,12 +103,25 @@ namespace ServiceAgregator.DataBase
             }
         }       
 
+        //TODO: Fix
         public ObservableCollection<Services> GetUserServices(int UserId)
         {
             ObservableCollection<Services> buffservices = new ObservableCollection<Services>();
-            using (DBContext db = new DBContext())
+            using (DBContext db = new DBContext()) 
             {
-                var Services = db.Services.Include("Orders").Include("Users").Where(p => p.Available == true && p.User_ID == UserId).ToList();
+                
+                var Services = db.Services.  
+                    Include("Users").
+                    Include("Orders").
+                    Where(p => p.Available == true && p.User_ID == UserId).ToList();
+                foreach(Services serv in Services)
+                {
+                    while(serv.Orders.FirstOrDefault(z=>z.Status=="DeletedByProducer")!=null)
+                    {
+                        serv.Orders.Remove(serv.Orders.FirstOrDefault(z => z.Status == "DeletedByProducer"));
+                    }
+                }
+
                 return buffservices.FromListToObservableCollection(Services);
             }
 

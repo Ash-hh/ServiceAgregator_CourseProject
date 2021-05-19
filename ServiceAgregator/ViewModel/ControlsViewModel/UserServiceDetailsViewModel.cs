@@ -71,7 +71,9 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
             if(Order.Status != "DeletedByCustomer")
             {
                 Order.Status = "CanceledByProducer";
-                new OrdersQuery().OrderUpdate(Order);                
+                new OrdersQuery().OrderUpdate(Order);
+                Orders = new ObservableCollection<Orders>(); 
+                Orders.FromListToObservableCollection(Service.Orders);
             }
         }
 
