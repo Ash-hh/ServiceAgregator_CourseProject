@@ -57,7 +57,8 @@
                                 <Label Grid.Column="1" Grid.Row="2" Content="{Binding Path=Orders.Count}"/>
                                 <Button Content="Detail"  Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
                                         Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ChangeViewModel}"/>
-                                <Expander Header="Orders" Grid.Row="3" Grid.ColumnSpan="2">
+                                <Expander Header="Orders" Grid.Row="3" Grid.ColumnSpan="2" 
+                                          Style="{DynamicResource ExpanderVisibility}">
                                     <DataGrid ItemsSource="{Binding Orders}" AutoGenerateColumns="False" Width="300">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution}"/>
@@ -79,6 +80,16 @@
                         </Style.Triggers>
                     </Style>
                 </ListBox.ItemContainerStyle>
+                <ListBox.Resources>
+                    <Style x:Key="ExpanderVisibility" >
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Orders.Count}" Value="0">
+                                <Setter Property="Expander.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                           
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Resources>
             </ListBox>
         </Grid>
     </Grid>

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ServiceAgregator.Models;
 using ServiceAgregator.DataBase;
 using ServiceAgregator.Command;
+using ServiceAgregator.ViewModel.Main;
 
 namespace ServiceAgregator.ViewModel.ControlsViewModel
 {
@@ -39,6 +40,7 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
                 Service.Date_OfAdd = DateTime.Now.Date;
                 Service.Available = true;
                 new ServicesQuery().AddNewService(Service);
+                Changer.getInstance(null).MainViewModel.SelectedViewModel = new ServicesControllerViewModel();
             }
         }
 

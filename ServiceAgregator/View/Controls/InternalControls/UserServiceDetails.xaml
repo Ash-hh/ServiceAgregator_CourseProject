@@ -6,7 +6,37 @@
              xmlns:local="clr-namespace:ServiceAgregator.View.Controls.InternalControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White" ShowGridLines="True">
+
+    <UserControl.Resources>
+        <Style TargetType="TextBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=EditBtn, Path=Tag}" Value="Edit">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding ElementName=EditBtn, Path=Tag}" Value="NoEdit">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+        
+
+        <Style TargetType="ComboBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding ElementName=EditBtn, Path=Tag}" Value="Edit">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding ElementName=EditBtn, Path=Tag}" Value="NoEdit">
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+    </UserControl.Resources>
+    
+    <Grid Background="White">
         <Grid ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -24,16 +54,43 @@
             <Label Content="Description" Grid.Row="1"/>
             <Label Content="Cost" Grid.Row="2"/>
             <Label Content="Added" Grid.Row="3"/>
-            <TextBox Grid.Column="1" Text="{Binding Service.Tag}"/>
+            
+            <ComboBox Grid.Column="1" HorizontalAlignment="Left" Width="200"                      
+                  ItemsSource="{Binding Path=Tags}" 
+                  DisplayMemberPath="Tag"
+                  SelectedValuePath="Tag"
+                  SelectedValue="{Binding Path=Service.Tag}">
+            </ComboBox>
+            
             <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Service.Description}"/>
             <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding Service.Cost}"/>
             <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding Service.Date_OfAdd}"/>
             <Label Grid.Row="4" Grid.Column="1">
                 <Hyperlink Command="{Binding DeleteService}">Delete Service</Hyperlink>
             </Label>
+            
+            <ToggleButton Grid.Row="4"                                   
+                    x:Name="EditBtn"
+                    Command="{Binding EditService}">
+                <ToggleButton.Style>
+                    <Style TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Tag" Value="NoEdit"/>
+                        <Setter Property="Content" Value="Edit Service"/>
+                        <Setter Property="CommandParameter" Value="EDIT"/>
+                        <Style.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Tag" Value="Edit"/>
+                                <Setter Property="Content" Value="Stop Editing"/>
+                                <Setter Property="CommandParameter" Value="NOEDIT"/>
+                            </Trigger>   
+                            
+                        </Style.Triggers>
+                    </Style>
+                </ToggleButton.Style>
+            </ToggleButton>
 
             <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
-                <DataGrid ItemsSource="{Binding Orders}" SelectedItem="{Binding Order}" AutoGenerateColumns="False" Width="300" >
+                <DataGrid ItemsSource="{Binding Orders}" SelectedItem="{Binding Order}" AutoGenerateColumns="False" CanUserAddRows="False" Width="300" >
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution}"/>
                         <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
@@ -42,7 +99,9 @@
                                 <DataTemplate>
                                     <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">
                                 <StackPanel>
-                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.CancelCom}">
+                                    <Button 
+                                        Style="{DynamicResource ButtonVisibility}"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.CancelCom}">
                                         Cancel
                                     </Button>
                                     <Button Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.DeleteOrder}">
@@ -54,6 +113,19 @@
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
+                    <DataGrid.Resources>
+                        <Style x:Key="ButtonVisibility" >
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="CanceledByProducer">
+                                    <Setter Property="Button.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Status}" Value="DeletedByCustomer">
+                                    <Setter Property="Button.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DataGrid.Resources>
                 </DataGrid>
             </Grid>
         </Grid>

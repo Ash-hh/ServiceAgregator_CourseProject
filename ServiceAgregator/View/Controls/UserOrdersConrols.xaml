@@ -10,7 +10,8 @@
     <UserControl.Resources>
         <Style TargetType="Button">
             <Setter Property="Margin" Value="5"/>
-        </Style>
+            
+        </Style>        
     </UserControl.Resources>
     
     <Grid Background="White">
@@ -59,9 +60,8 @@
 
 
                                 <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" >
-                                    <Button Content="Canceled" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Canceled"/>
-                                    <Button Content="Done" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Done"/>
-                                    <Button Content="Waiting" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Waiting"/>
+                                    <Button Style="{DynamicResource ButtonVisibility}" Content="Canceled" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Canceled"/>
+                                    <Button Style="{DynamicResource ButtonVisibility}" Content="Done" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Done"/>                                    
                                     <Button Content="Delete" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.DeleteOrder}"/>
                                 </StackPanel>
                             </Grid>
@@ -78,6 +78,23 @@
                         </Style.Triggers>
                     </Style>
                 </ListBox.ItemContainerStyle>
+                <ListBox.Resources>
+                    <Style x:Key="ButtonVisibility" >
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Status}" Value="Canceled">
+                                <Setter Property="Button.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Status}" Value="Done">
+                                <Setter Property="Button.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding Status}" Value="DeletedByProducer">
+                                <Setter Property="Button.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ListBox.Resources>
             </ListBox>
         </Grid>
     </Grid>

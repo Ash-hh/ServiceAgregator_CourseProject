@@ -54,6 +54,19 @@ namespace ServiceAgregator.DataBase
             }
         }
 
+        public void UpdateService(Services ServiceToUpdate)
+        {
+            using (DBContext db = new DBContext())
+            {
+                var Service = db.Services.Find(ServiceToUpdate.Service_ID);
+                Service.Tag = ServiceToUpdate.Tag;
+                Service.Description = ServiceToUpdate.Description;
+                Service.Cost = ServiceToUpdate.Cost;
+
+                db.SaveChanges();
+            }
+        }
+
         public void AddNewService(Services ServiceToAdd)
         {
             using (DBContext db = new DBContext())

@@ -31,6 +31,8 @@ namespace ServiceAgregator.DataBase
             }
         }
 
+        
+
         public Users GetUserByLogin(Login login)
         {
             Users User = new Users();

@@ -7,6 +7,7 @@ using ServiceAgregator.DataBase;
 using ServiceAgregator.Models;
 using ServiceAgregator.Command;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace ServiceAgregator.ViewModel.ControlsViewModel
 {
@@ -15,20 +16,23 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
         public UserServiceDetailsViewModel(Services service)
         {
             Service = service;
+            Tags = new ServicesQuery().GetTags();
             DeleteService = new DelegateCommand<object>(ServiceDelete);
             CancelCom = new DelegateCommand<string>(Cancel);
             DeleteOrder = new DelegateCommand<object>(Delete);
             Orders = new ObservableCollection<Orders>();
             Orders.FromListToObservableCollection(Service.Orders);
-
+            EditService = new DelegateCommand<string>(Edit);
         }
         //TODO: CanExecute() !!
         public DelegateCommand<object> DeleteService { set; get; }
         public DelegateCommand<string> CancelCom { set; get; }
-
+        public DelegateCommand<string> EditService { set; get; }
         public DelegateCommand<object> DeleteOrder { set; get; }
 
         private Services _service;
+
+        public List<Tags> Tags { set; get; }
 
         public int OrderID { set; get; }
 
@@ -66,8 +70,8 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
         {            
             if(Order.Status != "DeletedByCustomer")
             {
-                Order.Status = "CanceledByProduces";
-                new OrdersQuery().OrderUpdate(Order);
+                Order.Status = "CanceledByProducer";
+                new OrdersQuery().OrderUpdate(Order);                
             }
         }
 
@@ -88,6 +92,14 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
                 Orders.FirstOrDefault(p=>p.Order_ID == Order.Order_ID).Status = "DeletedByProducer";                
                 new OrdersQuery().OrderUpdate(Order);
                 Orders.Remove(Order);
+            }
+        }
+
+        private void Edit(string param)
+        {
+            if(param == "EDIT")
+            {
+                new ServicesQuery().UpdateService(Service);
             }
         }
     }

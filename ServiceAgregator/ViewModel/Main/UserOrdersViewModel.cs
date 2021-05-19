@@ -19,9 +19,16 @@ namespace ServiceAgregator.ViewModel.Main
         {
 
             Orders = new OrdersQuery().GetUserOrders();
+
+            Orders.CollectionChanged += Orders_CollectionChanged;
  
             UpdateStatus = new DelegateCommand<string>(Update_Status);
             DeleteOrder = new DelegateCommand<object>(Delete);
+        }
+
+        private void Orders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            Console.WriteLine("");
         }
 
         public DelegateCommand<string> UpdateStatus { set; get; }      
@@ -50,21 +57,15 @@ namespace ServiceAgregator.ViewModel.Main
             get { return _selectedOrder; }
         }
 
-        //TODO: Fix
-        //--Если вы читаете это сообщение, то снизу огромный костыль
+        //TODO: Trigers
+        //TODO: Fix        
         private void Update_Status(string status)
         {
             if(SelectedOrder.Status=="Waiting")
             {
-                Orders buff = new Orders();
-                buff = SelectedOrder;
-                buff.Status = status;
-                int id = SelectedIndex;
-                Orders.RemoveAt(SelectedIndex);
-                Orders.Insert(id, buff);
-                new OrdersQuery().OrderUpdate(Orders.ElementAt(id));
-
-                //new OrdersQuery().OrderUpdate(SelectedOrder);
+                SelectedOrder.Status = status; 
+                new OrdersQuery().OrderUpdate(SelectedOrder);
+                Orders = new OrdersQuery().GetUserOrders();
             }
             else
             {
