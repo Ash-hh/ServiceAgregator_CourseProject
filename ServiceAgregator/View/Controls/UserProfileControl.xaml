@@ -23,134 +23,95 @@
         
     </UserControl.Resources>
 
-    <Grid Background="White">
-        <ScrollViewer>
-            <Grid>              
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
 
-                </Grid.RowDefinitions>
-                    
-                    <!--Image-->
-                <Grid x:Name="UserInfo" >
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="1.5*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="6*"/>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <Image Source="{Binding Path=CurrentUser.User_Image}" Height="Auto" Width="Auto" MaxHeight="300" MaxWidth="300"/>
+    <Grid Background="#eef0f6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
 
-                    <Label                       
+        </Grid.RowDefinitions>
+
+        <!--Image-->
+        <Grid x:Name="UserInfo" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image Source="{Binding Path=CurrentUser.User_Image}" Height="Auto" Width="Auto" MaxHeight="300" MaxWidth="300"/>
+
+            <Label                       
                            Grid.Row="1">
-                        <Hyperlink x:Name="UploadLink" Command="{Binding UploadImage}">Upload Image</Hyperlink>
-                    </Label>
+                <Hyperlink x:Name="UploadLink" Command="{Binding UploadImage}">Upload Image</Hyperlink>
+            </Label>
 
-                    <Label 
-                        x:Name="Save"                             
-                        VerticalAlignment="Top"
-                           Grid.Row="2">                       
-                        <Hyperlink Command="{Binding SaveUserProfile}">Save Image</Hyperlink>
-                    </Label>
-
-                    <!--Personal Info-->
-                    <Grid Grid.Column="1" Grid.RowSpan="3">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="2*"/>
-                            <ColumnDefinition Width="2*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="1.5*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="1.5*"/>
-                            <RowDefinition Height="0.7*"/>
-                        </Grid.RowDefinitions>
+            <!--Personal Info-->
+            <Grid Grid.Column="1" Grid.RowSpan="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1.5*"/>
+                    <RowDefinition Height="0.7*"/>
+                </Grid.RowDefinitions>
 
 
-                        <Label
+                <Label
                             Content="Login"/>
 
-                        <Label
+                <Label
                              Grid.Row="1"  
                             Content="User Name"/>
 
-                        <Label
+                <Label
                              Grid.Row="2"  
                             Content="Reg Date"/>
 
-                        <Label
+                <Label
                              Grid.Row="3"  
                             Content="Rating"/>
 
-                        <Label
+                <Label
                             Grid.Row="3"
                             Grid.Column="1"
                             Grid.ColumnSpan="2"
                             Content="{Binding Path=CurrentUser.Rating}"/>
 
-                        <Label                                                     
-                            VerticalAlignment="Top"
-                            Grid.Row="4"
-                            Grid.Column="1">
-
-                            <Hyperlink Command="{Binding SaveUserProfile}">Changes</Hyperlink>
-                        </Label>
-                        
-                        <Label                                                     
-                            VerticalAlignment="Top"
-                            Grid.Row="4"
-                            Grid.Column="2">
-                            
-                            <Hyperlink Command="{Binding SaveUserProfile}">Save Changes</Hyperlink>
-                        </Label>
-
-
-
-                        <Label                          
+                <Label                          
                             Grid.ColumnSpan="2"
                            Content="{Binding Path=CurrentUser.User_Name}"
                            Grid.Column="1"
                          
                           />
 
-                        <Label 
+                <Label 
                               Grid.ColumnSpan="2"
                            Grid.Row="1"  
                            Content="{Binding Path=CurrentUser.Login}"
                              Grid.Column="1"
                           />
 
-                        <Label 
+                <Label 
                               Grid.ColumnSpan="2"
                            Grid.Row="2"  
                            Content="{Binding Path=CurrentUser.Date_Registration, StringFormat=dd-MM-yyyy}"
                             Grid.Column="1"
                          />
 
-                    </Grid>
-                    
-                        <!--Settings-->
-                    <Grid>
-                        
-                    </Grid>
-
-                </Grid>
-
-                <Separator  Grid.ColumnSpan="2"/>
-                
             </Grid>
-          
 
+        </Grid>
 
-
-        </ScrollViewer>
+        <Separator  Grid.ColumnSpan="2"/>
 
     </Grid>
+    
 </UserControl>

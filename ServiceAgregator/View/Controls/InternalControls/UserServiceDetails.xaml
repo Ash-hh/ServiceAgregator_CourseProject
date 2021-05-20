@@ -37,7 +37,7 @@
     </UserControl.Resources>
 
     
-    <Grid Background="White">
+    <Grid Background="White" >
         <Grid ShowGridLines="True">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>

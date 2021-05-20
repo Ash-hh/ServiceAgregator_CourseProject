@@ -25,20 +25,42 @@
         </DataTemplate>
     </UserControl.Resources>
 
-    <Grid Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="4*"/>
-        </Grid.ColumnDefinitions>
-        <StackPanel>
-            <Label>
-                <Hyperlink Command="{Binding ChangeModel}" CommandParameter="AddNewService">Add</Hyperlink>               
-            </Label>
-            <Label>
-                <Hyperlink Command="{Binding ChangeModel}" CommandParameter="ServiceDetails">My service Orders</Hyperlink>
-            </Label>
-        </StackPanel>
 
-        <ContentControl Grid.Column="1" Content="{Binding SelectedViewModel}"/>
-    </Grid>
+    <Border
+        BorderThickness="3 3 0 0"
+        BorderBrush="#faecfd"
+        >
+        
+        <Grid Background="#eef0f6">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="5*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel>
+                
+                <Button
+                    Height="50"
+                    Margin="4"
+                    Content="Add"
+                    Command="{Binding ChangeModel}" 
+                    CommandParameter="AddNewService"
+                    Style="{StaticResource BtnStyle}"
+                    />
+
+                <Button
+                    Height="50"
+                    Margin="4"
+                    Content="Services"
+                    Command="{Binding ChangeModel}" 
+                    CommandParameter="AllServices"
+                    Style="{StaticResource BtnStyle}"
+                    />
+
+            </StackPanel>
+
+            <ContentControl Grid.Column="1" Content="{Binding SelectedViewModel}"/>
+        </Grid>
+    </Border>
+    
 </UserControl>

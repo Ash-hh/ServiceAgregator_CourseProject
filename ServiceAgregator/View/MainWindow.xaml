@@ -10,7 +10,7 @@
         xmlns:viewModelMain="clr-namespace:ServiceAgregator.ViewModel.Main"
         
         mc:Ignorable="d"
-        Title="MainWindow" Height="700" Width="900"
+        Title="MainWindow" Height="700" Width="920"
         ResizeMode="NoResize"       
         Background="Transparent"        
         >

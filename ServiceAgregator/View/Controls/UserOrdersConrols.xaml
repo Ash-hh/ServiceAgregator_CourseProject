@@ -13,93 +13,176 @@
             
         </Style>        
     </UserControl.Resources>
-    
-    <Grid Background="White">
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="7*"/>
-        </Grid.RowDefinitions>
-
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="4*"/>
-            </Grid.ColumnDefinitions>
-
-            <Label Content="Total Orders:" HorizontalAlignment="Right"/>
-            <Label Content="{Binding Orders.Count}" Grid.Column="1" HorizontalAlignment="Left"/>
-        </Grid>
+    <Border
+        BorderThickness="3 3 0 0"
+        BorderBrush="#faecfd">
         
-        <Grid Grid.Row="1">
-            <ListBox ItemsSource="{Binding Orders}" SelectedItem="{Binding SelectedOrder}"  SelectedIndex="{Binding SelectedIndex}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
-                            <Grid Width="620" Height="200" ShowGridLines="True">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="5*"/>
-                                </Grid.RowDefinitions>
+        <Grid Background="#eef0f6">
 
-                                <Label Grid.Column="1" Content="{Binding Date_Execution, StringFormat=dd-MM-yyyy}"/>
-                                <TextBlock Grid.Column="2" Text="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"/>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="7*"/>
+            </Grid.RowDefinitions>
 
-                                <TextBlock Text="{Binding Services.Users.User_Name}"/>
-                                <Image Grid.Row="1"  Width="120" Height="120" Margin="5" Source="{Binding Services.Users.User_Image}"/>
-                                
-                                
-                                <TextBlock Grid.Column="1" Grid.Row="1" TextWrapping="Wrap" Grid.ColumnSpan="2" Text="{Binding Services.Description}"/>
-                                <TextBlock Grid.Column="3" Grid.RowSpan="2" Text="{Binding Services.Cost}"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="4*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label 
+                    VerticalAlignment="Center"
+                    Content="Total Orders:" 
+                    HorizontalAlignment="Right"
+                    FontSize="17"/>
+                
+                <Label 
+                    VerticalAlignment="Center"
+                    FontSize="17"
+                    Content="{Binding Orders.Count}" 
+                    Grid.Column="1" 
+                    HorizontalAlignment="Left"/>
+            </Grid>
+
+            <Grid Grid.Row="1" Background="#eef0f6">
+                <ListBox 
+                     BorderThickness="0"
+                    Background="#eef0f6"
+                    ItemsSource="{Binding Orders}" 
+                    SelectedItem="{Binding SelectedOrder}"  
+                    SelectedIndex="{Binding SelectedIndex}">
+                    
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
+                                <Grid Width="670" Height="200">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="1.3*"/>
+                                        <RowDefinition Height="5*"/>
+                                    </Grid.RowDefinitions>
+
+                                    <Separator 
+                                        VerticalAlignment="Top"
+                                        Grid.ColumnSpan="4"
+                                        Grid.Row="1"/>
+
+                                    <Label 
+                                        VerticalAlignment="Center"
+                                        Grid.Column="1" 
+                                        Content="{Binding Date_Execution, StringFormat=dd-MM-yyyy}"
+                                        FontSize="14"
+                                        HorizontalAlignment="Left"/>
+                                    
+                                    <TextBlock 
+                                        VerticalAlignment="Center"
+                                        Grid.Column="2"
+                                        FontSize="13"
+                                        FontFamily="Verdana"
+                                        TextDecorations="Underline"
+                                        Text="{Binding Path=Status, UpdateSourceTrigger=PropertyChanged}"/>
+
+                                    <Label>
+                                    <Hyperlink 
+                                            TextDecorations=""
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UserProfile}">
+                                        <TextBlock 
+                                                VerticalAlignment="Center"
+                                                Padding="3"
+                                                FontSize="14"
+                                                Text="{Binding Services.Users.User_Name}" />
+                                    </Hyperlink>
+                                    </Label>
+                                    
+                                    <Image Grid.Row="1"  Width="120" Height="120" Source="{Binding Services.Users.User_Image}"/>
 
 
-                                <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" >
-                                    <Button Style="{DynamicResource ButtonVisibility}" Content="Canceled" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Canceled"/>
-                                    <Button Style="{DynamicResource ButtonVisibility}" Content="Done" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Done"/>                                    
-                                    <Button Content="Delete" Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.DeleteOrder}"/>
-                                </StackPanel>
-                            </Grid>
-                        </Border>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem" 
-                            BasedOn="{StaticResource {x:Type ListBoxItem}}">
-                        <Style.Triggers>
-                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
-                                <Setter Property="IsSelected" Value="True"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-                <ListBox.Resources>
-                    <Style x:Key="ButtonVisibility" >
-                        <Style.Triggers>
-                            <DataTrigger Binding="{Binding Status}" Value="Canceled">
-                                <Setter Property="Button.Visibility" Value="Hidden"/>
-                            </DataTrigger>
+                                    <TextBlock 
+                                        Grid.Column="1" 
+                                        Grid.Row="1" 
+                                        TextWrapping="Wrap" 
+                                        Grid.ColumnSpan="2" 
+                                        FontSize="14"
+                                        FontFamily="Verdana"                                       
+                                        Padding="3 7 0 0"
+                                        Text="{Binding Services.Description}"/>
+                                    
+                                    
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        Grid.Column="3"
+                                        Text="{Binding Services.Cost}"
+                                        FontSize="13"                                        
+                                        FontWeight="Bold"/>
 
-                            <DataTrigger Binding="{Binding Status}" Value="Done">
-                                <Setter Property="Button.Visibility" Value="Hidden"/>
-                            </DataTrigger>
 
-                            <DataTrigger Binding="{Binding Status}" Value="DeletedByProducer">
-                                <Setter Property="Button.Visibility" Value="Hidden"/>
-                            </DataTrigger>
+                                    <StackPanel Grid.Column="3" Grid.Row="1" Grid.RowSpan="2" VerticalAlignment="Center">
 
-                            <DataTrigger Binding="{Binding Status}" Value="CanceledByProducer">
-                                <Setter Property="Button.Visibility" Value="Hidden"/>
-                            </DataTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListBox.Resources>
-            </ListBox>
+                                        <Button
+                                            Margin="5 2 5 2"
+                                            Style="{DynamicResource ItemButton}"
+                                            Content="Delete" 
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.DeleteOrder}"/>
+                                        
+                                        <Button 
+                                            Style="{DynamicResource ButtonVisibility}" 
+                                            Content="Canceled" 
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Canceled"/>
+                                        
+                                        <Button 
+                                            Style="{DynamicResource ButtonVisibility}" 
+                                            Content="Done" 
+                                            Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Done"/>
+                                                                                
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem" 
+                            BasedOn="{StaticResource OrdersListBox}">
+                            <Style.Triggers>
+                                <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                    <Setter Property="IsSelected" Value="True"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.Resources>
+                        <Style x:Key="ButtonVisibility" 
+                               TargetType="{x:Type Button}"
+                               BasedOn="{StaticResource ItemButton}">
+                            <Style.Setters>
+                                <Setter Property="Margin" Value="5 2 5 2"/>
+                            </Style.Setters>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Status}" Value="Canceled">
+                                    <Setter Property="Button.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Status}" Value="Done">
+                                    <Setter Property="Button.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Status}" Value="DeletedByProducer">
+                                    <Setter Property="Button.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Status}" Value="CanceledByProducer">
+                                    <Setter Property="Button.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ListBox.Resources>
+                </ListBox>
+            </Grid>
         </Grid>
-    </Grid>
+    </Border>    
 </UserControl>

@@ -24,6 +24,7 @@ namespace ServiceAgregator.ViewModel.Main
  
             UpdateStatus = new DelegateCommand<string>(Update_Status);
             DeleteOrder = new DelegateCommand<object>(Delete);
+            UserProfile = new DelegateCommand<object>(ViewUserProfile);
         }
 
         private void Orders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -31,6 +32,7 @@ namespace ServiceAgregator.ViewModel.Main
             Console.WriteLine("");
         }
 
+        public DelegateCommand<object> UserProfile { set; get; }
         public DelegateCommand<string> UpdateStatus { set; get; }      
         public DelegateCommand<object> DeleteOrder { set; get; }
 
@@ -73,6 +75,11 @@ namespace ServiceAgregator.ViewModel.Main
             }
         }      
         
+        private void ViewUserProfile(object obj)
+        {
+            Changer.getInstance(null).MainViewModel.SelectedViewModel = new OtherUserProfileViewModel(SelectedOrder.Services.User_ID);
+        }
+
         private void Delete(object obj)
         {
             if(SelectedOrder.Status != "ThisServiceIsNotAvailible")

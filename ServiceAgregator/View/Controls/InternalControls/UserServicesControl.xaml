@@ -18,25 +18,35 @@
         </Style>
         
     </UserControl.Resources>
-    
-    <Grid Background="White">
+
+    <Grid Background="#eef0f6">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <Label Content="{Binding Services.Count}"/>
-        
-        <Grid Grid.Row="1">
-            <ListBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label 
+            VerticalAlignment="Center"
+            FontSize="16"
+            Content="Total Services: "
+            />
+        <Label 
+            VerticalAlignment="Center"
+            HorizontalAlignment="Left"
+            Grid.Column="1"
+            Content="{Binding Services.Count}"/>
+
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" Background="#eef0f6">
+            <ListBox 
+                BorderThickness="0"
+                ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}"  Background="#eef0f6">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
-                            <!--<Border.InputBindings>
-                                <MouseBinding MouseAction="{x:Static MouseAction.LeftDoubleClick}"
-                                              Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ChangeViewModel}"/>
-                            </Border.InputBindings>-->
-                            <Grid Width="620" Margin="5" ShowGridLines="True">
+                        <Border BorderThickness="0 3 0 2" DockPanel.Dock="Top" BorderBrush="#c2d1e5">  
+                            <Grid Width="Auto" Margin="5" >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="0.7*"/>
                                     <ColumnDefinition Width="0.3*"/>
@@ -44,22 +54,61 @@
                                     <ColumnDefinition Width="0.5*"/>                                    
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.1*"/>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="0.6*"/>
                                     <RowDefinition Height="*"/>
+                                    <RowDefinition Height="0.1*"/>
                                 </Grid.RowDefinitions>
-                                <TextBlock Text="{Binding Path=Tag}" Grid.ColumnSpan="2"/>
-                                <TextBlock Grid.Row="1" Text="{Binding Path=Date_OfAdd, StringFormat=dd-MM-yyyy}" Grid.ColumnSpan="2"/>
-                                <TextBlock Grid.Column="1" Grid.ColumnSpan="2"  Grid.RowSpan ="2" TextWrapping="Wrap" Text="{Binding Path=Description}"/>
-                                <TextBlock Grid.Column="3" Grid.RowSpan="2" Text="{Binding Path=Cost}"/>
+                                
+                                <TextBlock
+                                    TextDecorations="Underline"
+                                    FontFamily="Verdana"
+                                    FontSize="14"
+                                    Text="{Binding Path=Tag}" 
+                                    Grid.ColumnSpan="2"/>
+                                
+                                <TextBlock 
+                                    FontFamily="Verdana"
+                                    FontSize="14"
+                                    Grid.Row="1" 
+                                    Text="{Binding Path=Date_OfAdd, StringFormat=dd-MM-yyyy}" 
+                                    Grid.ColumnSpan="2"/>
+                                
+                                <TextBlock
+                                    FontFamily="Verdana"
+                                    FontSize="14"
+                                    Width="300"
+                                    Grid.Column="1" 
+                                    Grid.ColumnSpan="2"  
+                                    Grid.RowSpan ="2" 
+                                    TextWrapping="Wrap" 
+                                    Text="{Binding Path=Description}"/>
+                                
+                                <TextBlock 
+                                    FontFamily="Verdana"
+                                    FontSize="13"
+                                    FontWeight="Bold"
+                                    Grid.Column="3" 
+                                    Grid.RowSpan="2" 
+                                    Text="{Binding Path=Cost}"/>
+                                
                                 <Label Grid.Row="2" Content="Total Orders:"/>
                                 <Label Grid.Column="1" Grid.Row="2" Content="{Binding Path=Orders.Count}"/>
-                                <Button Content="Detail"  Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
-                                        Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ChangeViewModel}"/>
-                                <Expander Header="Orders" Grid.Row="3" Grid.ColumnSpan="2" 
+                                <Button
+                                    Height="40"
+                                    Style="{StaticResource ItemButton}"
+                                    Content="Detail"  Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ChangeViewModel}"/>
+                                
+                                <Expander Header="Orders" Grid.Row="3" Grid.ColumnSpan="4" 
                                           Style="{DynamicResource ExpanderVisibility}">
-                                    <DataGrid ItemsSource="{Binding Orders}" AutoGenerateColumns="False" Width="300">
+                                    <DataGrid 
+                                        HorizontalAlignment="Left"
+                                        ItemsSource="{Binding Orders}" 
+                                        AutoGenerateColumns="False" 
+                                        Width="300">
                                         <DataGrid.Columns>
                                             <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution, StringFormat=dd-MM-yyyy}"/>
                                             <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>

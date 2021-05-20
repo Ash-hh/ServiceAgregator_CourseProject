@@ -18,21 +18,22 @@ namespace ServiceAgregator.ViewModel.Main
         public BaseViewModel SelectedViewModel
         {
             get { return _selectedViewModel; }
-            set { _selectedViewModel = value; OnPropertyChanged("SelectedViewModel"); }
+            set { _selectedViewModel = value; CurrentModelName = value.GetType().ToString(); OnPropertyChanged("SelectedViewModel"); 
+            }
         }
 
+        public string CurrentModelName { set; get; }
         public DelegateCommand<string> ChangeModel { set; get; }
 
         public ServicesControllerViewModel()
         {
             ChangeModel = new DelegateCommand<string>(ChangeViewModel);
-
             SelectedViewModel = new UserServicesViewModel();
-            
         }
 
         public ServicesControllerViewModel(Services serv)
         {
+            ChangeModel = new DelegateCommand<string>(ChangeViewModel);
             SelectedViewModel = new UserServiceDetailsViewModel(serv);
         }
 
@@ -45,10 +46,7 @@ namespace ServiceAgregator.ViewModel.Main
                     break;
                 case "AddNewService":
                     SelectedViewModel = new AddServiceViewModel();
-                    break;
-                //case "ServiceDetails":
-                //    SelectedViewModel = new UserServiceDetailsViewModel((SelectedViewModel as UserServicesViewModel).SelectedService);
-                //    break;
+                    break;               
             }
         }
     }

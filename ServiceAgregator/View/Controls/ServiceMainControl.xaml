@@ -4,9 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ServiceAgregator.View.Controls"
-             
-            
-             
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="700">
 
@@ -71,7 +68,9 @@
             </Grid>
 
             <Grid Grid.Row="1" Background="#eef0f6 ">
-                <ListBox ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Background="#eef0f6 ">
+                <ListBox 
+                    BorderThickness="0"
+                    ItemsSource="{Binding Services}" SelectedItem="{Binding SelectedService}" Background="#eef0f6 ">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border CornerRadius="6" BorderThickness="1" DockPanel.Dock="Top" BorderBrush="Transparent">
