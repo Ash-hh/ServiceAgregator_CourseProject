@@ -9,6 +9,8 @@ using System.Collections.ObjectModel;
 using ServiceAgregator.ViewModel.Main;
 using ServiceAgregator.Command;
 using ServiceAgregator.Models;
+using System.Windows;
+using ServiceAgregator.View;
 
 namespace ServiceAgregator.ViewModel
 {
@@ -34,6 +36,8 @@ namespace ServiceAgregator.ViewModel
             SelectedViewModel = new ServicesViewModel();
             CurrentUser = user;
             UpdateViewCommand = new DelegateCommand<string>(OnUpdateViewCommand, CanUpdateViewCommand);
+            AppExit = new DelegateCommand<Window>(Exit);
+            LogOut = new DelegateCommand<Window>(UserLogOut);
         }
 
         private Users _currentUser;
@@ -49,9 +53,12 @@ namespace ServiceAgregator.ViewModel
                 OnPropertyChanged("CurrentUser");
             }
         }
-
-        public DelegateCommand<object> Exit { set; get; }
+       
         public DelegateCommand<string> UpdateViewCommand { get; set; }
+
+        public DelegateCommand<Window> AppExit { set; get; } 
+
+        public DelegateCommand<Window> LogOut { set; get; }
 
         private void OnUpdateViewCommand(string parameter)
         {
@@ -77,9 +84,16 @@ namespace ServiceAgregator.ViewModel
             return true;
         }
 
-        private void Close(object obj)
+        private void UserLogOut(Window win)
         {
-            
+           
+            new LoginWin().Show();
+            win.Close();
+        }
+
+        public void Exit(Window win)
+        {
+            win.Close();
         }
 
     }

@@ -213,6 +213,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\Styles\LabelStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Styles\ListBoxStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -249,7 +253,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="View\Resources\LogOut.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Resources\tek.bmp" />
   </ItemGroup>
@@ -258,6 +264,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Resources\UserIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\Exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

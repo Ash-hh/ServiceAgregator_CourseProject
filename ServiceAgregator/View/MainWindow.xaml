@@ -78,6 +78,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="0.5*"/>
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
 
                 <!--<Ellipse 
                 Grid.Row="1"
@@ -91,7 +95,7 @@
                     </Ellipse.Fill>
                 </Ellipse>-->
 
-                <StackPanel>
+                <StackPanel Grid.ColumnSpan="2">
                     <RadioButton
                     Content="Your Profile"
                     Height="50"
@@ -126,7 +130,30 @@
                     Style="{StaticResource MainMenuButton}"
                     />
 
-                </StackPanel>                
+                </StackPanel>
+                
+                
+                <Button  
+                    Height="60"
+                    Width="60"
+                    Style="{StaticResource LogOut}"
+                    Grid.Row="3"
+                    Command="{Binding LogOut}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    />
+
+                <Button  
+                    Grid.Column="1"
+                    Height="60"
+                    Width="60"
+                    Style="{StaticResource ExitButton}"
+                    Grid.Row="3"
+                    Command="{Binding AppExit}"
+                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    />
+
+
+
             </Grid>
 
 

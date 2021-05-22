@@ -14,17 +14,17 @@
 
     <SolidColorBrush x:Key="ArrowBrushComboBox" Color="#094d74" />
 
-    <SolidColorBrush x:Key="DisabledBorderBrushComboBox" Color="#FF919191" />
+    <SolidColorBrush x:Key="DisabledBorderBrushComboBox" Color="#cfdaec" />
 
     <LinearGradientBrush x:Key="DisabledBackgroundComboBox" EndPoint="0,1" StartPoint="0,0">
-        <GradientStop Color="#f4f4f4" Offset="0"/>
-        <GradientStop Color="#d7d7d7" Offset="0.7"/>
-        <GradientStop Color="#c2c2c2" Offset="1"/>
+        <GradientStop Color="#cfdaec" Offset="0"/>
+        <GradientStop Color="#cfdaec" Offset="0.7"/>
+        <GradientStop Color="#cfdaec" Offset="1"/>
     </LinearGradientBrush>
 
-    <SolidColorBrush x:Key="DisabledForegroundComboBox" Color="#aaaaaa" />
+    <SolidColorBrush x:Key="DisabledForegroundComboBox" Color="#27282d" />
 
-    <SolidColorBrush x:Key="HoverBorderBrush" Color="#fbc6d0" />
+    <SolidColorBrush x:Key="HoverBorderBrush" Color="#95bddc" />
 
     <LinearGradientBrush x:Key="HoverBackground" EndPoint="0,1" StartPoint="0,0">
         <GradientStop Color="#da5e69" Offset="0"/>
@@ -57,8 +57,8 @@
         <ControlTemplate.Triggers>
             <Trigger Property="ToggleButton.IsMouseOver" Value="true">
                 <Setter TargetName="Border" Property="Background" Value="{StaticResource HoverToggleBackground}" />
-                <Setter TargetName="Border" Property="BorderThickness" Value="2" />
-                <Setter TargetName="BorderToggle" Property="BorderThickness" Value="1" />
+                <Setter TargetName="Border" Property="BorderThickness" Value="3" />
+                <Setter TargetName="BorderToggle" Property="BorderThickness" Value="2" />
                 <Setter TargetName="BorderToggle" Property="BorderBrush" Value="{StaticResource HoverBorderBrush}" />
                 <Setter TargetName="Border" Property="BorderBrush" Value="{StaticResource HoverBorderBrush}" />
             </Trigger>

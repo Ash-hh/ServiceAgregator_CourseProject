@@ -10,11 +10,10 @@
 
 
     <UserControl.Resources>
-        <Style TargetType="Label">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="HorizontalAlignment" Value="Right"/>
-            <Setter Property="Margin" Value="5 5 40 5"/>
+        <Style 
+            BasedOn="{StaticResource AddNewServiceLabel}"
+            TargetType="Label">
+            
         </Style>
     </UserControl.Resources>
     
@@ -47,6 +46,7 @@
                   SelectedValue="{Binding Path=Service.Tag}">
 
         </ComboBox>
+        
         <TextBox 
             FontFamily="Verdana"
             FontSize="15"

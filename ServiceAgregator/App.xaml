@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="View/Styles/ComboBoxStyle.xaml"/>
                 <ResourceDictionary Source="View/Styles/ButtonStyle.xaml"/>
                 <ResourceDictionary Source="View/Styles/ListBoxStyle.xaml"/>
+                <ResourceDictionary Source="View/Styles/LabelStyle.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
