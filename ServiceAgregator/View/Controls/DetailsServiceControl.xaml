@@ -15,7 +15,7 @@
             <uc:MakeOrderControl/>
         </DataTemplate>
     </UserControl.Resources>
-    <Grid Background="White">
+    <Grid Background="#eef0f6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="3*"/>
@@ -25,12 +25,33 @@
             <RowDefinition Height="1.5*"/>
         </Grid.RowDefinitions>
 
-        <Image Source="{Binding Provider.User_Image}"/>
+
+        <Ellipse
+                Height="150"
+                Width="150"
+                StrokeThickness="1"
+                Stroke="Gray" StrokeDashCap="Round">
+            <Ellipse.Fill>
+                <ImageBrush ImageSource="{Binding Provider.User_Image}"
+                                Stretch="UniformToFill"/>
+            </Ellipse.Fill>
+        </Ellipse>        
+      
         <StackPanel Grid.Row="1">
-            <Label Content="{Binding Provider.User_Name}"/>
-            <Label Content="{Binding Provider.Date_Registration, StringFormat=dd-MM-yyyy}"/>
-            <Label>
-                <Hyperlink>View Profile</Hyperlink>
+            <Label 
+                FontFamily="Verdana"
+                FontSize="14"
+                Content="{Binding Provider.User_Name}"/>
+            <Label 
+                FontFamily="Verdana"
+                FontSize="14"
+                Content="{Binding Provider.Date_Registration, StringFormat=dd-MM-yyyy}"/>
+            <Label 
+                FontFamily="Verdana"
+                FontSize="14">                
+                <Hyperlink 
+                    TextDecorations=""
+                    Command="{Binding ViewProfile}">View Profile</Hyperlink>
             </Label>
         </StackPanel>
 
@@ -40,20 +61,40 @@
             <Grid Grid.Column="1" Grid.RowSpan="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="0.4*"/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="1.5*"/>
                     <RowDefinition Height="0.5*"/>
                     <RowDefinition Height="0.4*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Label Content="{Binding Service.Date_OfAdd, StringFormat=dd-MM-yyyy}"/>
-                <TextBlock Grid.Row="1" Text="{Binding Service.Description}"/>
+                
+                <TextBlock 
+                    Grid.Row="1" 
+                    TextWrapping="Wrap"
+                    FontSize="14"
+                    FontFamily="Verdana"
+                    Text="{Binding Service.Description}"/>
+                
                 <Label Grid.Row="2" Content="{Binding Service.Cost}"/>
-                <Label Grid.Row="3">
-                    <Hyperlink Command="{Binding BackToService}">Back</Hyperlink>
-                </Label>
-                <Label Grid.Row="3" Margin="150 0 0 0">
-                    <Hyperlink Command="{Binding StartOrder}">Make an Order</Hyperlink>
-                </Label>
+
+                <Button
+                    Width="100"
+                    HorizontalAlignment="Left"                    
+                    Style="{StaticResource BtnStyle}"
+                    Content="Back"
+                    Grid.Row="3" 
+                    Command="{Binding BackToService}"
+                    />
+               
+                <Button
+                    HorizontalAlignment="Left"
+                    Width="200"
+                    Style="{StaticResource BtnStyle}"
+                    Content="Make an Order"
+                    Grid.Row="3" Margin="120 0 0 0"
+                    Command="{Binding StartOrder}"
+                    />
+                
                 <ContentControl Grid.Row="4" Content="{Binding MakeOrder}"/>
             </Grid>
         </ScrollViewer>

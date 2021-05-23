@@ -6,45 +6,187 @@
              xmlns:local="clr-namespace:ServiceAgregator.View.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="White">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>            
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="1.5*"/>
-        </Grid.ColumnDefinitions>
-        <Image Source="{Binding UserProfile.User_Image}"/>
-        <StackPanel Grid.Column="1">
-            <TextBlock Text="{Binding UserProfile.User_Name}"/>
-            <TextBlock Text="{Binding UserProfile.Date_Registration}"/>
-            <TextBlock Text="{Binding UserProfile.Rating}"/>
-            <Label>
-                <Hyperlink Command="{Binding UserServices}">User Services</Hyperlink>
-            </Label>
-        </StackPanel>
-        
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+
+
+    <UserControl.Resources>
+        <Style TargetType="RadioButton" BasedOn="{StaticResource RatingSet}">
+            <Style.Triggers>
+                
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    
+
+    <Border  
+        BorderThickness="3 3 0 0"
+        BorderBrush="#faecfd"
+        Background="#eef0f6"
+             >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.3*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="1.5*"/>
             </Grid.ColumnDefinitions>
-            <TextBox
+
+
+            <Ellipse
+                Width="140" 
+                Height="140"
+                StrokeThickness="2"
+                Stroke="Gray" StrokeDashCap="Round">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding UserProfile.User_Image}"
+                                Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <TextBlock 
+                VerticalAlignment="Bottom"
+                HorizontalAlignment="Left"
+                FontFamily="Verdana"
+                FontSize="16"                                
+                Text="{Binding UserProfile.User_Name}"/>
+                <TextBlock 
+                VerticalAlignment="Bottom"
+                Grid.Row="1"
+                HorizontalAlignment="Left"
+                FontFamily="Verdana"
+                FontSize="16" 
+                Text="{Binding UserProfile.Date_Registration,  StringFormat=dd-MM-yyyy}"/>
+
+
+                <TextBlock
+                VerticalAlignment="Bottom"
+                Grid.Row="2"
+                HorizontalAlignment="Left"
+                FontFamily="Verdana"
+                FontSize="16" 
+                Text="{Binding UserProfile.Rating}"
+                />
+
+                <Label 
+                VerticalAlignment="Bottom"
+                Grid.Row="3">
+                    <Hyperlink 
+                    FontSize="16"
+                    TextDecorations=""
+                    Command="{Binding UserServices}">User Services</Hyperlink>
+                </Label>
+            </Grid>
+
+            <WrapPanel 
+            VerticalAlignment="Bottom"
+            Grid.Row="1" Margin="10 10 0 0">
+
+                <Label 
+                FontSize="15"
+                Content="Set Rating: "/>
+
+                <RadioButton 
+                x:Name="M1"
+                IsChecked="{Binding Path=ModeArray[0]}"
+               
+                GroupName="Rating" Content="1"/>
+
+                <RadioButton 
+                x:Name="M2"
+                IsChecked="{Binding Path=ModeArray[1]}"
+               
+                GroupName="Rating" Content="2"/>
+
+                <RadioButton 
+                x:Name="M3"
+                IsChecked="{Binding Path=ModeArray[2]}"
+              
+                GroupName="Rating" Content="3"/>
+
+                <RadioButton 
+                x:Name="M4"
+                IsChecked="{Binding Path=ModeArray[3]}"
+               
+                GroupName="Rating" Content="4"/>
+
+                <RadioButton
+                x:Name="M5"
+                IsChecked="{Binding Path=ModeArray[4]}"
+             
+                GroupName="Rating" Content="5"/>
+
+            </WrapPanel>
+
+            <Grid Grid.Row="2" Grid.ColumnSpan="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <TextBox
+                Style="{StaticResource BaseTextBox}"
                 Margin="5"
                 Text="{Binding ReviewText}"/>
-            <Button 
-                Grid.Column="1" Content="Send Review" Margin="10" Command="{Binding SendReview}"/>
+
+                <Button 
+                Style="{StaticResource BtnStyle}"
+                Grid.Column="1" Content="Send Review" Margin="10" Command="{Binding SendReview}">
+
+                </Button>
+            </Grid>
+
+            <Expander
+            FontSize="15"
+            Header="Reviews"
+            Grid.Row="3" 
+            Grid.ColumnSpan="2">
+
+                <DataGrid
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+            Grid.Row="2" 
+            Grid.ColumnSpan="2" 
+            ItemsSource="{Binding UserProfile.ReviewsRecepient}" 
+            Width="700" 
+            AutoGenerateColumns="False"
+                CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn                         
+                        Header="Mark" Binding="{Binding Mark}"/>
+                        <DataGridTextColumn 
+                        Header="Review Date" Binding="{Binding Review_Date, StringFormat=dd-MM-yyyy}"/>
+                        <DataGridTextColumn 
+                        Header="Reviewer Name" Binding="{Binding UsersSender.User_Name}"/>
+                        <DataGridTextColumn 
+                        Width="Auto"
+                        Header="Text" Binding="{Binding Text}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Expander.Resources>
+                    <Style TargetType="Expander">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding UserProfile.ReviewsRecepient.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Expander.Resources>
+            </Expander>
+
         </Grid>
-        
-        <DataGrid Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding UserProfile.ReviewsRecepient}" Width="500" AutoGenerateColumns="False">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="SetRaiting" Binding="{Binding Mark}"/>
-                <DataGridTextColumn Header="Review Date" Binding="{Binding Review_Date}"/>
-                <DataGridTextColumn Header="Reviewer Name" Binding="{Binding UsersSender.User_Name}"/>
-                <DataGridTextColumn Header="Text" Binding="{Binding Text}"/>
-            </DataGrid.Columns>           
-        </DataGrid>
-    </Grid>
+    </Border>
+    
 </UserControl>

@@ -30,8 +30,7 @@
             <RowDefinition Height="2*"/>
 
         </Grid.RowDefinitions>
-
-        <!--Image-->
+       
         <Grid x:Name="UserInfo" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -41,11 +40,23 @@
                 <RowDefinition Height="5*"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Image Source="{Binding Path=CurrentUser.User_Image}" Height="Auto" Width="Auto" MaxHeight="300" MaxWidth="300"/>
+
+            <Ellipse
+                Height="150"
+                Width="150"
+                StrokeThickness="1"
+                Stroke="Gray" StrokeDashCap="Round">
+                <Ellipse.Fill>
+                    <ImageBrush ImageSource="{Binding CurrentUser.User_Image}"
+                                Stretch="UniformToFill"/>
+                </Ellipse.Fill>
+            </Ellipse>           
 
             <Label                       
                            Grid.Row="1">
-                <Hyperlink x:Name="UploadLink" Command="{Binding UploadImage}">Upload Image</Hyperlink>
+                <Hyperlink x:Name="UploadLink" 
+                           TextDecorations=""
+                           Command="{Binding UploadImage}">Upload Image</Hyperlink>
             </Label>
 
             <!--Personal Info-->
@@ -87,14 +98,14 @@
 
                 <Label                          
                             Grid.ColumnSpan="2"
+                            Grid.Row="1"  
                            Content="{Binding Path=CurrentUser.User_Name}"
                            Grid.Column="1"
                          
                           />
 
                 <Label 
-                              Grid.ColumnSpan="2"
-                           Grid.Row="1"  
+                              Grid.ColumnSpan="2"                           
                            Content="{Binding Path=CurrentUser.Login}"
                              Grid.Column="1"
                           />
@@ -111,6 +122,45 @@
         </Grid>
 
         <Separator  Grid.ColumnSpan="2"/>
+
+        <Grid Grid.Row="1">
+            <Expander
+            FontSize="15"
+            Header="Reviews"
+            Grid.Row="3" 
+            Grid.ColumnSpan="2">
+                <DataGrid
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+            Grid.Row="2" 
+            Grid.ColumnSpan="2" 
+            ItemsSource="{Binding CurrentUser.ReviewsRecepient}" 
+            Width="700" 
+            AutoGenerateColumns="False"
+                CanUserAddRows="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn                         
+                        Header="Mark" Binding="{Binding Mark}"/>
+                        <DataGridTextColumn 
+                        Header="Review Date" Binding="{Binding Review_Date, StringFormat=dd-MM-yyyy}"/>
+                        <DataGridTextColumn 
+                        Header="Reviewer Name" Binding="{Binding UsersSender.User_Name}"/>
+                        <DataGridTextColumn 
+                        Width="Auto"
+                        Header="Text" Binding="{Binding Text}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <Expander.Resources>
+                    <Style TargetType="Expander">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CurrentUser.ReviewsRecepient.Count}" Value="0">
+                                <Setter Property="Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Expander.Resources>
+            </Expander>
+        </Grid>
 
     </Grid>
     

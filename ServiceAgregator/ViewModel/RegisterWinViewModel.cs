@@ -69,7 +69,7 @@ namespace ServiceAgregator.ViewModel
         {
             try
             {
-                User.User_Image = File.ReadAllBytes(@"F:\БГТУ\2_Курс\ООП_Курсовой\ServiceAgregator\ServiceAgregator\View\Resources\UserIcon.png");
+                User.User_Image = File.ReadAllBytes(@"..\..\View\Resources\UserIcon.png");
                 
             }
             catch (Exception ee)

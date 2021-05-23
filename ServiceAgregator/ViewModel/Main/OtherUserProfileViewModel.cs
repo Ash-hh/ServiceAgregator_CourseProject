@@ -20,6 +20,19 @@ namespace ServiceAgregator.ViewModel.Main
         {   set { _reviewtext = value; OnPropertyChanged("ReviewText"); } 
             get { return _reviewtext; }
         }
+
+
+        private bool[] _modeArray = new bool[] { false, false, false, false, false };
+        public bool[] ModeArray
+        {   
+            set { _modeArray = value; OnPropertyChanged("ModeArray"); }
+            get { return _modeArray; }
+        }
+        public int SelectedMode
+        {
+            get { return Array.IndexOf(_modeArray, true); }
+        }
+
         public OtherUserProfileViewModel(int userId)
         {
             UserProfile = new UserQuery().GetUserById(userId);
@@ -37,27 +50,50 @@ namespace ServiceAgregator.ViewModel.Main
         }
 
         //TODO: TextBox Clear After Review       
-        //TODO: DataGrid Binding Update
         //TODO: Add Rating Options
         private void ReviewSend(object obj)
         {
-            if(UserProfile.Services.FirstOrDefault(p=>p.Orders.FirstOrDefault(z=>z.User_ID==Changer.CurrentUserID)!=null)!=null)
-            {
-                Reviews review = new Reviews {
-                    Text = ReviewText,
-                    Review_Date = DateTime.Today,
-                    Sender_Id = Changer.CurrentUserID,
-                    Recipient_Id = UserProfile.User_ID
-                };
-                new UserQuery().SendReview(review);
-                ReviewText = "";         
-                MessageBox.Show("Your review succesfully sended");
-
+            if(ReviewText==null || ReviewText.Length<=0)
+            {                
+                MessageBox.Show("You can't leave empty review");
             }
             else
             {
-                MessageBox.Show("You have no orders for this user to leave a review");
+                if(SelectedMode == -1)
+                {
+                    MessageBox.Show("You didnt set rating");
+                }
+                else
+                {
+                    if (UserProfile.Services.FirstOrDefault(p => p.Orders.FirstOrDefault(z => z.User_ID == Changer.CurrentUserID) != null) != null)
+                    {
+
+                        Reviews review = new Reviews
+                        {
+                            Text = ReviewText,
+                            Mark = SelectedMode + 1,
+                            Review_Date = DateTime.Today,
+                            Sender_Id = Changer.CurrentUserID,
+                            Recipient_Id = UserProfile.User_ID
+                        };
+                        new UserQuery().SendReview(review);
+
+                        UserProfile.Rating = (5 + UserProfile.ReviewsRecepient.Sum(e => e.Mark) + SelectedMode + 1) / (UserProfile.ReviewsRecepient.Count + 2);
+
+                        new UserQuery().UserUpdate(UserProfile);
+
+                        ReviewText = "";
+                        ModeArray[SelectedMode] = false;
+                        MessageBox.Show("Your review succesfully sended");
+                        Changer.getInstance(null).MainViewModel.SelectedViewModel = new OtherUserProfileViewModel(UserProfile.User_ID);
+                    }
+                    else
+                    {
+                        MessageBox.Show("You have no orders for this user to leave a review");
+                    }
+                }                
             }
+            
         }
     }
 }

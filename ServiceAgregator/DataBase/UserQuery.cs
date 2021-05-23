@@ -76,6 +76,7 @@ namespace ServiceAgregator.DataBase
                     User.Password = user.Password;
                     User.User_Name = user.User_Name;
                     User.Date_LastLogin = user.Date_LastLogin;
+                    User.Rating = user.Rating;
                     db.SaveChanges();
                 }
                 catch(DbEntityValidationException ex)

@@ -42,7 +42,13 @@ namespace ServiceAgregator.Models
 
         public byte[] User_Image { get; set; }
 
-        public double? Rating { get; set; }
+        [NotMapped]
+        private double? _rating;
+        public double? Rating 
+        {
+            get { return _rating; }
+            set { _rating = Math.Round(value.Value, 2); }
+        }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders> Orders { get; set; }

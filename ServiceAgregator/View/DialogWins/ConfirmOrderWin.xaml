@@ -5,26 +5,70 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"     
         xmlns:local="clr-namespace:ServiceAgregator.View.DialogWins"
         mc:Ignorable="d"
-        Title="Confirm Order" SizeToContent="WidthAndHeight" WindowStartupLocation="CenterScreen"
-        WindowStyle="None" AllowsTransparency="True">
+        Title="Confirm Order" 
+        SizeToContent="WidthAndHeight" 
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None" 
+        AllowsTransparency="True"
+        Background="Transparent"
+        MaxWidth="260" 
+        MaxHeight="600">
+    
     <Window.Resources>
         <Style TargetType="TextBlock">
             <Setter Property="FontSize" Value="15"/>
-        </Style>
-        
+        </Style>        
     </Window.Resources>
 
-    <Grid Background="#cfdaec">      
-        <StackPanel Margin="20">
-            <TextBlock>Заказ оформлен верно?</TextBlock>
-            <TextBlock>Описание заказ</TextBlock>
-            <TextBlock Text="{Binding Path=Services.Description}"></TextBlock>
-            <TextBlock>Дата выполнения заказа</TextBlock>
-            <TextBlock Text="{Binding Path=Date_Execution}"></TextBlock>
-            <WrapPanel HorizontalAlignment="Right" Margin="0,15,0,0">
-                <Button IsDefault="True" Click="Button_Click_1" MinWidth="60" Margin="0,0,10,0">Да</Button>
-                <Button IsCancel="True" MinWidth="60">Отмена</Button>
-            </WrapPanel>
-        </StackPanel>  
-    </Grid>
+    <Border 
+        Background="#ffeefc"
+        CornerRadius="40">
+        <Grid Width="Auto" Height="Auto">
+            <StackPanel Margin="20">
+                <TextBlock
+                FontSize="16"
+                Margin="10 0 0 5"                
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Text="Заказ оформлен верно?"
+                />
+                <TextBlock
+                FontSize="16"
+                Margin="10 0 0 15"                
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                >Описание заказа</TextBlock>
+                <TextBlock 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Left"
+                TextWrapping="Wrap"
+                Text="{Binding Path=Services.Description}"></TextBlock>
+
+                <TextBlock
+                FontSize="16"
+                Margin="10 10 5 10"                
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                >Дата выполнения заказа</TextBlock>
+
+                <TextBlock 
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center"
+                Text="{Binding Path=Date_Execution, StringFormat=dd-MM-yyyy}"></TextBlock>
+                
+                <WrapPanel HorizontalAlignment="Center" Margin="0,15,0,0">
+                    <Button 
+                        Style="{StaticResource BtnStyle}"
+                        IsDefault="True" 
+                        Click="Button_Click_1" 
+                        MinWidth="60" 
+                        Margin="0,0,10,0">Да</Button>
+                    <Button 
+                        Style="{StaticResource BtnStyle}"
+                        IsCancel="True"
+                        MinWidth="60">Нет</Button>
+                </WrapPanel>
+            </StackPanel>
+        </Grid>
+    </Border>    
 </Window>

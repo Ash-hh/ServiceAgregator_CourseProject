@@ -9,7 +9,6 @@
 
     <UserControl.Resources>
 
-
         <Style 
             BasedOn="{StaticResource AddNewServiceLabel}"
             TargetType="Label"/>
@@ -24,8 +23,7 @@
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
             </Style.Triggers>
-        </Style>
-        
+        </Style>     
         
 
         <Style TargetType="ComboBox" 
@@ -43,9 +41,9 @@
         
     </UserControl.Resources>
 
-
-    <Grid Background="#eef0f6" >
-        <Grid ShowGridLines="True">
+    
+    <Grid Background="#eef0f6">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="3*"/>
@@ -162,7 +160,15 @@
 
                                 <DataTrigger Binding="{Binding Status}" Value="DeletedByCustomer">
                                     <Setter Property="Button.Visibility" Value="Hidden"/>
-                                </DataTrigger>
+                                </DataTrigger>                                
+                            </Style.Triggers>
+                        </Style>
+
+                        <Style TargetType="DataGrid">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Orders.Count}" Value="0">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>                                
                             </Style.Triggers>
                         </Style>
                     </DataGrid.Resources>

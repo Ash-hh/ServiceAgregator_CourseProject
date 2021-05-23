@@ -20,16 +20,12 @@ namespace ServiceAgregator
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
-        {
-            InitializeComponent();
-            DataContext = new ViewModel.MainViewModel();
-        }
-
         public MainWindow(Models.Users user)
         {
             InitializeComponent();
-            DataContext = new ViewModel.MainViewModel(user);
+            var Main = new ViewModel.MainViewModel(user);
+            DataContext = Main;
+            Command.Changer.getInstance().MainViewModel = Main;
         }
     }
 }

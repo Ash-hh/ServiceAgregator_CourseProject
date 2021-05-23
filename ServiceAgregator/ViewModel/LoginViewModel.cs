@@ -50,7 +50,7 @@ namespace ServiceAgregator.ViewModel
 
             if (login.Login())
             {
-                MainWindow main = new MainWindow(login.user);
+                MainWindow main = new MainWindow(login.user);                
                 main.Show();
                 if (win != null)
                 {

@@ -99,8 +99,19 @@
                                                 Text="{Binding Services.Users.User_Name}" />
                                     </Hyperlink>
                                     </Label>
-                                    
-                                    <Image Grid.Row="1"  Width="120" Height="120" Source="{Binding Services.Users.User_Image}"/>
+
+                                    <Ellipse
+                                        HorizontalAlignment="Left"
+                                        Grid.Row="1"  Width="120" Height="120"
+                                        StrokeThickness="1"
+                                        Stroke="Gray" StrokeDashCap="Round">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding Services.Users.User_Image}"
+                                                Stretch="UniformToFill"/>
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                   
 
 
                                     <TextBlock 

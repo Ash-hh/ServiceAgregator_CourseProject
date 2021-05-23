@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using ServiceAgregator.Models;
+using System.Windows.Data;
 
 namespace ServiceAgregator.Command
 {
@@ -55,6 +56,7 @@ namespace ServiceAgregator.Command
             CanExecuteChanged(this, EventArgs.Empty);
         }
     }
+    
 
     public static class Extensions
     {

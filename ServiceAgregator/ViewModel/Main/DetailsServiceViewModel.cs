@@ -26,6 +26,8 @@ namespace ServiceAgregator.ViewModel.Main
 
         public DelegateCommand<object> BackToService { set; get; }
 
+        public DelegateCommand<object> ViewProfile { set; get; }
+
         public DelegateCommand<object> StartOrder { set; get; }
         public Services Service
         {
@@ -38,19 +40,15 @@ namespace ServiceAgregator.ViewModel.Main
                 _services = value;
                 OnPropertyChanged("Service");
             }
-        }
-
-        public DetailsServiceViewModel()
-        {
-
-        }
+        }        
 
         public DetailsServiceViewModel(Services service)
         {
             StartOrder = new DelegateCommand<object>(ShowOrderWin, CanExecute);
             BackToService = new DelegateCommand<object>(Back_toService, CanExecute);
             Service = service;
-            Provider = new DataBase.UserQuery().GetUserById(Service.User_ID);
+            Provider = new UserQuery().GetUserById(Service.User_ID);
+            ViewProfile = new DelegateCommand<object>(ViewOtherUserProfile);
         }
 
         private void Back_toService(object obj)
@@ -82,6 +80,11 @@ namespace ServiceAgregator.ViewModel.Main
                 MessageBox.Show("You already order this Service");
             }
             
+        }
+
+        private void ViewOtherUserProfile(object obj)
+        {
+            Changer.getInstance(null).MainViewModel.SelectedViewModel = new OtherUserProfileViewModel(Service.User_ID);
         }
     }
 }

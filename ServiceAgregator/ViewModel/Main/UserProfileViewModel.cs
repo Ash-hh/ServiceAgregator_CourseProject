@@ -9,6 +9,7 @@ using System.Windows;
 using ServiceAgregator.ViewModel;
 using ServiceAgregator.Models;
 using ServiceAgregator.Command;
+using ServiceAgregator.DataBase;
 
 namespace ServiceAgregator.ViewModel.Main
 {
@@ -19,7 +20,7 @@ namespace ServiceAgregator.ViewModel.Main
 
         public UserProfileViewModel(Users currentUser)
         {
-            _currentUser = currentUser;
+            CurrentUser = new UserQuery().GetUserById(currentUser.User_ID);
             UploadImage = new DelegateCommand<object>(ImageLoad, CanExecute);
            
         }
