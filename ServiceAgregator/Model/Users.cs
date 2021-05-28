@@ -39,7 +39,7 @@ namespace ServiceAgregator.Models
 
         [Column(TypeName = "date")]
         public DateTime? Date_LastLogin { get; set; }
-
+        public bool? Active { set; get; }
         public byte[] User_Image { get; set; }
 
         [NotMapped]

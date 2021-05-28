@@ -50,12 +50,20 @@ namespace ServiceAgregator.ViewModel
 
             if (login.Login())
             {
-                MainWindow main = new MainWindow(login.user);                
-                main.Show();
-                if (win != null)
+                if(!login.user.Active.Value)
                 {
-                    win.Close();
+                    MessageBox.Show("This User is Blocked");
                 }
+                else
+                {
+                    Changer.IsAdmin = login.user.User_Type == 0;
+                    MainWindow main = new MainWindow(login.user);
+                    main.Show();
+                    if (win != null)
+                    {
+                        win.Close();
+                    }
+                }                
             }
             else
             {

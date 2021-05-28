@@ -8,6 +8,7 @@
         xmlns:local="clr-namespace:ServiceAgregator"
         xmlns:uc="clr-namespace:ServiceAgregator.View.Controls"
         xmlns:viewModelMain="clr-namespace:ServiceAgregator.ViewModel.Main"
+        xmlns:s="clr-namespace:ServiceAgregator.Command"
         
         mc:Ignorable="d"
         Title="MainWindow" Height="700" Width="920"
@@ -43,6 +44,10 @@
         <DataTemplate DataType="{x:Type  viewModelMain:OtherUserProfileViewModel}">
             <uc:OtherUserProfileControl/>
         </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModelMain:AdminAllUsersViewModel}">
+            <uc:AdminAllUsers/>
+        </DataTemplate>
     </Window.Resources>
 
 
@@ -70,8 +75,8 @@
             <GridSplitter Grid.Row="1" Grid.ColumnSpan="3" Height="3" Background="#faecfd"
         HorizontalAlignment="Stretch" VerticalAlignment="Top" />
 
-            <Grid ShowGridLines="True" Grid.Row="1" Grid.RowSpan="3" Background="#cfdaec">
-                <!-- Окно меню -->
+            <Grid Grid.Row="1" Grid.RowSpan="3" Background="#cfdaec">
+              
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -81,22 +86,11 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-
-                <!--<Ellipse 
-                Grid.Row="1"
-                Width="150" 
-                Height="150"
-                StrokeThickness="2"
-                Stroke="Gray" StrokeDashCap="Round">
-                    <Ellipse.Fill>
-                        <ImageBrush ImageSource="{Binding CurrentUser.User_Image}"
-                                Stretch="UniformToFill"/>
-                    </Ellipse.Fill>
-                </Ellipse>-->
+                </Grid.ColumnDefinitions>              
 
                 <StackPanel Grid.ColumnSpan="2">
                     <RadioButton
+                    GroupName="MainMenu"
                     Content="Your Profile"
                     Height="50"
                     FontSize="17"                    
@@ -105,6 +99,7 @@
                     Style="{StaticResource MainMenuButton}"
                     />
                     <RadioButton
+                         GroupName="MainMenu"
                     Content="Services"
                     Height="50"
                     FontSize="17"   
@@ -114,6 +109,7 @@
                     Style="{StaticResource MainMenuButton}"
                     />
                     <RadioButton
+                         GroupName="MainMenu"
                     Content="MyOrders"
                     Height="50"
                     FontSize="17"                    
@@ -122,6 +118,7 @@
                     Style="{StaticResource MainMenuButton}"
                     />
                     <RadioButton
+                         GroupName="MainMenu"
                     Content="My Services"
                     Height="50"
                     FontSize="17"                    
@@ -130,6 +127,31 @@
                     Style="{StaticResource MainMenuButton}"
                     />
 
+                </StackPanel>
+
+                <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
+                    <RadioButton
+                         GroupName="MainMenu"
+                    Content="All Users"
+                    Height="50"
+                    FontSize="17"                    
+                    Command="{Binding UpdateViewCommand}" 
+                    CommandParameter="AllUsers"
+                    Style="{StaticResource MainMenuButton}"
+                    />
+                    <StackPanel.Resources>
+                        <Style TargetType="StackPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Source={x:Static s:Changer.IsAdmin}}" Value="False">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+
+                                <DataTrigger Binding="{Binding Source={x:Static s:Changer.IsAdmin}}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </StackPanel.Resources>
                 </StackPanel>
                 
                 

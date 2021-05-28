@@ -96,6 +96,15 @@ namespace ServiceAgregator.Command
             return observ;
         }
 
+        public static ObservableCollection<Users> FromListToObservableCollection(this ObservableCollection<Users> observ, List<Users> list)
+        {
+            foreach (Users f in list)
+            {
+                observ.Add(f);
+            }
+            return observ;
+        }
+
 
     }
         

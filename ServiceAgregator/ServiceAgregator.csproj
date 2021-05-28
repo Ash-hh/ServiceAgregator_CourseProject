@@ -75,6 +75,7 @@
     <Compile Include="ViewModel\ControlsViewModel\MakeOrderViewModel.cs" />
     <Compile Include="ViewModel\ControlsViewModel\UserServiceDetailsViewModel.cs" />
     <Compile Include="ViewModel\ControlsViewModel\UserServicesViewModel.cs" />
+    <Compile Include="ViewModel\Main\AdminAllUsersViewModel.cs" />
     <Compile Include="ViewModel\Main\DetailsServiceViewModel.cs" />
     <Compile Include="ViewModel\Main\DetailsUserOrderControlViewModel.cs" />
     <Compile Include="ViewModel\Main\OtherUserProfileViewModel.cs" />
@@ -82,6 +83,9 @@
     <Compile Include="ViewModel\Main\UserOrdersViewModel.cs" />
     <Compile Include="ViewModel\Main\UserProfileViewModel.cs" />
     <Compile Include="ViewModel\Main\ServicesControllerViewModel.cs" />
+    <Compile Include="View\Controls\AdminAllUsers.xaml.cs">
+      <DependentUpon>AdminAllUsers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Controls\DetailsServiceControl.xaml.cs">
       <DependentUpon>DetailsServiceControl.xaml</DependentUpon>
     </Compile>
@@ -121,6 +125,10 @@
     <Compile Include="View\RegisterWin.xaml.cs">
       <DependentUpon>RegisterWin.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\Controls\AdminAllUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\Controls\DetailsServiceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

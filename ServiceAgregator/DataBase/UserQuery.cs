@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ServiceAgregator.Models;
 using System.Collections.ObjectModel;
 using System.Data.Entity.Validation;
+using ServiceAgregator.Command;
 
 
 namespace ServiceAgregator.DataBase
@@ -55,12 +56,13 @@ namespace ServiceAgregator.DataBase
             using (DBContext db = new DBContext())
             {
                 ObservableCollection<Users> users = new ObservableCollection<Users>();
-                var bufflist = db.Users.ToList<Users>();
-                foreach (Users buff in bufflist)
-                {
-                    users.Add(buff);
-                }
-                return users;
+                var bufflist = db.Users.
+                                    Include("Orders").
+                                    Include("Services").
+                                    Include("Services.Orders").Where(p=>p.User_ID != Changer.CurrentUserID).
+                                    ToList();
+
+                return users.FromListToObservableCollection(bufflist);
             }
         }
 
@@ -77,6 +79,8 @@ namespace ServiceAgregator.DataBase
                     User.User_Name = user.User_Name;
                     User.Date_LastLogin = user.Date_LastLogin;
                     User.Rating = user.Rating;
+                    User.User_Type = user.User_Type;
+                    User.Active = user.Active;
                     db.SaveChanges();
                 }
                 catch(DbEntityValidationException ex)

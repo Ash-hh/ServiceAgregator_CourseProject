@@ -19,6 +19,7 @@ namespace ServiceAgregator.DataBase
                 NewUser.Date_LastLogin = DateTime.Now;                
                 NewUser.User_Type = 1;
                 NewUser.Rating = 5;
+                NewUser.Active = true;
                 try
                 {
                     if(IsUserLoginValid(db,NewUser))

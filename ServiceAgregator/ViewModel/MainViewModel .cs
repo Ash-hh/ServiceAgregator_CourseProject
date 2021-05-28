@@ -76,6 +76,11 @@ namespace ServiceAgregator.ViewModel
                 case "MyServices":
                     Changer.getInstance(null).MainViewModel.SelectedViewModel = new ServicesControllerViewModel();
                     break;
+                case "AllUsers":
+                    if(Changer.IsAdmin)
+                    {
+                        Changer.getInstance(null).MainViewModel.SelectedViewModel = new AdminAllUsersViewModel();
+                    } break;
             }
         }
 

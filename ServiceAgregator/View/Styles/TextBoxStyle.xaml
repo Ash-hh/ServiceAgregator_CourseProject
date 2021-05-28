@@ -33,9 +33,7 @@
     <Style 
         x:Key="LoginTextBox"
         TargetType="{x:Type TextBox}">
-        <Setter Property="Padding" Value="3"/>
-        <Setter Property="TextWrapping" Value="Wrap"/>
-        <Setter Property="AcceptsReturn" Value="True"/>
+        <Setter Property="Padding" Value="3"/>      
         <Setter Property="FontFamily" Value="Verdana"/>
         <Setter Property="FontSize" Value="15"/>
         <Setter Property="MaxLength" Value="25"/>
