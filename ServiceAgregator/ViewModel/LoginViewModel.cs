@@ -67,7 +67,7 @@ namespace ServiceAgregator.ViewModel
             }
             else
             {
-                MessageBox.Show("error");
+                MessageBox.Show("Authorization filed");
             }
         }
 

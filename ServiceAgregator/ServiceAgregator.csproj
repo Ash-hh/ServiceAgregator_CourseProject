@@ -273,16 +273,13 @@
     <Resource Include="View\Resources\LogOut.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="View\Resources\tek.bmp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="View\Resources\tek.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="View\Resources\UserIcon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\Resources\Exit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="View\Resources\AppIcon.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
