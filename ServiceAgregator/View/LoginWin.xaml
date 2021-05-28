@@ -72,7 +72,7 @@
                 <RowDefinition Height="0.9*"/>
             </Grid.RowDefinitions>
 
-            <Image Grid.Column="1" Source="Resources/tek.png" Margin="15"/>
+            <Image Grid.Column="1" Source="Resources/AppIcon.png" Margin="15"/>
 
             <Button     
                 Style="{StaticResource LoginWinButton}"
