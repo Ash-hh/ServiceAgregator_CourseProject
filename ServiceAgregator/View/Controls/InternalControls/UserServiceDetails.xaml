@@ -55,9 +55,9 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
-            <Label Content="Tag"/>
-            <Label Content="Description" Grid.Row="1"/>
-            <Label Content="Cost" Grid.Row="2"/>                    
+            <Label Content="Категория"/>
+            <Label Content="Описание" Grid.Row="1"/>
+            <Label Content="Стоимость" Grid.Row="2"/>                    
 
             <ComboBox 
                 Grid.Column="1" 
@@ -96,7 +96,7 @@
                 Width="150"
                 Height="50"
                 Style="{StaticResource BtnStyle}"
-                Content="Delete Service"    
+                Content="Удалить"    
                 Command="{Binding DeleteService}"
                 Grid.Row="3" Grid.Column="1"
                 />
@@ -113,12 +113,12 @@
                         BasedOn="{StaticResource EditButton}"
                         TargetType="{x:Type ToggleButton}">
                         <Setter Property="Tag" Value="NoEdit"/>
-                        <Setter Property="Content" Value="Edit Service"/>
+                        <Setter Property="Content" Value="Редактировать"/>
                         <Setter Property="CommandParameter" Value="EDIT"/>
                         <Style.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter Property="Tag" Value="Edit"/>
-                                <Setter Property="Content" Value="Stop Editing"/>
+                                <Setter Property="Content" Value="Не редактировать"/>
                                 <Setter Property="CommandParameter" Value="NOEDIT"/>
                             </Trigger>   
                             
@@ -128,10 +128,11 @@
             </ToggleButton>
 
             <Grid Grid.Row="5" Grid.Column="1" HorizontalAlignment="Left">
-                <DataGrid ItemsSource="{Binding Orders}" SelectedItem="{Binding Order}" AutoGenerateColumns="False" CanUserAddRows="False" Width="300" >
+                <DataGrid ItemsSource="{Binding Orders}" SelectedItem="{Binding Order}" AutoGenerateColumns="False" CanUserAddRows="False" Width="330" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution}"/>
-                        <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                        <DataGridTextColumn Header="Дата исполнения" Binding="{Binding Date_Execution}"/>
+                        <DataGridTextColumn Header="Имя заказчика" Binding="{Binding Users.User_Name}"/>
+                        <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
                         <DataGridTemplateColumn Width="*">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
@@ -140,10 +141,12 @@
                                     <Button 
                                         Style="{DynamicResource ButtonVisibility}"
                                         Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.CancelCom}">
-                                        Cancel
+                                        Отменить
                                     </Button>
-                                    <Button Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.DeleteOrder}">
-                                        Delete
+                                    <Button 
+                                        Style="{StaticResource ItemButton}"
+                                        Command="{Binding RelativeSource={RelativeSource AncestorType=DataGrid}, Path=DataContext.DeleteOrder}">
+                                        Удалить
                                     </Button>
                                 </StackPanel>
                                     </TextBlock>
@@ -152,14 +155,14 @@
                         </DataGridTemplateColumn>
                     </DataGrid.Columns>
                     <DataGrid.Resources>
-                        <Style x:Key="ButtonVisibility" >
+                        <Style x:Key="ButtonVisibility" BasedOn="{StaticResource ItemButton}" TargetType="{x:Type Button}">
                             <Style.Triggers>
                                 <DataTrigger Binding="{Binding Status}" Value="CanceledByProducer">
-                                    <Setter Property="Button.Visibility" Value="Hidden"/>
+                                    <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>
 
                                 <DataTrigger Binding="{Binding Status}" Value="DeletedByCustomer">
-                                    <Setter Property="Button.Visibility" Value="Hidden"/>
+                                    <Setter Property="Visibility" Value="Hidden"/>
                                 </DataTrigger>                                
                             </Style.Triggers>
                         </Style>

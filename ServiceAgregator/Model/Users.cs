@@ -21,15 +21,14 @@ namespace ServiceAgregator.Models
         public int User_ID { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(50)]       
         public string Login { get; set; }
 
         [Required]
-        [StringLength(95)]
+        [StringLength(95, MinimumLength=3, ErrorMessage ="Недопустимая длинна пароля")]
         public string Password { get; set; }
-
-        [Required]
-        [StringLength(20)]
+     
+        [StringLength(20, MinimumLength = 3, ErrorMessage = "Недопустимая длинна имени")]        
         public string User_Name { get; set; }
 
         public short User_Type { get; set; }
@@ -44,6 +43,7 @@ namespace ServiceAgregator.Models
 
         [NotMapped]
         private double? _rating;
+        
         public double? Rating 
         {
             get { return _rating; }

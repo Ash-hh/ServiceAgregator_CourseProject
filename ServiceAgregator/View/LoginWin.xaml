@@ -78,14 +78,14 @@
                 Style="{StaticResource LoginWinButton}"
                 Grid.Row="3" 
                 Grid.Column="1" 
-                Content="Log In" 
+                Content="Войти" 
                 Command="{Binding LogInCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
             
             <Button
                 Style="{StaticResource LoginWinButton}"
                 Grid.Row="4"
                 Grid.Column="1" 
-                Content="Register" 
+                Content="Регистрация" 
                 Command="{Binding RegisterCommand }" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
 
             <Grid Grid.Row="1" Grid.Column="1">
@@ -97,7 +97,7 @@
                     Style="{StaticResource LoginTextBox}"
                     Height="45"
                     Text="{Binding Login}" Grid.Row="1"/>
-                <Label Content="Login"/>
+                <Label Content="Логин"/>
             </Grid>
 
             <Grid Grid.Row="2" Grid.Column="1" >
@@ -110,7 +110,7 @@
                     Height="45"
                     Width="Auto"
                     PasswordChanged="PasswordBox_PasswordChanged" Grid.Row="1"/>
-                <Label Content="Password"/>
+                <Label Content="Пароль"/>
             </Grid>
 
         </Grid>

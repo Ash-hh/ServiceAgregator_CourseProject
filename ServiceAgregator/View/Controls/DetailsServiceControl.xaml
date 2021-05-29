@@ -51,7 +51,7 @@
                 FontSize="14">                
                 <Hyperlink 
                     TextDecorations=""
-                    Command="{Binding ViewProfile}">View Profile</Hyperlink>
+                    Command="{Binding ViewProfile}">Просмотр профиля</Hyperlink>
             </Label>
         </StackPanel>
 
@@ -81,7 +81,7 @@
                     Width="100"
                     HorizontalAlignment="Left"                    
                     Style="{StaticResource BtnStyle}"
-                    Content="Back"
+                    Content="Назад"
                     Grid.Row="3" 
                     Command="{Binding BackToService}"
                     />
@@ -90,7 +90,7 @@
                     HorizontalAlignment="Left"
                     Width="200"
                     Style="{StaticResource BtnStyle}"
-                    Content="Make an Order"
+                    Content="Сделать заказ"
                     Grid.Row="3" Margin="120 0 0 0"
                     Command="{Binding StartOrder}"
                     />

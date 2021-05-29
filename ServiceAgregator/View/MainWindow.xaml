@@ -91,7 +91,7 @@
                 <StackPanel Grid.ColumnSpan="2">
                     <RadioButton
                     GroupName="MainMenu"
-                    Content="Your Profile"
+                    Content="Мой профиль"
                     Height="50"
                     FontSize="17"                    
                     Command="{Binding UpdateViewCommand}" 
@@ -100,7 +100,7 @@
                     />
                     <RadioButton
                          GroupName="MainMenu"
-                    Content="Services"
+                    Content="Услуги"
                     Height="50"
                     FontSize="17"   
                     IsChecked="True"   
@@ -110,7 +110,7 @@
                     />
                     <RadioButton
                          GroupName="MainMenu"
-                    Content="MyOrders"
+                    Content="Мои заказы"
                     Height="50"
                     FontSize="17"                    
                     Command="{Binding UpdateViewCommand}" 
@@ -119,7 +119,7 @@
                     />
                     <RadioButton
                          GroupName="MainMenu"
-                    Content="My Services"
+                    Content="Мои услуги"
                     Height="50"
                     FontSize="17"                    
                     Command="{Binding UpdateViewCommand}" 
@@ -132,7 +132,7 @@
                 <StackPanel Grid.Row="2" Grid.ColumnSpan="2">
                     <RadioButton
                          GroupName="MainMenu"
-                    Content="All Users"
+                    Content="Пользователи"
                     Height="50"
                     FontSize="17"                    
                     Command="{Binding UpdateViewCommand}" 

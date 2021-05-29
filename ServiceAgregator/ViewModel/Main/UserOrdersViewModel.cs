@@ -13,7 +13,7 @@ using System.ComponentModel;
 
 namespace ServiceAgregator.ViewModel.Main
 {
-    class UserOrdersViewModel : BaseViewModel, INotifyPropertyChanged
+    class UserOrdersViewModel : BaseViewModel
     {
         public UserOrdersViewModel()
         {

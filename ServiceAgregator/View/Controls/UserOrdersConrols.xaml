@@ -33,7 +33,7 @@
 
                 <Label 
                     VerticalAlignment="Center"
-                    Content="Total Orders:" 
+                    Content="Всего заказов:" 
                     HorizontalAlignment="Right"
                     FontSize="17"/>
                 
@@ -138,17 +138,17 @@
                                         <Button
                                             Margin="5 2 5 2"
                                             Style="{DynamicResource ItemButton}"
-                                            Content="Delete" 
+                                            Content="Удалить" 
                                             Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.DeleteOrder}"/>
                                         
                                         <Button 
                                             Style="{DynamicResource ButtonVisibility}" 
-                                            Content="Canceled" 
+                                            Content="Отменить" 
                                             Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Canceled"/>
                                         
                                         <Button 
                                             Style="{DynamicResource ButtonVisibility}" 
-                                            Content="Done" 
+                                            Content="Выполнено" 
                                             Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.UpdateStatus}" CommandParameter="Done"/>
                                                                                 
                                     </StackPanel>

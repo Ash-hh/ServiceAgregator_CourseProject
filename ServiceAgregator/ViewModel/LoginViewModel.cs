@@ -8,6 +8,7 @@ using System.Runtime.CompilerServices;
 using System.Collections.ObjectModel;
 using System.Windows;
 using ServiceAgregator.Command;
+using ServiceAgregator.Models;
 
 namespace ServiceAgregator.ViewModel
 {
@@ -46,29 +47,39 @@ namespace ServiceAgregator.ViewModel
 
         private void OnLogin(Window win)
         {
-            DataBase.LoginQuery login = new DataBase.LoginQuery(_Login);            
-
-            if (login.Login())
+            string ErrorMessage = "";
+            if(!new Validation<Login>().IsValid(_Login, out ErrorMessage))
             {
-                if(!login.user.Active.Value)
-                {
-                    MessageBox.Show("This User is Blocked");
-                }
-                else
-                {
-                    Changer.IsAdmin = login.user.User_Type == 0;
-                    MainWindow main = new MainWindow(login.user);
-                    main.Show();
-                    if (win != null)
-                    {
-                        win.Close();
-                    }
-                }                
+                MessageBox.Show(ErrorMessage);
+                
             }
             else
             {
-                MessageBox.Show("Authorization filed");
+                DataBase.LoginQuery login = new DataBase.LoginQuery(_Login);
+
+                if (login.Login())
+                {
+                    if (!login.user.Active.Value)
+                    {
+                        MessageBox.Show("This User is Blocked");
+                    }
+                    else
+                    {
+                        Changer.IsAdmin = login.user.User_Type == 0;
+                        MainWindow main = new MainWindow(login.user);
+                        main.Show();
+                        if (win != null)
+                        {
+                            win.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Authorization filed");
+                }
             }
+            
         }
 
         private void OnRegister(Window win)

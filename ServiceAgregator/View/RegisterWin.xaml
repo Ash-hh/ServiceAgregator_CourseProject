@@ -64,26 +64,26 @@
                 <Image Source="{Binding User.User_Image}" x:Name="UserIcon"/>
 
                 <Button 
-                Width="250"
+                Width="260"
                 Style="{StaticResource LoginWinButton}"
                 Grid.Row="1" 
-                Content="Upload Image" 
+                Content="Загрузить изображение" 
                 Command="{Binding LoadImage}" 
                 CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
             </Grid>
 
-            <Label Content="Name" Grid.Row="2"></Label>
+            <Label Content="Имя" Grid.Row="2"></Label>
             <TextBox Grid.Row="2" Text="{Binding User.User_Name}"></TextBox>
-            <Label Content="Login" Grid.Row="3"></Label>
+            <Label Content="Логин" Grid.Row="3"></Label>
             <TextBox Grid.Row="3" Text="{Binding User.Login}"></TextBox>
-            <Label Content="Password" Grid.Row="4"></Label>
+            <Label Content="Пароль" Grid.Row="4"></Label>
             <TextBox Grid.Row="4" Text="{Binding User.Password}"></TextBox>
 
             <Button 
              Width="250"
             Style="{StaticResource LoginWinButton}"
             Grid.Row="5" 
-            Content="Register"
+            Content="Зарегистрироваться"
             Command="{Binding RegisterCommand}" CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"></Button>
 
 

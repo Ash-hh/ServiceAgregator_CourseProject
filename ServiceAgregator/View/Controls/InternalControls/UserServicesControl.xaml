@@ -94,15 +94,15 @@
                                     Grid.RowSpan="2" 
                                     Text="{Binding Path=Cost}"/>
                                 
-                                <Label Grid.Row="2" Content="Total Orders:"/>
+                                <Label Grid.Row="2" Content="Всего заказов:"/>
                                 <Label Grid.Column="1" Grid.Row="2" Content="{Binding Path=Orders.Count}"/>
                                 <Button
                                     Height="40"
                                     Style="{StaticResource ItemButton}"
-                                    Content="Detail"  Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
+                                    Content="Просмотр"  Grid.Column="3" Grid.Row="1" Grid.RowSpan="2"
                                     Command="{Binding RelativeSource={RelativeSource AncestorType=ListBox}, Path=DataContext.ChangeViewModel}"/>
                                 
-                                <Expander Header="Orders" Grid.Row="3" Grid.ColumnSpan="4" 
+                                <Expander Header="Заказы" Grid.Row="3" Grid.ColumnSpan="4" 
                                           Style="{DynamicResource ExpanderVisibility}">
                                     <DataGrid 
                                         HorizontalAlignment="Left"
@@ -110,8 +110,9 @@
                                         AutoGenerateColumns="False" 
                                         Width="300">
                                         <DataGrid.Columns>
-                                            <DataGridTextColumn Header="Execution Date" Binding="{Binding Date_Execution, StringFormat=dd-MM-yyyy}"/>
-                                            <DataGridTextColumn Header="Status" Binding="{Binding Status}"/>
+                                            <DataGridTextColumn Header="Дата выполнения" Binding="{Binding Date_Execution, StringFormat=dd-MM-yyyy}"/>
+                                            <DataGridTextColumn Header="Имя заказчика" Binding="{Binding Users.User_Name}"/>
+                                            <DataGridTextColumn Header="Статус" Binding="{Binding Status}"/>
                                         </DataGrid.Columns>    
                                     </DataGrid>
                                 </Expander>

@@ -66,6 +66,7 @@
     </ApplicationDefinition>
     <Compile Include="Command\Changer.cs" />
     <Compile Include="Command\PasswordHash.cs" />
+    <Compile Include="Command\Validation.cs" />
     <Compile Include="DataBase\OrdersQuery.cs" />
     <Compile Include="DataBase\ServicesQuery.cs" />
     <Compile Include="DataBase\UserQuery.cs" />
@@ -265,6 +266,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="UmlDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

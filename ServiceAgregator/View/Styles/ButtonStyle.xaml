@@ -62,7 +62,9 @@
                                     Margin="2"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
+                                    
                                     RecognizesAccessKey="True"/>
+                                
                                 <Border.Style>
                                     <Style TargetType="{x:Type Border}">
                                         <Setter Property="Background" Value="#9cb9d1"/>

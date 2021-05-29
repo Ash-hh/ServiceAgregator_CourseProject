@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.IO;
 using Microsoft.Win32;
+using ServiceAgregator.Models;
 
 namespace ServiceAgregator.ViewModel
 {
@@ -44,8 +45,7 @@ namespace ServiceAgregator.ViewModel
                 try
                 {
                     User.User_Image = File.ReadAllBytes(FilePath);
-                    OnPropertyChanged("User");
-                    MessageBox.Show("!!");
+                    OnPropertyChanged("User");                   
                 }
                 catch (Exception ee)
                 {
@@ -80,16 +80,24 @@ namespace ServiceAgregator.ViewModel
 
         private void Register(Window win)
         {
-            var Register = new DataBase.RegisterQuery(_User);
-
-            if(Register.Succes)
+            string ErrorMessage = "";
+            if (new Command.Validation<Login>().IsValid(new Login(_User.Login, _User.Password), out ErrorMessage) && new Validation<Users>().IsValid(_User, out ErrorMessage))
             {
-                var NewLogin = new View.LoginWin();
-                NewLogin.Show();
-                if(win!=null)
+                var Register = new DataBase.RegisterQuery(_User);
+
+                if (Register.Succes)
                 {
-                    win.Close();
-                }                
+                    var NewLogin = new View.LoginWin();
+                    NewLogin.Show();
+                    if (win != null)
+                    {
+                        win.Close();
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show(ErrorMessage);
             }
            
         }

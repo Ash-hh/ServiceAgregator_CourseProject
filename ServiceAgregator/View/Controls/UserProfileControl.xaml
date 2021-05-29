@@ -56,15 +56,15 @@
                            Grid.Row="1">
                 <Hyperlink x:Name="UploadLink" 
                            TextDecorations=""
-                           Command="{Binding UploadImage}">Upload Image</Hyperlink>
+                           Command="{Binding UploadImage}">Загрузить изображение</Hyperlink>
             </Label>
 
             <!--Personal Info-->
             <Grid Grid.Column="1" Grid.RowSpan="3">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="2*"/>
                     <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1.5*"/>
@@ -76,19 +76,19 @@
 
 
                 <Label
-                            Content="Login"/>
+                            Content="Логин"/>
 
                 <Label
                              Grid.Row="1"  
-                            Content="User Name"/>
+                            Content="Имя пользователя"/>
 
                 <Label
                              Grid.Row="2"  
-                            Content="Reg Date"/>
+                            Content="Дата регистрации"/>
 
                 <Label
                              Grid.Row="3"  
-                            Content="Rating"/>
+                            Content="Ретйинг"/>
 
                 <Label
                             Grid.Row="3"
@@ -126,7 +126,7 @@
         <Grid Grid.Row="1">
             <Expander
             FontSize="15"
-            Header="Reviews"
+            Header="Отзывы"
             Grid.Row="3" 
             Grid.ColumnSpan="2">
                 <DataGrid
@@ -140,14 +140,14 @@
                 CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn                         
-                        Header="Mark" Binding="{Binding Mark}"/>
+                        Header="Рейтинг" Binding="{Binding Mark}"/>
                         <DataGridTextColumn 
-                        Header="Review Date" Binding="{Binding Review_Date, StringFormat=dd-MM-yyyy}"/>
+                        Header="Дата отзыва" Binding="{Binding Review_Date, StringFormat=dd-MM-yyyy}"/>
                         <DataGridTextColumn 
-                        Header="Reviewer Name" Binding="{Binding UsersSender.User_Name}"/>
+                        Header="Имя пользователя" Binding="{Binding UsersSender.User_Name}"/>
                         <DataGridTextColumn 
                         Width="Auto"
-                        Header="Text" Binding="{Binding Text}"/>
+                        Header="Текст отзыва" Binding="{Binding Text}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Expander.Resources>

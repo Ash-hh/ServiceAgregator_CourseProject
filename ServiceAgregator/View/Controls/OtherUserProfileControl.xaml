@@ -86,7 +86,7 @@
                     <Hyperlink 
                     FontSize="16"
                     TextDecorations=""
-                    Command="{Binding UserServices}">User Services</Hyperlink>
+                    Command="{Binding UserServices}">Просмотреть услуги пользователя</Hyperlink>
                 </Label>
             </Grid>
 
@@ -96,7 +96,7 @@
 
                 <Label 
                 FontSize="15"
-                Content="Set Rating: "/>
+                Content="Рейтинг: "/>
 
                 <RadioButton 
                 x:Name="M1"
@@ -143,14 +143,14 @@
 
                 <Button 
                 Style="{StaticResource BtnStyle}"
-                Grid.Column="1" Content="Send Review" Margin="10" Command="{Binding SendReview}">
+                Grid.Column="1" Content="Отправить отзыв" Margin="10" Command="{Binding SendReview}">
 
                 </Button>
             </Grid>
 
             <Expander
             FontSize="15"
-            Header="Reviews"
+            Header="Отзывы"
             Grid.Row="3" 
             Grid.ColumnSpan="2">
 
@@ -165,14 +165,14 @@
                 CanUserAddRows="False">
                     <DataGrid.Columns>
                         <DataGridTextColumn                         
-                        Header="Mark" Binding="{Binding Mark}"/>
+                        Header="Рейтинг" Binding="{Binding Mark}"/>
                         <DataGridTextColumn 
-                        Header="Review Date" Binding="{Binding Review_Date, StringFormat=dd-MM-yyyy}"/>
+                        Header="Дата отзыва" Binding="{Binding Review_Date, StringFormat=dd-MM-yyyy}"/>
                         <DataGridTextColumn 
-                        Header="Reviewer Name" Binding="{Binding UsersSender.User_Name}"/>
+                        Header="Имя пользователя" Binding="{Binding UsersSender.User_Name}"/>
                         <DataGridTextColumn 
                         Width="Auto"
-                        Header="Text" Binding="{Binding Text}"/>
+                        Header="Текст" Binding="{Binding Text}"/>
                     </DataGrid.Columns>
                 </DataGrid>
                 <Expander.Resources>

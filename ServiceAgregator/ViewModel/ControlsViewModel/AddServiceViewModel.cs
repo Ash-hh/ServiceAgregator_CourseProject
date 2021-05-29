@@ -7,6 +7,8 @@ using ServiceAgregator.Models;
 using ServiceAgregator.DataBase;
 using ServiceAgregator.Command;
 using ServiceAgregator.ViewModel.Main;
+using System.Windows.Controls;
+using System.Windows;
 
 namespace ServiceAgregator.ViewModel.ControlsViewModel
 {
@@ -34,13 +36,26 @@ namespace ServiceAgregator.ViewModel.ControlsViewModel
 
         private void ServiceAdd(object obj)
         {
-            if(Service!=null)
+            string ErrorMessage;
+            if(new Command.Validation<Services>().IsValid(Service, out ErrorMessage))
             {
                 Service.User_ID = Changer.CurrentUserID;
                 Service.Date_OfAdd = DateTime.Now.Date;
                 Service.Available = true;
                 new ServicesQuery().AddNewService(Service);
                 Changer.getInstance(null).MainViewModel.SelectedViewModel = new ServicesControllerViewModel();
+            }
+            else
+            {
+                MessageBox.Show(ErrorMessage);
+            }
+        }
+
+        private void validationError(object sender, ValidationErrorEventArgs e)
+        {
+            if (e.Action == ValidationErrorEventAction.Added)
+            {
+                MessageBox.Show(e.Error.ErrorContent.ToString());
             }
         }
 

@@ -4,26 +4,30 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ServiceAgregator.Models;
 
 namespace ServiceAgregator.DataBase
 {
     class RegisterQuery
     {
         public bool Succes = false;
-        public RegisterQuery(Models.Users NewUser)
-        {
+        public RegisterQuery(Users NewUser)
+        {          
+
             using (DBContext db = new DBContext())
-            {
-                NewUser.Password = new Command.PasswordHash().GetStrHash(NewUser.Password);
-                NewUser.Date_Registration = DateTime.Now;
-                NewUser.Date_LastLogin = DateTime.Now;                
-                NewUser.User_Type = 1;
-                NewUser.Rating = 5;
-                NewUser.Active = true;
+            {                
+
+                
                 try
                 {
                     if(IsUserLoginValid(db,NewUser))
                     {
+                        NewUser.Password = new Command.PasswordHash().GetStrHash(NewUser.Password);
+                        NewUser.Date_Registration = DateTime.Now;
+                        NewUser.Date_LastLogin = DateTime.Now;
+                        NewUser.User_Type = 1;
+                        NewUser.Rating = 5;
+                        NewUser.Active = true;
                         db.Users.Add(NewUser);
 
                         db.SaveChanges();
@@ -54,16 +58,6 @@ namespace ServiceAgregator.DataBase
                 return false;
             }
         }
-
-        int GenerateUserId(DBContext db)
-        {
-            var id = db.Users.OrderByDescending(p => p.User_ID).Select(p => p.User_ID).Take(1);
-
-            foreach(int f in id)
-            {
-                return f + 1;
-            }
-            return 1;
-        }
+       
     }
 }

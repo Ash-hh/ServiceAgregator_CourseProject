@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using ServiceAgregator.Models;
 using ServiceAgregator.Command;
 using System.Data.Entity;
+using System.Data.Entity.Validation;
+using System.Windows;
 
 namespace ServiceAgregator.DataBase
 {
@@ -70,11 +72,27 @@ namespace ServiceAgregator.DataBase
 
         public void AddNewService(Services ServiceToAdd)
         {
+            string ErrorMessage="";
             using (DBContext db = new DBContext())
             {
                 db.Services.Attach(ServiceToAdd);
                 db.Services.Add(ServiceToAdd);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (DbEntityValidationException e)
+                {
+                    foreach (DbEntityValidationResult validationRes in e.EntityValidationErrors)
+                    {
+                        foreach (DbValidationError err in validationRes.ValidationErrors)
+                        {
+                            ErrorMessage += err.ErrorMessage;
+                        }
+                        MessageBox.Show(ErrorMessage);
+                    }
+                }
+               
             }
         }        
 
@@ -91,7 +109,21 @@ namespace ServiceAgregator.DataBase
                         order.Status = "ThisServiceIsNotAvailible";
                     }
                     db.Services.FirstOrDefault(p => p.Service_ID == ServiceToDelete.Service_ID).Available = false;
-                    db.SaveChanges();
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        foreach (DbEntityValidationResult validationRes in e.EntityValidationErrors)
+                        {
+                            foreach (DbValidationError err in validationRes.ValidationErrors)
+                            {
+                                Console.WriteLine(err.ErrorMessage);
+                            }
+                        }
+                    }
+
                 }
                 else
                 {
@@ -113,6 +145,7 @@ namespace ServiceAgregator.DataBase
                 var Services = db.Services.  
                     Include("Users").
                     Include("Orders").
+                    Include("Orders.Users").
                     Where(p => p.Available == true && p.User_ID == UserId).ToList();
                 foreach(Services serv in Services)
                 {

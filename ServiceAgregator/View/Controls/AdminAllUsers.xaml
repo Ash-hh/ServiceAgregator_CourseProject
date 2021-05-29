@@ -40,11 +40,11 @@
                                     <TextBlock>
                                         <TextBlock.Resources>
                                             <Style TargetType="TextBlock">
-                                                <Setter Property="Text" Value="User"/>
+                                                <Setter Property="Text" Value="Пользователь"/>
                                                 <Setter Property="TextDecorations" Value="Underline"/>
                                                 <Style.Triggers>
                                                     <DataTrigger Binding="{Binding User.User_Type}" Value="0">
-                                                        <Setter Property="Text" Value="Administrator"/>
+                                                        <Setter Property="Text" Value="Администратор"/>
                                                     </DataTrigger>
                                                 </Style.Triggers>
                                             </Style>
@@ -65,48 +65,50 @@
                                 </StackPanel>
 
                                 <StackPanel Grid.Column="1">
-                                    <TextBlock                                   
-                                    Text="{Binding StringFormat=Login: {0}, Path=User.Login}"
+                                    <TextBlock     
+                                        TextWrapping="Wrap"
+                                    Text="{Binding StringFormat=Логин: {0}, Path=User.Login}"
                                     />
                                     
-                                    <TextBlock                                   
-                                    Text="{Binding  StringFormat=User Name: {0}, Path=User.User_Name}"
+                                    <TextBlock 
+                                        TextWrapping="Wrap"
+                                    Text="{Binding  StringFormat=Имя пользователя: {0}, Path=User.User_Name}"
                                     />
 
                                     <WrapPanel>
-                                        <TextBlock Text="Registration Date: "/>
+                                        <TextBlock Text="Дата регистрации : "/>
                                         <TextBlock                                   
                                             Text="{Binding User.Date_Registration, StringFormat=dd.MM.yyyy}"
                                         />
                                     </WrapPanel>
 
                                     <WrapPanel>
-                                        <TextBlock Text="Last Login Date: "/>
+                                        <TextBlock Text="Дата последнего входа : "/>
                                         <TextBlock                                   
                                             Text="{Binding User.Date_LastLogin, StringFormat=dd.MM.yyyy }"
                                         />
                                     </WrapPanel>
 
                                     <TextBlock
-                                        Text="{Binding  StringFormat=Orders made {0}, Path=UserOrders}"
+                                        Text="{Binding  StringFormat=Заказов сделано: {0}, Path=UserOrders}"
                                     />
 
                                 </StackPanel>
 
                                 <Expander 
                                     Grid.Column="2"
-                                    Header="Service Stats">
+                                    Header="Информация об услугах">
                                     <StackPanel>
                                         <TextBlock
-                                            Text="{Binding  StringFormat=Posted services: {0}, Path=PostedService }"
+                                            Text="{Binding  StringFormat=Рамзещено услуг: {0}, Path=PostedService }"
                                             />
 
                                         <TextBlock
-                                            Text="{Binding  StringFormat=Posted service orders: {0}, Path=ServiceOrders }"
+                                            Text="{Binding  StringFormat=Заказов на услуги пользователя: {0}, Path=ServiceOrders }"
                                             />
 
                                         <TextBlock
-                                            Text="{Binding  StringFormat=Posted service done orders: {0}, Path=ServiceOrdersDone }"
+                                            Text="{Binding  StringFormat=Выполнено заказов: {0}, Path=ServiceOrdersDone }"
                                             />
                                     </StackPanel>
 
@@ -153,11 +155,11 @@
                         </Style.Setters>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding User.Active}" Value="True">
-                                <Setter Property="Button.Content" Value="Block"/>
+                                <Setter Property="Button.Content" Value="Заблокировать"/>
                             </DataTrigger>
 
                             <DataTrigger Binding="{Binding User.Active}" Value="False">
-                                <Setter Property="Button.Content" Value="Unblock"/>
+                                <Setter Property="Button.Content" Value="Разблокировать"/>
                             </DataTrigger>
 
 
@@ -167,16 +169,16 @@
                     <Style x:Key="IsUserAdmin" 
                                TargetType="{x:Type Button}"
                                BasedOn="{StaticResource ItemButton}">
-                        <Style.Setters>
+                        <Style.Setters>                            
                             <Setter Property="Margin" Value="5 2 5 2"/>
                         </Style.Setters>
                         <Style.Triggers>
                             <DataTrigger Binding="{Binding User.User_Type}" Value="0">
-                                <Setter Property="Button.Content" Value="Take Admin Rights"/>
+                                <Setter Property="Button.Content" Value="Не Администратор"/>
                             </DataTrigger>
 
                             <DataTrigger Binding="{Binding User.User_Type}" Value="1">
-                                <Setter Property="Button.Content" Value="Give Admin Rights"/>
+                                <Setter Property="Button.Content" Value="Администратор"/>
                             </DataTrigger>
 
 

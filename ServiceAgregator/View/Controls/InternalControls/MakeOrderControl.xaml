@@ -12,16 +12,19 @@
             
         </Style>
     </UserControl.Resources>
-    <Grid Background="White">
+    <Grid Background="#eef0f6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
 
         <Calendar  SelectedDate="{Binding Order.Date_Execution}"
+                   VerticalAlignment="Center"
                    DisplayDateStart="{Binding Today}"
                    x:Name="calendar"></Calendar>
-        <Button Grid.Column="1" Content="Make an Order" Command="{Binding MakeOrder}" MaxHeight="100" MaxWidth="200"/>
+        <Button 
+            Style="{StaticResource BtnStyle}"
+            Grid.Column="1" Content="Make an Order" Command="{Binding MakeOrder}" MaxHeight="100" MaxWidth="200"/>
         
     </Grid>
 </UserControl>
